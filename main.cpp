@@ -2,59 +2,74 @@
 #include "Vector.hpp"
 
 #include <iostream>
-
-
-// int main_m ()
-// {
-//     std::vector<int> a;
-
-//     a.push_back(1);
-//     a.push_back(2);
-
-//     std::vector<int>::iterator it1 = a.begin();
-//     std::vector<int>::iterator it1 = a.begin();
-//     std::cout << *it1 << " " << *it2 << "\n";
-//     *it1 = 21;
-
-//     std::cout << &it1 << " " << &it2 << "\n";
-//     std::cout << *it1 << " " << *it2 << "\n";
-
-//     if (it1 == it2) std::cout << "YES\n"; else std::cout << "NO\n";
-
-//   return 0;
-// }
+#include <stack>
 
 int main_m ()
 {
-    std::vector<int> a;
-    a.push_back(1);
-    a.push_back(2);
+  std::vector<int> myvector (10);
+  std::vector<int>::iterator it;
+  
+  for (int s = 0; s < 10; s++)
+    myvector[s] = s;
+    
+  std::cout << "size " << myvector.size() << " cap " << myvector.capacity() << std::endl;
+  myvector.push_back(123);
 
-    std::vector<int>::iterator it1 = a.begin();
-    std::vector<int>::iterator it2 = it1;
+  std::cout << "myvector contains:";
+  for (it=myvector.begin(); it<myvector.end(); it++)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
 
-    std::cout << &it1 << " " << &it2 << std::endl;
-    it1++;
-    std::cout << *it1 << " " << *it2 << std::endl;
+  std::vector<int>::iterator first = myvector.begin() + 4;
+  std::vector<int>::iterator last = myvector.end() - 1;
 
-    return (0);
+
+  std::cout << "size " << myvector.size() << " cap " << myvector.capacity() << std::endl;
+
+  std::cout << *myvector.erase(last - 3) << std::endl;
+  std::cout << "size " << myvector.size() << " cap " << myvector.capacity() << std::endl;
+
+  std::cout << "myvector contains:";
+  for (it=myvector.begin(); it<myvector.end(); it++)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
+  
+  return 0;
 }
 
 int main ()
 {
     main_m();
-
     std::cout << "_________________________\n\n";
 
-    Vector<int>::iterator it1;
-    Vector<int>::iterator it2 = it1;
+  Vector<int> myvector (10);
+  Vector<int>::iterator it;
+  
+  for (int s = 0; s < 10; s++)
+    myvector[s] = s;
     
-    // if (it1 == it2) std::cout << "YES\n"; else std::cout << "NO\n";
-    // if (it1 != it2) std::cout << "YES\n"; else std::cout << "NO\n";
+  std::cout << "size " << myvector.size() << " cap " << myvector.capacity() << std::endl;
+  myvector.push_back(123);
+
+  std::cout << "myvector contains:";
+  for (it=myvector.begin(); it<myvector.end(); it++)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
+
+  Vector<int>::iterator first = myvector.begin() + 4;
+  Vector<int>::iterator last = myvector.end() - 1;
 
 
+  std::cout << "size " << myvector.size() << " cap " << myvector.capacity() << std::endl;
 
-    std::cout << *it1 << " " << &it2 << std::endl;
-    it1++;
-    std::cout << *it1 << " " << &it2 << std::endl;
+  std::cout << *myvector.erase(last - 3) << std::endl;
+  std::cout << "size " << myvector.size() << " cap " << myvector.capacity() << std::endl;
+
+  std::cout << "myvector contains:";
+  for (it=myvector.begin(); it<myvector.end(); it++)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
+
+
+  return 0;
 }

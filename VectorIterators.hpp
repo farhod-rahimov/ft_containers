@@ -19,7 +19,7 @@ public:
     virtual ~VectorIterator() {
     };
 
-    VectorIterator(VectorIterator & src) {
+    VectorIterator(VectorIterator const & src) {
         *this = src;
     };
 
@@ -49,28 +49,29 @@ public:
         return (_ptr);
     };
 
-    VectorIterator &operator++(void) {  // check, it is not working yet. DONT undestand
-        _ptr++;
-        return (*this);
-    };
+    // VectorIterator &operator++(void) {
+    //     _ptr++;
+    //     return (*this);
+    // };
 
-    VectorIterator &operator--(void) {  // check, it is not working yet. DONT undestand
-        _ptr--;
-        return (*this);
-    };
+    // VectorIterator &operator--(void) {
+    //     _ptr--;
+    //     return (*this);
+    // };
 
-    VectorIterator operator++(int)  // DONT undestand
+    VectorIterator operator++(int)
     {
         VectorIterator tmp(*this);
-        
-        operator++();
+        this->_ptr++;
+        // operator++();
         return (tmp);
     };
 
-    VectorIterator operator--(int)  // DONT undestand
+    VectorIterator operator--(int)
     {
         VectorIterator tmp(*this);
-        operator--();
+        this->_ptr--;
+        // operator--();
         return (tmp);
     };
 
@@ -86,18 +87,6 @@ public:
         return (tmp);
     };
 
-    VectorIterator operator+(VectorIterator const &other) const {
-        VectorIterator tmp(*this);
-        tmp += other;
-        return (tmp);
-    };
-
-    VectorIterator operator-(VectorIterator const &other) const {
-        VectorIterator tmp(*this);
-        tmp -= other;
-        return (tmp);
-    };
-    
     bool operator<(VectorIterator const &other) const {
         return (_ptr < other._ptr);
     };
