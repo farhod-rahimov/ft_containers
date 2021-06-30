@@ -1,5 +1,6 @@
 #include <vector>
-#include "Vector_old.hpp"
+// #include "Vector_old.hpp"
+#include "Vector.hpp"
 
 #include <iostream>
 #include <stack>
@@ -7,40 +8,62 @@
 
 int main_m ()
 {
-    std::vector<int> v;
+  std::vector<int>::size_type sz;
 
-    v.push_back(1);
-    v.push_back(2);
-    v.push_back(-3);
-    v.push_back(4);
+  std::vector<int> foo;
+  sz = foo.capacity();
+  std::cout << "making foo grow:\n";
+  for (int i=0; i<100; ++i) {
+    foo.push_back(i);
+    if (sz!=foo.capacity()) {
+      sz = foo.capacity();
+      std::cout << "capacity changed: " << sz << " size " << foo.size() << '\n';
+    }
+  }
 
-    // Vector<int>::iterator it(v.begin());
-    std::vector<int>::iterator it = v.begin();
-    std::vector<int>::iterator ite = v.end();
-    it[0] = 25;
-    std::cout << it[3] << std::endl;
+  std::vector<int> bar;
+  sz = bar.capacity();
+  bar.reserve(100);   // this is the only difference with foo above
+  std::cout << "making bar grow:\n";
+  for (int i=0; i<100; ++i) {
+    bar.push_back(i);
+    if (sz!=bar.capacity()) {
+      sz = bar.capacity();
+      std::cout << "capacity changed: " << sz << " size " << bar.size() << '\n';
+    }
+  }
   return 0;
 }
 
 int main ()
 {
     main_m();
+
     std::cout << "_________________________\n\n";
+ 
+  vector<int>::size_type sz;
 
-    Vector<int> v;
+  vector<int> foo;
+  sz = foo.capacity();
+  std::cout << "making foo grow:\n";
+  for (int i=0; i<100; ++i) {
+    foo.push_back(i);
+    if (sz!=foo.capacity()) {
+      sz = foo.capacity();
+      std::cout << "capacity changed: " << sz << " size " << foo.size() << '\n';
+    }
+  }
 
-    v.push_back(1);
-    v.push_back(2);
-    v.push_back(-3);
-    v.push_back(4);
-
-    // Vector<int>::iterator it(v.begin());
-    Vector<int>::iterator it = v.begin();
-    Vector<int>::iterator ite = v.end();
-
-    it[0] = 25;
-    std::cout << it[3] << std::endl;
-
-
+  vector<int> bar;
+  sz = bar.capacity();
+  bar.reserve(100);   // this is the only difference with foo above
+  std::cout << "making bar grow:\n";
+  for (int i=0; i<100; ++i) {
+    bar.push_back(i);
+    if (sz!=bar.capacity()) {
+      sz = bar.capacity();
+      std::cout << "capacity changed: " << sz << " size " << bar.size() << '\n';
+    }
+  }
   return 0;
 }
