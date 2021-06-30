@@ -4,36 +4,31 @@
 #include <iostream>
 #include <stack>
 
+#define nl std::cout << std::endl;
+
 int main_m ()
 {
-  std::vector<int> myvector (10);
-  std::vector<int>::iterator it;
+  std::vector<int> myvector(3, 100);
+  myvector.push_back(101);
+  myvector.push_back(102);
+
   
-  for (int s = 0; s < 10; s++)
-    myvector[s] = s;
-    
-  std::cout << "size " << myvector.size() << " cap " << myvector.capacity() << std::endl;
-  myvector.push_back(123);
 
-  std::cout << "myvector contains:";
-  for (it=myvector.begin(); it<myvector.end(); it++)
-    std::cout << ' ' << *it;
-  std::cout << '\n';
+  std::vector<int> myvector2(myvector.begin(), myvector.end());
 
-  std::vector<int>::iterator first = myvector.begin() + 4;
-  std::vector<int>::iterator last = myvector.end() - 1;
+  for (int i = 0; i < myvector.size(); i++) {
+    std::cout << myvector[i] << " ";
+  }
+  for (std::vector<int>::iterator start = myvector.begin(); start != myvector.end(); start++) {
+    std::cout << *start << " ";
+  }
 
+  nl;
+  for (std::vector<int>::iterator start = myvector2.begin(); start != myvector2.end(); start++) {
+    std::cout << *start << " ";
+  }
+  nl;
 
-  std::cout << "size " << myvector.size() << " cap " << myvector.capacity() << std::endl;
-
-  std::cout << *myvector.erase(last - 3) << std::endl;
-  std::cout << "size " << myvector.size() << " cap " << myvector.capacity() << std::endl;
-
-  std::cout << "myvector contains:";
-  for (it=myvector.begin(); it<myvector.end(); it++)
-    std::cout << ' ' << *it;
-  std::cout << '\n';
-  
   return 0;
 }
 
@@ -42,34 +37,26 @@ int main ()
     main_m();
     std::cout << "_________________________\n\n";
 
-  Vector<int> myvector (10);
-  Vector<int>::iterator it;
+  Vector<int> myvector(3, 100);
+  myvector.push_back(101);
+  myvector.push_back(102);
+
   
-  for (int s = 0; s < 10; s++)
-    myvector[s] = s;
-    
-  std::cout << "size " << myvector.size() << " cap " << myvector.capacity() << std::endl;
-  myvector.push_back(123);
 
-  std::cout << "myvector contains:";
-  for (it=myvector.begin(); it<myvector.end(); it++)
-    std::cout << ' ' << *it;
-  std::cout << '\n';
+  Vector<int> myvector2(myvector.begin(), myvector.end());
 
-  Vector<int>::iterator first = myvector.begin() + 4;
-  Vector<int>::iterator last = myvector.end() - 1;
+  for (int i = 0; i < myvector.size(); i++) {
+    std::cout << myvector[i] << " ";
+  }
+  for (Vector<int>::iterator start = myvector.begin(); start != myvector.end(); start++) {
+    std::cout << *start << " ";
+  }
 
-
-  std::cout << "size " << myvector.size() << " cap " << myvector.capacity() << std::endl;
-
-  std::cout << *myvector.erase(last - 3) << std::endl;
-  std::cout << "size " << myvector.size() << " cap " << myvector.capacity() << std::endl;
-
-  std::cout << "myvector contains:";
-  for (it=myvector.begin(); it<myvector.end(); it++)
-    std::cout << ' ' << *it;
-  std::cout << '\n';
-
+  nl;
+  for (Vector<int>::iterator start = myvector2.begin(); start != myvector2.end(); start++) {
+    std::cout << *start << " ";
+  }
+  nl;
 
   return 0;
 }

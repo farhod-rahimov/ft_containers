@@ -27,6 +27,8 @@ public:
 	};
 
 	explicit Vector (size_type n, const value_type& val = value_type()) {
+		// std::cout << "THISSSS BOYY\n";
+		
 		if (n > max_size())
 			throw (std::length_error("ft::Vector<T>::Vector(size_type n, ...) - 'n' exceeds maximum supported size"));
 		this->_my_vector = new value_type[n];
@@ -38,23 +40,21 @@ public:
 		this->_capacity = n;
 	};
 
-	// template <class InputIterator> 						// DONT UNDESTAND
-	// Vector(InputIterator first, InputIterator last) {
-	// 	size_type size = 0;
+	Vector(InputIterator first, InputIterator last) {
+		size_type size = 0;
 
-	// 	for (size_type i = 0; first != last; first++) {
-	// 		size++;
-	// 	}
-	// 	if (size > max_size())
-	// 		throw (std::length_error("ft::Vector<T>::Vector(InputIterator first, InputIterator last) - 'last - first' exceeds maximum supported size"));
-	// 	_my_vector = new value_type[size];
-	// 	_capacity = size;
-	// 	_size = size;
-	// 	for (size_type i = 0; i < size; i++)
-	// 		_my_vector[i] = first;
-	// 		// _my_vector[i] = 0;
-
-	// };
+		// std::cout << "NNNOOOOOO BOYY\n";
+		for (iterator f = first; f != last; f++) {
+			size++;
+		}
+		if (size > max_size())
+			throw (std::length_error("ft::Vector<T>::Vector(InputIterator first, InputIterator last) - 'last - first' exceeds maximum supported size"));
+		_my_vector = new value_type[size];
+		_capacity = size;
+		_size = size;
+		for (size_type i = 0; i < size; i++)
+			_my_vector[i] = *first;
+	};
 	
 	Vector (const Vector& x) {
 		this->_my_vector = nullptr;
@@ -427,6 +427,31 @@ public:
 		}
 		this->_size = this->_size - deleted;
 		return (this->begin() + ret);
+	};
+
+	void swap (Vector& x) {
+		pointer tmp;
+		size_type tmp_size;
+		size_type tmp_capacity;
+
+		tmp = this->_my_vector;
+		tmp_size = this->_size;
+		tmp_capacity = this->_capacity;
+		
+		this->_my_vector = x._my_vector;
+		this->_size = x._size;
+		this->_capacity = x._capacity;
+		
+		x._my_vector = tmp;
+		x._size = tmp_size;
+		x._capacity = tmp_capacity;
+	};
+
+	void clear() {
+		for (iterator start = this->begin(); start != this->end(); start++) {
+			*start = value_type();
+		}
+		this->_size = 0;
 	};
 
 private:
