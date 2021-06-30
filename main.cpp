@@ -1,34 +1,24 @@
 #include <vector>
-#include "Vector.hpp"
+#include "Vector_old.hpp"
 
 #include <iostream>
 #include <stack>
 
-#define nl std::cout << std::endl;
 
 int main_m ()
 {
-  std::vector<int> myvector(3, 100);
-  myvector.push_back(101);
-  myvector.push_back(102);
+    std::vector<int> v;
 
-  
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(-3);
+    v.push_back(4);
 
-  std::vector<int> myvector2(myvector.begin(), myvector.end());
-
-  for (int i = 0; i < myvector.size(); i++) {
-    std::cout << myvector[i] << " ";
-  }
-  for (std::vector<int>::iterator start = myvector.begin(); start != myvector.end(); start++) {
-    std::cout << *start << " ";
-  }
-
-  nl;
-  for (std::vector<int>::iterator start = myvector2.begin(); start != myvector2.end(); start++) {
-    std::cout << *start << " ";
-  }
-  nl;
-
+    // Vector<int>::iterator it(v.begin());
+    std::vector<int>::iterator it = v.begin();
+    std::vector<int>::iterator ite = v.end();
+    it[0] = 25;
+    std::cout << it[3] << std::endl;
   return 0;
 }
 
@@ -37,26 +27,20 @@ int main ()
     main_m();
     std::cout << "_________________________\n\n";
 
-  Vector<int> myvector(3, 100);
-  myvector.push_back(101);
-  myvector.push_back(102);
+    Vector<int> v;
 
-  
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(-3);
+    v.push_back(4);
 
-  Vector<int> myvector2(myvector.begin(), myvector.end());
+    // Vector<int>::iterator it(v.begin());
+    Vector<int>::iterator it = v.begin();
+    Vector<int>::iterator ite = v.end();
 
-  for (int i = 0; i < myvector.size(); i++) {
-    std::cout << myvector[i] << " ";
-  }
-  for (Vector<int>::iterator start = myvector.begin(); start != myvector.end(); start++) {
-    std::cout << *start << " ";
-  }
+    it[0] = 25;
+    std::cout << it[3] << std::endl;
 
-  nl;
-  for (Vector<int>::iterator start = myvector2.begin(); start != myvector2.end(); start++) {
-    std::cout << *start << " ";
-  }
-  nl;
 
   return 0;
 }
