@@ -11,27 +11,15 @@ int main_m ()
   std::vector<int>::size_type sz;
 
   std::vector<int> foo;
-  sz = foo.capacity();
-  std::cout << "making foo grow:\n";
-  for (int i=0; i<100; ++i) {
-    foo.push_back(i);
-    if (sz!=foo.capacity()) {
-      sz = foo.capacity();
-      std::cout << "capacity changed: " << sz << " size " << foo.size() << '\n';
-    }
-  }
+  foo.push_back(0);
+  foo.push_back(1);
+  foo.push_back(2);
+  foo.push_back(3);
+  foo.push_back(4);
+  foo.push_back(5);
 
-  std::vector<int> bar;
-  sz = bar.capacity();
-  bar.reserve(100);   // this is the only difference with foo above
-  std::cout << "making bar grow:\n";
-  for (int i=0; i<100; ++i) {
-    bar.push_back(i);
-    if (sz!=bar.capacity()) {
-      sz = bar.capacity();
-      std::cout << "capacity changed: " << sz << " size " << bar.size() << '\n';
-    }
-  }
+  std::cout << foo.front() << std::endl;
+  std::cout << foo.back() << std::endl;
   return 0;
 }
 
@@ -41,29 +29,16 @@ int main ()
 
     std::cout << "_________________________\n\n";
  
-  vector<int>::size_type sz;
-
   vector<int> foo;
-  sz = foo.capacity();
-  std::cout << "making foo grow:\n";
-  for (int i=0; i<100; ++i) {
-    foo.push_back(i);
-    if (sz!=foo.capacity()) {
-      sz = foo.capacity();
-      std::cout << "capacity changed: " << sz << " size " << foo.size() << '\n';
-    }
-  }
+  foo.push_back(0);
+  foo.push_back(1);
+  foo.push_back(2);
+  foo.push_back(3);
+  foo.push_back(4);
+  foo.push_back(5);
 
-  vector<int> bar;
-  sz = bar.capacity();
-  bar.reserve(100);   // this is the only difference with foo above
-  std::cout << "making bar grow:\n";
-  for (int i=0; i<100; ++i) {
-    bar.push_back(i);
-    if (sz!=bar.capacity()) {
-      sz = bar.capacity();
-      std::cout << "capacity changed: " << sz << " size " << bar.size() << '\n';
-    }
-  }
+  std::cout << foo.front() << std::endl;
+  std::cout << foo.back() << std::endl;
+ 
   return 0;
 }

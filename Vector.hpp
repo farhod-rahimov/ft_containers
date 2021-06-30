@@ -180,6 +180,44 @@ public:
 			}
 		};
 
+// ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS //
+
+		reference operator [] (size_type n) {
+			return (this->_my_vector[n]);
+		};
+
+		const_reference operator [] (size_type n) const {
+			return (this->_my_vector[n]);
+		};
+
+		reference at (size_type n) {
+			if (n >= this->_size)
+				throw (std::out_of_range("vector"));
+			return (this->_my_vector[n]);
+		};
+
+		const_reference at (size_type n) const {
+			if (n >= this->_size)
+				throw (std::out_of_range("vector"));
+			return (this->_my_vector[n]);
+		};
+
+		reference front() {
+			return (this->_my_vector[0]);
+		};
+
+		const_reference front() const {
+			return (this->_my_vector[0]);
+		};
+
+		reference back() {
+			return (this->_my_vector[this->_size - 1]);
+		};
+
+		const_reference back() const {
+			return (this->_my_vector[this->_size - 1]);
+		};
+
 // MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS //
 
 		void push_back (const value_type& val) {
