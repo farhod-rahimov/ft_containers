@@ -56,13 +56,8 @@ namespace ft {
 
 				size_type size = last - first;
 
-				if (size > this->_capacity) {
-					for (size_type i = 0; i < this->_size; i++) {
-						this->_allocator.destroy(this->_my_vector + i);
-					}
-					this->_allocator.deallocate(this->_my_vector, this->_capacity);
-					this->_capacity = size;
-				}
+				this->_my_vector = _allocator.allocate(size);
+				this->_capacity = size;
 				for (size_type i = 0; i < size; i++) {
 					this->_allocator.construct(this->_my_vector + i, *first++);
 				}
@@ -527,7 +522,7 @@ namespace ft {
 	bool operator == (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
 		if (lhs.size() != rhs.size())
 			return (false);
-		for (size_t i = 0; i < lhs.size(); i++) {
+		for (long i = 0; i < lhs.size(); i++) {
 			if (lhs[i] != rhs[i])
 				return (false);
 		}
