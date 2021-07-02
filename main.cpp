@@ -8,19 +8,22 @@
 
 int main_m ()
 {
-   unsigned int i;
-  std::vector<int> foo (3,100);   // three ints with a value of 100
-  std::vector<int> bar (5,200);   // five ints with a value of 200
+  std::vector<int> myvector (5);  // 5 default-constructed ints
 
-  foo.swap(bar);
+  int i=0;
 
-  std::cout << "foo contains:";
-  for (std::vector<int>::iterator it = foo.begin(); it!=foo.end(); ++it)
-    std::cout << ' ' << *it;
-  std::cout << '\n';
+  std::vector<int>::reverse_iterator rit = myvector.rbegin();
+  for (; rit!= myvector.rend(); ++rit)
+    *rit = ++i;
 
-  std::cout << "bar contains:";
-  for (std::vector<int>::iterator it = bar.begin(); it!=bar.end(); ++it)
+  std::cout << "rbegin = " << *(rit = myvector.rbegin()) << std::endl;
+  std::cout << "rend = " << *(rit = myvector.rend()) << std::endl;
+  
+  bool ret = myvector.rbegin() > myvector.rend();
+  std::cout << "bool " << ret << std::endl;
+  
+  std::cout << "myvector contains:";
+  for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
     std::cout << ' ' << *it;
   std::cout << '\n';
 
@@ -33,19 +36,22 @@ int main ()
 
     std::cout << "_________________________\n\n";
  
-  unsigned int i;
-  ft::vector<int> foo (3,100);   // three ints with a value of 100
-  ft::vector<int> bar (5,200);   // five ints with a value of 200
+  ft::vector<int> myvector (5);  // 5 default-constructed ints
 
-  foo.swap(bar);
+  int i=0;
 
-  std::cout << "foo contains:";
-  for (ft::vector<int>::iterator it = foo.begin(); it!=foo.end(); ++it)
-    std::cout << ' ' << *it;
-  std::cout << '\n';
+  ft::vector<int>::reverse_iterator rit = myvector.rbegin();
+  for (; rit!= myvector.rend(); ++rit)
+    *rit = ++i;
+  
+  std::cout << "rbegin = " << *(rit = myvector.rbegin()) << std::endl;
+  std::cout << "rend = " << *(rit = myvector.rend()) << std::endl;
 
-  std::cout << "bar contains:";
-  for (ft::vector<int>::iterator it = bar.begin(); it!=bar.end(); ++it)
+  bool ret = myvector.rbegin() > myvector.rend();
+  std::cout << "bool " << ret << std::endl;
+
+  std::cout << "myvector contains:";
+  for (ft::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
     std::cout << ' ' << *it;
   std::cout << '\n';
 
