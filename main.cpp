@@ -8,26 +8,22 @@
 
 int main_m ()
 {
-  std::vector<int>::size_type sz;
+   unsigned int i;
+  std::vector<int> foo (3,100);   // three ints with a value of 100
+  std::vector<int> bar (5,200);   // five ints with a value of 200
 
-  std::vector<int> foo;
-  foo.push_back(0);
-  foo.push_back(1);
-  foo.push_back(2);
-  foo.push_back(3);
-  foo.push_back(4);
-  foo.push_back(5);
+  foo.swap(bar);
 
-  std::cout << "size = " << foo.size() << " capacity = " << foo.capacity() << std::endl;
+  std::cout << "foo contains:";
+  for (std::vector<int>::iterator it = foo.begin(); it!=foo.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
 
-  std::cout << *(foo.erase(foo.begin() + 1), foo.end() - 2) << std::endl;
+  std::cout << "bar contains:";
+  for (std::vector<int>::iterator it = bar.begin(); it!=bar.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
 
-  std::cout << "my vector contains: " << std::endl;
-  for (std::vector<int>::iterator it = foo.begin(); it != foo.end(); it++) {
-    std::cout << *it << " ";
-  }
-  std::cout << std::endl;
-  std::cout << "size = " << foo.size() << " capacity = " << foo.capacity() << std::endl;
   return 0;
 }
 
@@ -37,25 +33,21 @@ int main ()
 
     std::cout << "_________________________\n\n";
  
-  vector<int> foo;
-  foo.push_back(0);
-  foo.push_back(1);
-  foo.push_back(2);
-  foo.push_back(3);
-  foo.push_back(4);
-  foo.push_back(5);
+  unsigned int i;
+  ft::vector<int> foo (3,100);   // three ints with a value of 100
+  ft::vector<int> bar (5,200);   // five ints with a value of 200
 
-  std::cout << "size = " << foo.size() << " capacity = " << foo.capacity() << std::endl;
+  foo.swap(bar);
 
-  std::cout << *(foo.erase(foo.begin() + 1), foo.end() - 2) << std::endl;
+  std::cout << "foo contains:";
+  for (ft::vector<int>::iterator it = foo.begin(); it!=foo.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
 
-  std::cout << "my vector contains: " << std::endl;
-  for (vector<int>::iterator it = foo.begin(); it != foo.end(); it++) {
-    std::cout << *it << " ";
-  }
-  std::cout << std::endl;
-  std::cout << "size = " << foo.size() << " capacity = " << foo.capacity() << std::endl;
-  
-  // while (1) ;
+  std::cout << "bar contains:";
+  for (ft::vector<int>::iterator it = bar.begin(); it!=bar.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
+
   return 0;
 }
