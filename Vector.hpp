@@ -358,11 +358,12 @@ public:
 			if (tmp.size() != 0) {
 				for (size_type i = 0; i < tmp.size(); i++) {
 					if (i == inserted_position) {
+						size_type k = i;
 						for (size_type j = 0; j < n; j++) {
 							this->_allocator.construct(this->_my_vector + i++, val);
 						}
-						for (size_type k = inserted_position + n; i < tmp.size(); i++) {
-							this->_allocator.construct(this->_my_vector + k++, tmp[i]);
+						for ( ; k < tmp.size(); k++) {
+							this->_allocator.construct(this->_my_vector + i++, tmp[k]);
 						}
 						break ;
 					}
@@ -400,11 +401,12 @@ public:
 			if (tmp.size() != 0) {
 				for (size_type i = 0; i < tmp.size(); i++) {
 					if (i == inserted_position) {
+						size_type k = i;
 						for (size_type j = 0; j < n; j++) {
 							this->_allocator.construct(this->_my_vector + i++, *first++);
 						}
-						for (size_type k = inserted_position + n; i < tmp.size(); i++) {
-							this->_allocator.construct(this->_my_vector + k++, tmp[i]);
+						for ( ; k < tmp.size(); k++) {
+							this->_allocator.construct(this->_my_vector + i++, tmp[k]);
 						}
 						break ;
 					}
@@ -417,6 +419,49 @@ public:
 				}
 			}
 			this->_size += n;
+		};
+
+		iterator erase (iterator position) {
+			vector		tmp(*this);
+			iterator	erase_el = this->begin();
+			size_type	erase_pos = 0;
+
+			while (erase_el++ != position)
+				erase_pos++;
+			if (erase_pos >= this->_size)
+				return (this->begin());
+
+			for (size_type i = erase_pos; i < this->_size; i++) {
+				this->_allocator.destroy(this->_my_vector + i);
+			}
+
+			for (size_type i = erase_pos; i + 1 < tmp.size(); i++) {
+				this->_allocator.construct(this->_my_vector + i, tmp[i + 1]);
+			}
+			this->_size -= 1;
+			return (this->begin() + erase_pos);
+		};
+
+		iterator erase (iterator first, iterator last) {
+			vector			tmp(*this);
+			difference_type	n = last - first;
+			iterator		erase_el = this->begin();
+			size_type		erase_pos = 0;
+
+			while (erase_el++ != first)
+				erase_pos++;
+			if (erase_pos >= this->_size)
+				return (this->begin());
+			
+			for (size_type i = erase_pos; i < this->_size; i++) {
+				this->_allocator.destroy(this->_my_vector + i);
+			}
+			
+			for (size_type i = erase_pos; i + n < tmp.size(); i++) {
+				this->_allocator.construct(this->_my_vector + i, tmp[i + n]);
+			}
+			this->_size -= n;
+			return (this->begin() + erase_pos);
 		};
 
 private:
