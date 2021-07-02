@@ -25,12 +25,14 @@ namespace ft {
 			typedef 			RandomAccessReverseIterator<value_type>			reverse_iterator;
 			typedef 			RandomAccessReverseIterator<value_type const>	const_reverse_iterator;
 
-			typedef 			std::ptrdiff_t									difference_type;
-			typedef 			size_t											size_type;
+			typedef 			std::ptrdiff_t									size_type;
+			typedef 			size_t											difference_type;
 
 	// INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION  //
 
 			explicit vector (const allocator_type& alloc = allocator_type()) {
+				static_cast<void>(alloc);
+
 				this->_my_vector = nullptr;
 				this->_capacity = 0;
 				this->_size = 0;
@@ -38,6 +40,8 @@ namespace ft {
 			
 			explicit vector (size_type n, const value_type& val = value_type(),
 							const allocator_type& alloc = allocator_type()) {
+				static_cast<void>(alloc);
+
 				this->_my_vector = _allocator.allocate(n);
 				this->_capacity = n;
 				this->_size = n;
@@ -48,7 +52,9 @@ namespace ft {
 			
 			vector (iterator first, iterator last,
 							const allocator_type& alloc = allocator_type()) {
-				difference_type size = last - first;
+				static_cast<void>(alloc);
+
+				size_type size = last - first;
 
 				if (size > this->_capacity) {
 					for (size_type i = 0; i < this->_size; i++) {
@@ -238,7 +244,7 @@ namespace ft {
 	// MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS //
 
 			void assign (iterator first, iterator last) {
-				difference_type size = last - first;
+				size_type size = last - first;
 
 				for (size_type i = 0; i < this->_size; i++) {
 					this->_allocator.destroy(this->_my_vector + i);
@@ -396,7 +402,7 @@ namespace ft {
 			};
 
 			void insert (iterator position, iterator first, iterator last) {
-				difference_type n = last - first;
+				size_type n = last - first;
 				iterator	inserted_element = this->begin();
 				size_type	inserted_position = 0;
 				vector		tmp(*this);
@@ -461,7 +467,7 @@ namespace ft {
 
 			iterator erase (iterator first, iterator last) {
 				vector			tmp(*this);
-				difference_type	n = last - first;
+				size_type	n = last - first;
 				iterator		erase_el = this->begin();
 				size_type		erase_pos = 0;
 
@@ -540,6 +546,7 @@ namespace ft {
 
 	template <class T, class Alloc>
 	bool operator <= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+		static_cast<void>(lhs);
 		if (rhs.size() == 0)
 			return (false);
 		return (true);

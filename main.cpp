@@ -1,59 +1,53 @@
 #include <vector>
-// #include "Vector_old.hpp"
-#include "Vector.hpp"
 
 #include <iostream>
-#include <stack>
+#include "Vector.hpp"
 
 
 int main_m ()
 {
-  std::vector<int> myvector (5);  // 5 default-constructed ints
+  std::vector<int> first;
+  std::vector<int> second;
+  std::vector<int> third;
 
-  int i=0;
+  first.assign (7,100);             // 7 ints with a value of 100
 
-  std::vector<int>::reverse_iterator rit = myvector.rbegin();
-  for (; rit!= myvector.rend(); ++rit)
-    *rit = ++i;
+  std::vector<int>::iterator it;
+  it=first.begin()+1;
 
-  std::cout << "rbegin = " << *(rit = myvector.rbegin()) << std::endl;
-  std::cout << "rend = " << *(rit = myvector.rend()) << std::endl;
-  
-  bool ret = myvector.rbegin() > myvector.rend();
-  std::cout << "bool " << ret << std::endl;
-  
-  std::cout << "myvector contains:";
-  for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
-    std::cout << ' ' << *it;
-  std::cout << '\n';
+  second.assign (it,first.end()-1); // the 5 central values of first
 
+  int myints[] = {1776,7,4};
+  third.assign (myints,myints+3);   // assigning from array.
+
+  std::cout << "Size of first: " << int (first.size()) << '\n';
+  std::cout << "Size of second: " << int (second.size()) << '\n';
+  std::cout << "Size of third: " << int (third.size()) << '\n';
   return 0;
 }
+
 
 int main ()
 {
     main_m();
+    std::cout << "---------------------------\n";
 
-    std::cout << "_________________________\n\n";
- 
-  ft::vector<int> myvector (5);  // 5 default-constructed ints
+  ft::vector<int> first;
+  ft::vector<int> second;
+  ft::vector<int> third;
 
-  int i=0;
+  first.assign (7,100);             // 7 ints with a value of 100
 
-  ft::vector<int>::reverse_iterator rit = myvector.rbegin();
-  for (; rit!= myvector.rend(); ++rit)
-    *rit = ++i;
-  
-  std::cout << "rbegin = " << *(rit = myvector.rbegin()) << std::endl;
-  std::cout << "rend = " << *(rit = myvector.rend()) << std::endl;
+  ft::vector<int>::iterator it;
+  it=first.begin()+1;
 
-  bool ret = myvector.rbegin() > myvector.rend();
-  std::cout << "bool " << ret << std::endl;
+  second.assign (it,first.end()-1); // the 5 central values of first
 
-  std::cout << "myvector contains:";
-  for (ft::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
-    std::cout << ' ' << *it;
-  std::cout << '\n';
+  int myints[] = {1776,7,4};
+  third.assign (myints,myints+3);   // assigning from array.
 
+  std::cout << "Size of first: " << int (first.size()) << '\n';
+  std::cout << "Size of second: " << int (second.size()) << '\n';
+  std::cout << "Size of third: " << int (third.size()) << '\n';
   return 0;
 }
