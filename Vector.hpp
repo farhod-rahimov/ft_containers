@@ -159,7 +159,7 @@ public:
 		};
 
 		bool empty() const {
-			return (this->_size);
+			return (this->_size == 0);
 		};
 
 		void reserve (size_type n) {
@@ -220,6 +220,42 @@ public:
 
 // MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS //
 
+		void assign (iterator first, iterator last) {
+			difference_type size = last - first;
+
+			for (size_type i = 0; i < this->_size; i++) {
+				this->_allocator.destroy(this->_my_vector + i);
+			}
+
+			if (size > this->_capacity) {
+				this->_allocator.deallocate(this->_my_vector, this->_capacity);
+				this->_my_vector = this->_allocator.allocate(size);
+				this->_capacity = size;
+			}
+
+			for (size_type i = 0; i < size; i++) {
+				this->_allocator.construct(this->_my_vector + i, *first++);
+			}
+			this->_size = size;
+		};
+		
+		void assign (size_type n, const value_type& val) {
+			for (size_type i = 0; i < this->_size; i++) {
+				this->_allocator.destroy(this->_my_vector + i);
+			}
+			
+			if (n > this->_capacity) {
+				this->_allocator.deallocate(this->_my_vector, this->_capacity);
+				this->_my_vector = this->_allocator.allocate(n);
+				this->_capacity = n;
+			}
+
+			for (size_type i = 0; i < n; i++) {
+				this->_allocator.construct(this->_my_vector + i, val);
+			}
+			this->_size = n;
+		};
+
 		void push_back (const value_type& val) {
 			if (this->_size < this->_capacity) {
 				this->_my_vector[this->_size] = val;
@@ -247,6 +283,140 @@ public:
 				this->_my_vector[i] = val;
 			}
 			this->_size += 1;
+		};
+
+		void pop_back() {
+			if (this->empty())
+				return ;
+			this->_allocator.destroy(this->_my_vector + this->_size - 1);
+			this->_size -= 1;
+		};
+
+		iterator insert (iterator position, const value_type& val) {
+			iterator	inserted_element = this->begin();
+			size_type	inserted_position = 0;
+			vector		tmp(*this);
+
+			while (inserted_element++ != position)
+				inserted_position++;
+			
+			if (this->_size + 1 > this->_capacity) {
+				for (size_type i = 0; i < this->_size; i++) {
+					this->_allocator.destroy(this->_my_vector + i);
+				}
+
+				this->_allocator.deallocate(this->_my_vector, this->_capacity);
+				if (this->_capacity != 0) {
+					this->_my_vector = this->_allocator.allocate(this->_capacity * 2);
+					this->_capacity *= 2;
+				}
+				else {
+					this->_my_vector = this->_allocator.allocate(1);
+					this->_capacity = 1;
+				}
+			}
+
+			if (tmp.size() != 0) {
+				for (size_type i = 0; i < tmp.size(); i++) {
+					if (i == inserted_position) {
+						this->_allocator.construct(this->_my_vector + i, val);
+						for (size_type k = inserted_position + 1; i < tmp.size(); ++i) {
+							this->_allocator.construct(this->_my_vector + k++, tmp[i]);
+						}
+						break ;
+					}
+					this->_allocator.construct(this->_my_vector + i, tmp[i]);
+				}
+			}
+			else {
+				this->_allocator.construct(this->_my_vector + inserted_position, val);
+			}
+
+			this->_size += 1;
+			return (this->begin() + inserted_position);
+		};
+		
+		void insert (iterator position, size_type n, const value_type& val) {
+			iterator	inserted_element = this->begin();
+			size_type	inserted_position = 0;
+			vector		tmp(*this);
+
+			if (n == 0)
+				return ;
+			while (inserted_element++ != position)
+				inserted_position++;
+
+			if (this->_size + n > this->_capacity) {
+				for (size_type i = 0; i < this->_size; i++) {
+					this->_allocator.destroy(this->_my_vector + i);
+				}
+				this->_allocator.deallocate(this->_my_vector, this->_capacity);
+				this->_my_vector = this->_allocator.allocate(this->_size + n);
+				this->_capacity = this->_size + n;
+			}
+
+			if (tmp.size() != 0) {
+				for (size_type i = 0; i < tmp.size(); i++) {
+					if (i == inserted_position) {
+						for (size_type j = 0; j < n; j++) {
+							this->_allocator.construct(this->_my_vector + i++, val);
+						}
+						for (size_type k = inserted_position + n; i < tmp.size(); i++) {
+							this->_allocator.construct(this->_my_vector + k++, tmp[i]);
+						}
+						break ;
+					}
+					this->_allocator.construct(this->_my_vector + i, tmp[i]);
+				}
+			}
+			else {
+				for (size_type j = 0; j < n; j++) {
+						this->_allocator.construct(this->_my_vector + j, val);
+				}
+			}
+			this->_size += n;
+		};
+
+		void insert (iterator position, iterator first, iterator last) {
+			difference_type n = last - first;
+			iterator	inserted_element = this->begin();
+			size_type	inserted_position = 0;
+			vector		tmp(*this);
+
+			if (n == 0)
+				return ;
+			while (inserted_element++ != position)
+				inserted_position++;
+
+			if (this->_size + n > this->_capacity) {
+				for (size_type i = 0; i < this->_size; i++) {
+					this->_allocator.destroy(this->_my_vector + i);
+				}
+				this->_allocator.deallocate(this->_my_vector, this->_capacity);
+				this->_my_vector = this->_allocator.allocate(this->_size + n);
+				this->_capacity = this->_size + n;
+			}
+
+			if (tmp.size() != 0) {
+				for (size_type i = 0; i < tmp.size(); i++) {
+					if (i == inserted_position) {
+						for (size_type j = 0; j < n; j++) {
+							this->_allocator.construct(this->_my_vector + i++, *first++);
+						}
+						for (size_type k = inserted_position + n; i < tmp.size(); i++) {
+							this->_allocator.construct(this->_my_vector + k++, tmp[i]);
+						}
+						break ;
+					}
+					this->_allocator.construct(this->_my_vector + i, tmp[i]);
+				}
+			}
+			else {
+				for (size_type j = 0; j < n; j++) {
+						this->_allocator.construct(this->_my_vector + j, *first++);
+				}
+			}
+			this->_size += n;
 		};
 
 private:
