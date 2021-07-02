@@ -3,11 +3,8 @@
 
 #include <memory>
 
-#include <iostream>
-
 #include "RandomAccessIterator.hpp"
 #include "utils.hpp"
-
 
 namespace ft {
 	template < class T, class Alloc = std::allocator<T> >
@@ -549,6 +546,5 @@ namespace ft {
 		x.swap(y);
 	};
 }
-
 
 #endif
