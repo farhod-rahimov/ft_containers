@@ -25,8 +25,8 @@ namespace ft {
 			typedef 			RandomAccessReverseIterator<value_type>			reverse_iterator;
 			typedef 			RandomAccessReverseIterator<value_type const>	const_reverse_iterator;
 
-			typedef 			std::ptrdiff_t									size_type;
-			typedef 			size_t											difference_type;
+			typedef 			std::ptrdiff_t									difference_type;
+			typedef 			size_t											size_type;
 
 	// INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION  //
 
@@ -522,7 +522,7 @@ namespace ft {
 	bool operator == (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
 		if (lhs.size() != rhs.size())
 			return (false);
-		for (long i = 0; i < lhs.size(); i++) {
+		for (size_t i = 0; i < lhs.size(); i++) {
 			if (lhs[i] != rhs[i])
 				return (false);
 		}

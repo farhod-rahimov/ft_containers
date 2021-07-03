@@ -1,8 +1,7 @@
-#include <vector>
 #include <iostream>
 #include <ctime>
 
-#include "Vector.hpp"
+#include "../headers/Vector.hpp"
 
 void constructor ()
 {
@@ -10,15 +9,16 @@ void constructor ()
   ft::vector<int> first;                                // empty vector of ints
   ft::vector<int> second (4,100);                       // four ints with value 100
   ft::vector<int> third (second.begin(),second.end());  // iterating through second
-  // ft::vector<int> fourth (third);                       // a copy of third
+  ft::vector<int> fourth (third);                       // a copy of third
 
-  // // the iterator constructor can also be used to construct from arrays:
-  // ft::vector<int> fifth (second.begin(), second.end());
+  // the iterator constructor can also be used to construct from arrays:
+  int myints[] = {16,2,77,29};
+  ft::vector<int> fifth (myints, myints + sizeof(myints) / sizeof(int) );
 
-  // std::cout << "The contents of fifth are:";
-  // for (ft::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
-  //   std::cout << ' ' << *it;
-  // std::cout << '\n';
+  std::cout << "The contents of fifth are:";
+  for (ft::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
 
 }
 
@@ -97,7 +97,7 @@ void resize ()
   myvector.resize(12);
 
   std::cout << "myvector contains:";
-  for (long i=0;i<myvector.size();i++)
+  for (size_t i=0;i<myvector.size();i++)
     std::cout << ' ' << myvector[i];
   std::cout << '\n';
 }
@@ -425,37 +425,41 @@ void swap_vector()
 
 void main_vector()
 {
-    constructor();
-    // operator_equal();
-    // begin();
-    // rbegin();
-    // size();
-    // max_size();
-    // resize();
-    // capacity();
-    // empty();
-    // reserve();
-    // operator_2();
-    // at();
-    // front();
-    // back();
-    // assign();
-    // push_back();
-    // pop_back();
-    // insert();
-    // erase();
-    // swap();
-    // clear();
-    // get_allocator();
-    // relational_operators_vector();
-    // swap_vector();
+    int a = 10000;
+    while (a-- != 0)
+    {
+      constructor();
+      operator_equal();
+      begin();
+      rbegin();
+      size();
+      max_size();
+      resize();
+      capacity();
+      empty();
+      reserve();
+      operator_2();
+      at();
+      front();
+      back();
+      assign();
+      push_back();
+      pop_back();
+      insert();
+      erase();
+      swap();
+      clear();
+      get_allocator();
+      relational_operators_vector();
+      swap_vector();
+  }
 }
 
 int main()
 {
     int start = std::clock();
-    int end = std::clock();
     main_vector();
-    int t = (end - start) / CLOCKS_PER_SEC;
-    std::cout << "\nIt took " << t << " seconds to run this tests" << std::endl;
+    int end = std::clock();
+    int t = (end - start) / 1000;
+    std::cout << "\nIt took " << t << " milliseconds to run MAIN_FT.CPP tests" << std::endl;
 }
