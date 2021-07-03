@@ -64,21 +64,39 @@ namespace ft {
 				this->_size = size;
 			};
 			
-			vector (const vector& x) {
-				this->_my_vector = _allocator.allocate(x._size);
-				this->_capacity = x._capacity;
-				this->_size = x._size;
+			vector (const vector & src) {
+				this->_my_vector = _allocator.allocate(src._size);
+				this->_capacity = src._capacity;
+				this->_size = src._size;
 
-				for (size_type i = 0; i < x._size; i++) {
-					this->_allocator.construct(this->_my_vector + i, x._my_vector[i]);
+				for (size_type i = 0; i < src._size; i++) {
+					this->_allocator.construct(this->_my_vector + i, src._my_vector[i]);
 				}
 			};
 
-			~vector () {
+			virtual ~vector () {
 				for (size_type i = 0; i < this->_size; i++) {
 					this->_allocator.destroy(this->_my_vector + i);
 				}
 				this->_allocator.deallocate(this->_my_vector, this->_capacity);
+			};
+
+			vector & operator = (vector const & src) {
+				if (this != &src)
+				{
+					if (this->_capacity != 0) {
+						this->clear();
+						this->_allocator.deallocate(this->_my_vector, this->_capacity);
+					}
+					this->_my_vector = _allocator.allocate(src._size);
+					this->_capacity = src._capacity;
+					this->_size = src._size;
+					
+					for (size_type i = 0; i < src._size; i++) {
+						this->_allocator.construct(this->_my_vector + i, src._my_vector[i]);
+					}
+				}
+				return (*this);
 			};
 
 	// ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS //
@@ -519,7 +537,7 @@ namespace ft {
 	// NON-MEMBER FUNCTION OVERLOADS | NON-MEMBER FUNCTION OVERLOADS | NON-MEMBER FUNCTION OVERLOADS | NON-MEMBER FUNCTION OVERLOADS //
 
 	template <class T, class Alloc>
-	bool operator == (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+	bool operator == (const ft::vector<T,Alloc> & lhs, const ft::vector<T,Alloc> & rhs) {
 		if (lhs.size() != rhs.size())
 			return (false);
 		for (size_t i = 0; i < lhs.size(); i++) {
@@ -530,17 +548,17 @@ namespace ft {
 	};
 
 	template <class T, class Alloc>
-	bool operator != (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+	bool operator != (const ft::vector<T,Alloc> & lhs, const ft::vector<T,Alloc> & rhs) {
 		return (!(lhs==rhs));
 	};
 
 	template <class T, class Alloc>
-	bool operator <  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+	bool operator <  (const ft::vector<T,Alloc> & lhs, const ft::vector<T,Alloc> & rhs) {
 		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 	};
 
 	template <class T, class Alloc>
-	bool operator <= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+	bool operator <= (const ft::vector<T,Alloc> & lhs, const ft::vector<T,Alloc> & rhs) {
 		static_cast<void>(lhs);
 		if (rhs.size() == 0)
 			return (false);
@@ -548,18 +566,18 @@ namespace ft {
 	}
 
 	template <class T, class Alloc>
-	bool operator > (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+	bool operator > (const ft::vector<T,Alloc> & lhs, const ft::vector<T,Alloc> & rhs) {
 		return (!operator < (lhs, rhs));
 
 	};
 
 	template <class T, class Alloc>
-	bool operator >= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+	bool operator >= (const ft::vector<T,Alloc> & lhs, const ft::vector<T,Alloc> & rhs) {
 		return (!operator <= (lhs, rhs));
 	};
 
 	template <class T, class Alloc>
-	void swap (vector<T,Alloc>& x, vector<T,Alloc>& y) {
+	void swap (vector<T,Alloc> & x, vector<T,Alloc> & y) {
 		x.swap(y);
 	};
 }

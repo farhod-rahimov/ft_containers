@@ -1,17 +1,18 @@
 #include <iostream>
 #include <ctime>
 
-#include "../headers/Stack.hpp"
+#include <vector>
+#include <stack>
 
 void constructor ()
 {
-  ft::vector<int> myv (3,100);          // deque with 3 elements
-  ft::vector<int> myvector (2,200);        // vector with 2 elements
+  std::vector<int> myv (3,100);          // deque with 3 elements
+  std::vector<int> myvector (2,200);        // vector with 2 elements
 
-  ft::stack<int> first;                    // empty stack
-  ft::stack<int, ft::vector<int> > second (myv);         // stack initialized to copy of deque
+  std::stack<int> first;                    // empty stack
+  std::stack<int, std::vector<int> > second (myv);         // stack initialized to copy of deque
 
-  ft::stack<int,ft::vector<int> > third;  // empty stack using vector
+  std::stack<int,std::vector<int> > third;  // empty stack using vector
 
   std::cout << "size of first: " << first.size() << '\n';
   std::cout << "size of second: " << second.size() << '\n';
@@ -21,7 +22,7 @@ void constructor ()
 
 void empty ()
 {
- ft::stack<int> mystack;
+ std::stack<int> mystack;
   int sum (0);
 
   for (int i=1;i<=10;i++) mystack.push(i);
@@ -38,7 +39,7 @@ void empty ()
 
 void size ()
 {
-  ft::stack<int> myints;
+  std::stack<int> myints;
   std::cout << "0. size: " << myints.size() << '\n';
 
   for (int i=0; i<5; i++) myints.push(i);
@@ -51,7 +52,7 @@ void size ()
 
 void top ()
 {
-  ft::stack<int> mystack;
+  std::stack<int> mystack;
 
   mystack.push(10);
   mystack.push(20);
@@ -64,7 +65,7 @@ void top ()
 
 void push ()
 {
-  ft::stack<int> mystack;
+  std::stack<int> mystack;
 
   for (int i=0; i<5; ++i) mystack.push(i);
 
@@ -80,7 +81,7 @@ void push ()
 
 void pop ()
 {
-  ft::stack<int> mystack;
+  std::stack<int> mystack;
 
   for (int i=0; i<5; ++i) mystack.push(i);
 
@@ -96,11 +97,11 @@ void pop ()
 
 void relational_operators_vector()
 {
-  ft::vector<int> foo_vector (3,100);   // three ints with a value of 100
-  ft::vector<int> bar_vector (2,200);   // two ints with a value of 200
+  std::vector<int> foo_vector (3,100);   // three ints with a value of 100
+  std::vector<int> bar_vector (2,200);   // two ints with a value of 200
   
-  ft::stack<int, ft::vector<int> > foo_stack (foo_vector);   // three ints with a value of 100
-  ft::stack<int, ft::vector<int> > bar_stack (bar_vector);   // two ints with a value of 200
+  std::stack<int, std::vector<int> > foo_stack (foo_vector);   // three ints with a value of 100
+  std::stack<int, std::vector<int> > bar_stack (bar_vector);   // two ints with a value of 200
 
   if (foo_stack==bar_stack) std::cout << "foo and bar are equal\n";
   if (foo_stack!=bar_stack) std::cout << "foo and bar are not equal\n";
@@ -131,5 +132,5 @@ int main()
     main_stack();
     int end = std::clock();
     int t = (end - start) / 1000;
-    std::cout << "\nIt took " << t << " milliseconds to run MAIN_STL.CPP tests" << std::endl;
+    std::cout << "\nIt took " << t << " milliseconds to run MAIN_FT.CPP tests" << std::endl;
 }
