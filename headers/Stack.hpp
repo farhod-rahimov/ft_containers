@@ -1,8 +1,6 @@
 #ifndef STACK_HPP
 # define STACK_HPP
 
-#include <memory>
-
 #include "RandomAccessIterator.hpp"
 #include "RandomAccessReverseIterator.hpp"
 #include "utils.hpp"
