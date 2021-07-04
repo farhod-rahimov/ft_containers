@@ -528,10 +528,10 @@ namespace ft {
 			};
 
 	private:
-			pointer		_my_vector;
-			size_type	_capacity;
-			size_type	_size;
-			Alloc		_allocator;
+			pointer			_my_vector;
+			size_type		_capacity;
+			size_type		_size;
+			allocator_type	_allocator;
 	};
 
 	// NON-MEMBER FUNCTION OVERLOADS | NON-MEMBER FUNCTION OVERLOADS | NON-MEMBER FUNCTION OVERLOADS | NON-MEMBER FUNCTION OVERLOADS //
