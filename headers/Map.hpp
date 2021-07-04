@@ -62,9 +62,6 @@ namespace ft {
 				static_cast<void>(val);
 				if (this->_size == 0) {
 					this->_root = new _BinaryTree(val);
-					
-					this->_root->lhs = nullptr;
-					this->_root->rhs = nullptr;
 				}
 				else {
 
@@ -88,7 +85,10 @@ namespace ft {
 		private:
 				typedef struct _s {
 					public:
-							_s(value_type const & src) : value(src) {};
+							_s(value_type const & src) : value(src) {
+								this->lhs = nullptr;
+								this->rhs = nullptr;
+							};
 							~_s() {
 								delete lhs;
 								delete rhs;
