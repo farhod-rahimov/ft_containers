@@ -64,16 +64,16 @@ namespace ft {
 
 				while (tmp)
 				{
-					if (val.first < tmp->value.first && tmp->lhs)
+					if (this->_comp(val.first, tmp->value.first) && tmp->lhs)
 						tmp = tmp->lhs;
-					else if (val.first < tmp->value.first && !tmp->lhs) {
+					else if (this->_comp(val.first, tmp->value.first) && !tmp->lhs) {
 						tmp->lhs = new _BinaryTree(val);
 						tmp = tmp->lhs;
 						break ;
 					}
-					else if (val.first > tmp->value.first && tmp->rhs)
+					else if (this->_comp(tmp->value.first, val.first) && tmp->rhs)
 						tmp = tmp->rhs;
-					else if (val.first > tmp->value.first && !tmp->rhs) {
+					else if (this->_comp(tmp->value.first, val.first) && !tmp->rhs) {
 						tmp->rhs = new _BinaryTree(val);
 						tmp = tmp->rhs;
 						break ;
@@ -86,14 +86,19 @@ namespace ft {
 			};
 
 			iterator insert (iterator position, const value_type& val) {
-
+				static_cast<void>(position);
+				return (this->insert(val).first);
 			};
 
-			// template <class InputIterator>
-			// void insert (InputIterator first, InputIterator last) {
-
-			// };
-
+			void insert (iterator first, iterator last) {
+				while (first != last)
+				{
+					std::cout << "First " << first->first << " second " << first->second << std::endl;
+					first++;
+					std::cout << "First " << first->first << " second " << first->second << std::endl;
+					break ;
+				}
+			};
 
 		private:
 				typedef struct _s {
