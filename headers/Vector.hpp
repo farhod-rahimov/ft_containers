@@ -31,20 +31,19 @@ namespace ft {
 	// INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION  //
 
 			explicit vector (const allocator_type& alloc = allocator_type()) {
-				static_cast<void>(alloc);
-
 				this->_my_vector = nullptr;
 				this->_capacity = 0;
 				this->_size = 0;
+				this->_allocator = alloc;
 			};
 			
 			explicit vector (size_type n, const value_type& val = value_type(),
 							const allocator_type& alloc = allocator_type()) {
-				static_cast<void>(alloc);
-
 				this->_my_vector = _allocator.allocate(n);
 				this->_capacity = n;
 				this->_size = n;
+				this->_allocator = alloc;
+				
 				for (size_type i = 0; i < this->_size; i++) {
 					this->_allocator.construct(this->_my_vector + i, val);
 				}
@@ -52,12 +51,12 @@ namespace ft {
 			
 			vector (iterator first, iterator last,
 							const allocator_type& alloc = allocator_type()) {
-				static_cast<void>(alloc);
-
 				size_type size = last - first;
 
 				this->_my_vector = _allocator.allocate(size);
 				this->_capacity = size;
+				this->_allocator = alloc;
+
 				for (size_type i = 0; i < size; i++) {
 					this->_allocator.construct(this->_my_vector + i, *first++);
 				}
