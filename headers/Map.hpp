@@ -43,7 +43,7 @@ namespace ft {
 					// this->_allocator = alloc;
 					this->_comp = comp;
 					this->_size = 0;
-					this->_root = nullptr;
+					// this->_root = nullptr;
 				};
 				
 				// template <class InputIterator>
@@ -61,10 +61,8 @@ namespace ft {
 			void insert (const value_type& val) {
 				static_cast<void>(val);
 				if (this->_size == 0) {
-					this->_root = new _BinaryTree;
+					this->_root = new _BinaryTree(val);
 					
-					this->_root->value.first = val.first;
-					this->_root->value.second = val.second;
 					this->_root->lhs = nullptr;
 					this->_root->rhs = nullptr;
 				}
@@ -73,6 +71,7 @@ namespace ft {
 				}
 				this->_size++;
 
+				std::cout << "First " << this->_root->value.first << "\n";
 				std::cout << "Second " << this->_root->value.second << "\n";
 			};
 
@@ -87,16 +86,36 @@ namespace ft {
 
 
 		private:
-				typedef struct s {
-					value_type	value;
-					struct s	*lhs;
-					struct s	*rhs;
-				}				_BinaryTree;
+				class _BinaryTree {
+					public:
+							_BinaryTree() {};
+							
+							_BinaryTree(value_type const & src) : value(src) {};
+							
+							~_BinaryTree() {
+								delete lhs;
+								delete rhs;
+							};
+							
+							_BinaryTree(_BinaryTree const &src) {
+								*this = src;
+							};
+
+							_BinaryTree &operator=(_BinaryTree const &src) {
+								this->value = src.value;
+								this->lhs = src->lhs;
+								this->rhs = src->rhs;
+							};
+
+							value_type	value;
+							_BinaryTree	*lhs;
+							_BinaryTree	*rhs;
+				};
 
 				allocator_type	_allocator;
 				key_compare		_comp;
 				size_type		_size;
-				_BinaryTree	*	_root;
+				_BinaryTree		*_root;
 	};
 };
 
