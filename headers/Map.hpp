@@ -86,31 +86,17 @@ namespace ft {
 
 
 		private:
-				class _BinaryTree {
+				typedef struct _s {
 					public:
-							_BinaryTree() {};
-							
-							_BinaryTree(value_type const & src) : value(src) {};
-							
-							~_BinaryTree() {
+							_s(value_type const & src) : value(src) {};
+							~_s() {
 								delete lhs;
 								delete rhs;
 							};
-							
-							_BinaryTree(_BinaryTree const &src) {
-								*this = src;
-							};
-
-							_BinaryTree &operator=(_BinaryTree const &src) {
-								this->value = src.value;
-								this->lhs = src->lhs;
-								this->rhs = src->rhs;
-							};
-
 							value_type	value;
-							_BinaryTree	*lhs;
-							_BinaryTree	*rhs;
-				};
+							struct _s	*lhs;
+							struct _s	*rhs;
+				} _BinaryTree;
 
 				allocator_type	_allocator;
 				key_compare		_comp;
