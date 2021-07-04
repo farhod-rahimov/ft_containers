@@ -3,15 +3,15 @@
 #include <iostream>     // std::cout
 
 #include "utils.hpp"
+#include "Map.hpp"
 
 int main () {
-  ft::pair <std::string,int> planet, homeplanet;
 
-  planet = ft::make_pair("Earth",6371);
+  ft::map<char, int> mymap;
 
-  homeplanet = planet;
+  // ft::pair<char, int> pr('a', 100);
+  
+  mymap.insert ( std::pair<char,int>('a',100) );
 
-  std::cout << "Home planet: " << homeplanet.first << '\n';
-  std::cout << "Planet size: " << homeplanet.second << '\n';
   return 0;
 }
