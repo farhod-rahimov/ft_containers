@@ -7,16 +7,13 @@
 #include "RandomAccessReverseIterator.hpp"
 #include "utils.hpp"
 
-// !!!!!!!!!!!!!!!!! std::pair change to ft::pair !!!!!!!!!!!
-
-
 namespace ft {
-	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<std::pair <const Key,T> > >
+	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair <const Key,T> > >
 	class map {
 		public:
 				typedef 			Key													key_type;
 				typedef 			T													mapped_type;
-				typedef 			std::pair<const key_type, mapped_type>				value_type;
+				typedef 			ft::pair<const key_type, mapped_type>				value_type;
 
 				typedef 			Compare												key_compare;
 				// typedef 			ft::map::value_comp									value_compare;
@@ -38,12 +35,10 @@ namespace ft {
 		// INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION  //
 				explicit map (const key_compare& comp = key_compare(), 
 							const allocator_type& alloc = allocator_type()) {
-					static_cast<void>(alloc);
-					
-					// this->_allocator = alloc;
+					this->_allocator = alloc;
 					this->_comp = comp;
 					this->_size = 0;
-					// this->_root = nullptr;
+					this->_root = nullptr;
 				};
 				
 				// template <class InputIterator>
@@ -57,24 +52,42 @@ namespace ft {
 				// };
 		
 		// MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS //
-			// pair<iterator,bool> insert (const value_type& val) {
-			void insert (const value_type& val) {
-				static_cast<void>(val);
+			
+			ft::pair<iterator,bool> insert (const value_type& val) {
 				if (this->_size == 0) {
 					this->_root = new _BinaryTree(val);
+					this->_size++;
+					return (ft::make_pair(&(this->_root->value), true));
 				}
-				else {
 
+				_BinaryTree *tmp = this->_root;
+
+				while (tmp)
+				{
+					if (val.first < tmp->value.first && tmp->lhs)
+						tmp = tmp->lhs;
+					else if (val.first < tmp->value.first && !tmp->lhs) {
+						tmp->lhs = new _BinaryTree(val);
+						tmp = tmp->lhs;
+						break ;
+					}
+					else if (val.first > tmp->value.first && tmp->rhs)
+						tmp = tmp->rhs;
+					else if (val.first > tmp->value.first && !tmp->rhs) {
+						tmp->rhs = new _BinaryTree(val);
+						tmp = tmp->rhs;
+						break ;
+					}
+					else
+						return (ft::make_pair(&(tmp->value), false));
 				}
 				this->_size++;
-
-				std::cout << "First " << this->_root->value.first << "\n";
-				std::cout << "Second " << this->_root->value.second << "\n";
+				return (ft::make_pair(&(tmp->value), true));
 			};
 
-			// iterator insert (iterator position, const value_type& val) {
+			iterator insert (iterator position, const value_type& val) {
 
-			// };
+			};
 
 			// template <class InputIterator>
 			// void insert (InputIterator first, InputIterator last) {
@@ -84,19 +97,19 @@ namespace ft {
 
 		private:
 				typedef struct _s {
-					public:
-							_s(value_type const & src) : value(src) {
-								this->lhs = nullptr;
-								this->rhs = nullptr;
-							};
-							~_s() {
-								delete lhs;
-								delete rhs;
-							};
-							value_type	value;
-							struct _s	*lhs;
-							struct _s	*rhs;
-				} _BinaryTree;
+				public:
+					_s(value_type const & src) : value(src) {
+						this->lhs = nullptr;
+						this->rhs = nullptr;
+					};
+					~_s() {
+						delete lhs;
+						delete rhs;
+					};
+					value_type	value;
+					struct _s	*lhs;
+					struct _s	*rhs;
+				} 				_BinaryTree;
 
 				allocator_type	_allocator;
 				key_compare		_comp;
