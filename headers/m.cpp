@@ -110,6 +110,24 @@ tree *ft_plus(tree *current) {
   return (tmp);
 }
 
+tree *ft_minus(tree *current) {
+  tree *tmp = current;
+
+  if (tmp->lh) {
+    tmp = tmp->lh;
+    while (tmp->rh) {
+      tmp = tmp->rh;
+    }
+  }
+  else {
+    while (tmp->value >= current->value && tmp->parent) {
+      tmp = tmp->parent;
+    }
+    if (tmp->value >= current->value)
+      return (nullptr);
+  }
+  return (tmp);
+}
 
 int main()
 {
@@ -124,39 +142,39 @@ int main()
     ft_insert(array[i++], root, 0);
   }
 
-  tree *start = ft_get_start(root);
+  // tree *start = ft_get_start(root);
+  tree *start = ft_get_end(root);
+
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
+  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
 
   // std::cout << "END = " << ft_get_end(root)->value << std::endl;
 
 
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  std::cout << "START   = " << start->value << std::endl; start = ft_plus(start);
-  
+  std::cout << "START-- = " << start->value << std::endl;
   
   // std::cout << "\nSTART = " << root->lh->value << std::endl;
 
