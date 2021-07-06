@@ -55,43 +55,41 @@
 
 int main ()
 {
-  std::map<char,int> mymap;
+  std::map<int,char> mymap;
 
-  // first insert function version (single parameter):
-  mymap.insert ( std::pair<char,int>('a',100) );
-  mymap.insert ( std::pair<char,int>('z',200) );
+  mymap.insert (std::pair<int,char>(200, 'a'));
+  mymap.insert (std::pair<int,char>(100, 'a'));
+  mymap.insert (std::pair<int,char>(1500, 'a'));
+  mymap.insert (std::pair<int,char>(987, 'a'));
+  mymap.insert (std::pair<int,char>(2000, 'a'));
+  mymap.insert (std::pair<int,char>(1700, 'a'));
+  mymap.insert (std::pair<int,char>(3000, 'a'));
+  mymap.insert (std::pair<int,char>(1750, 'a'));
+  mymap.insert (std::pair<int,char>(1600, 'a'));
+  mymap.insert (std::pair<int,char>(1000, 'a'));
+  mymap.insert (std::pair<int,char>(400, 'a'));
+  mymap.insert (std::pair<int,char>(600, 'a'));
+  mymap.insert (std::pair<int,char>(300, 'a'));
+  mymap.insert (std::pair<int,char>(350, 'a'));
+  mymap.insert (std::pair<int,char>(250, 'a'));
+  mymap.insert (std::pair<int,char>(340, 'a'));
+  mymap.insert (std::pair<int,char>(360, 'a'));
+  mymap.insert (std::pair<int,char>(120, 'a'));
+  mymap.insert (std::pair<int,char>(50, 'a'));
+  mymap.insert (std::pair<int,char>(1, 'a'));
+  mymap.insert (std::pair<int,char>(60, 'a'));
+  mymap.insert (std::pair<int,char>(55, 'a'));
+  mymap.insert (std::pair<int,char>(65, 'a'));
+  mymap.insert (std::pair<int,char>(57, 'a'));
+  mymap.insert (std::pair<int,char>(53, 'a'));
+  mymap.insert (std::pair<int,char>(54, 'a'));
+  mymap.insert (std::pair<int,char>(51, 'a'));
 
-  std::pair<std::map<char,int>::iterator,bool> ret;
-  ret = mymap.insert ( std::pair<char,int>('z',500) );
-  if (ret.second==false) {
-    std::cout << "element 'z' already existed";
-    std::cout << " with a value of " << ret.first->second << '\n';
-  }
-
-  // second insert function version (with hint position):
-  std::map<char,int>::iterator it = mymap.begin();
-  mymap.insert (it, std::pair<char,int>('b',300));  // max efficiency inserting
-  mymap.insert (it, std::pair<char,int>('c',400));  // no max efficiency inserting
-  mymap.insert (it, std::pair<char,int>('g',400));  // no max efficiency inserting
-  mymap.insert (it, std::pair<char,int>('f',400));  // no max efficiency inserting
-  mymap.insert (it, std::pair<char,int>('h',400));  // no max efficiency inserting
-
-  // third insert function version (range insertion):
-  std::map<char,int> anothermap;
-  anothermap.insert(mymap.begin(),mymap.find('f'));
 
   // showing contents:
   std::cout << "mymap contains:\n";
-  for (it=mymap.begin(); it!=mymap.end(); ++it)
+  for (std::map<int, char>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
     std::cout << it->first << " => " << it->second << '\n';
-
-  std::cout << "anothermap contains:\n";
-  for (it=anothermap.begin(); it!=anothermap.end(); ++it)
-    std::cout << it->first << " => " << it->second << '\n';
-
-it = anothermap.begin();
-++it;
-  std::cout << it->first;
 
   return 0;
 }
