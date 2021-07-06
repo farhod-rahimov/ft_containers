@@ -13,6 +13,28 @@ namespace ft {
 			typedef std::bidirectional_iterator_tag         iterator_category;
 
 	// ----------------------------------------------------------------------------------------------------------- //
+    
+	private:
+                typedef struct _s {
+				public:
+					_s() {};
+					_s(value_type const & src, _s * parent) : value(src), parent(parent) {
+						this->lhs = nullptr;
+						this->rhs = nullptr;
+					};
+					~_s() {
+						// delete lhs;
+						// delete rhs;
+					};
+					value_type	value;
+					struct _s	*parent;
+					struct _s	*lhs;
+					struct _s	*rhs;
+				} 				_BinaryTree;
+	
+	// ----------------------------------------------------------------------------------------------------------- //
+    
+	public:
 
             BidirectionalIteratorMap() {};
 			
@@ -63,30 +85,54 @@ namespace ft {
 
 			BidirectionalIteratorMap operator ++ (int)
 			{
-				BidirectionalIteratorMap ret_it(*this);
-                this->_ptr = &ret_it->_binary_tree->value->rhs;
-				return (ret_it);
+				BidirectionalIteratorMap tmp(*this);
+
+				if (tmp->_binary_tree->rhs) {
+					tmp->_binary_tree = tmp->_binary_tree->rhs;
+					while (tmp->_binary_tree->lhs) {
+						tmp->_binary_tree = tmp->_binary_tree->lhs;
+					}
+				}
+				else {
+					while (tmp->_binary_tree->value <= this->_binary_tree->value && tmp->_binary_tree->parent) {
+						tmp->_binary_tree = tmp->_binary_tree->parent;
+						}
+					if (tmp->_binary_tree->value <= this->_binary_tree->value)
+						return (nullptr);
+				}		
+				return (tmp);
 			};
 
 	// ----------------------------------------------------------------------------------------------------------- //
 
-    private:
-                typedef struct _s {
-				public:
-					_s(value_type const & src, size_type idx) : value(src) {
-						this->lhs = nullptr;
-						this->rhs = nullptr;
-						this->index = idx;
-					};
-					~_s() {
-						delete lhs;
-						delete rhs;
-					};
-					value_type	value;
-					struct _s	*lhs;
-					struct _s	*rhs;
-				} 				_BinaryTree;
+			friend BidirectionalIteratorMap operator -- (BidirectionalIteratorMap & it) {
+				it--;
+				return (it);
+			};
 
+			BidirectionalIteratorMap operator -- (int)
+			{
+				BidirectionalIteratorMap tmp(*this);
+				if (tmp->_binary_tree->lhs) {
+					tmp->_binary_tree = tmp->_binary_tree->lhs;
+					while (tmp->_binary_tree->rhs) {
+						tmp->_binary_tree = tmp->_binary_tree->rhs;
+					}
+				}
+				else {
+					while (tmp->_binary_tree->value >= this->_binary_tree->value && tmp->_binary_tree->parent) {
+						tmp->_binary_tree = tmp->_binary_tree->parent;
+					}
+					if (tmp->_binary_tree->value >= this->_binary_tree->value)
+						return (nullptr);
+				}
+				return (tmp);
+			};
+
+	// ----------------------------------------------------------------------------------------------------------- //
+
+
+    private:
             pointer     _ptr;
             _BinaryTree _binary_tree;
     };

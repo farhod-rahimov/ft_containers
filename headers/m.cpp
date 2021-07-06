@@ -129,62 +129,28 @@ tree *ft_minus(tree *current) {
   return (tmp);
 }
 
+#include <cstdlib>
+
 int main()
 {
 
   tree *root = ft_create_new_el(0, nullptr);
 
-  int array[] = {200, 1500, 100, 50, 120, 1, 60, 55, 65, 57, 53, 51, 54, 987, 2000, 1700, 3000, 1600, 1750, 1000, 400, 600, 300, 350, 250, 340, 360};
-  int i = 0;
+  ft_insert(-1, root, 1);
+  srand(0);
 
-  ft_insert(array[i++], root, 1);
-  while (i < 26) {
-    ft_insert(array[i++], root, 0);
+  for (int i = 0; i < 30; i++) {
+    ft_insert(rand() % 1000, root, 0);
   }
 
-  // tree *start = ft_get_start(root);
-  tree *start = ft_get_end(root);
-
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-  std::cout << "START-- = " << start->value << std::endl; start = ft_minus(start);
-
-  // std::cout << "END = " << ft_get_end(root)->value << std::endl;
-
-
-  std::cout << "START-- = " << start->value << std::endl;
   
-  // std::cout << "\nSTART = " << root->lh->value << std::endl;
 
+  // for (tree *start = ft_get_start(root); start != nullptr; start = ft_plus(start)) {
+  //   std::cout << start->value << "\n";
+  // }
 
-  // std::cout << "START++ = " << (start = ft_plus(start))->value << std::endl;
-  // std::cout << "START++ = " << (start = ft_plus(start))->value << std::endl;
-  // std::cout << "START++ = " << (start = ft_plus(start))->value << std::endl;
-  // std::cout << "START++ = " << (start = ft_plus(start))->value << std::endl;
-  // std::cout << "START++ = " << (start = ft_plus(start))->value << std::endl;
-  // std::cout << "START++ = " << (start = ft_plus(start))->value << std::endl;
+  for (tree *start = ft_get_end(root); start != nullptr; start = ft_minus(start)) {
+    std::cout << start->value << "\n";
+  }
 
-  
 }
