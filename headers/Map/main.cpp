@@ -25,15 +25,17 @@ int main()
   ft::map<int, int> mymap;
   std::map<int, int> smap;
 
-  // std::map<int, int>::iterator sit = smap.begin();
+  ft::pair<ft::map<int, int>::iterator, bool> pr;
   // std::cout << sit->first;
   // std::cout << sit->second;
 
-  ft::map<int, int>::iterator mit = mymap.begin();
-  ft::map<int, int>::iterator mit2;
-  std::cout << mit->first;
-  std::cout << mit->second;
-  mit2 = mit;
+  pr = mymap.insert(ft::make_pair<int, int>(50, 60));
+  std::cout << pr.first->first << " "  << pr.first->second << " "  << pr.second << "\n";
+
+  pr = mymap.insert(ft::make_pair<int, int>(40, 60));
+  std::cout << pr.first->first << " "  << pr.first->second << " "  << pr.second << "\n";
+  pr = mymap.insert(ft::make_pair<int, int>(40, 60));
+  std::cout << pr.first->first << " "  << pr.first->second << " "  << pr.second << "\n";
 
   // std::cout << mit->second;
 }

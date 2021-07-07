@@ -43,7 +43,7 @@ namespace ft {
 			typedef		T2	second_type;
 
 
-			pair() : first(first_type()) {
+			pair() : first(first_type()), second(second_type()) {
 			};
 			
 			template <class U, class V>
@@ -126,6 +126,15 @@ namespace ft {
 			
 			BinaryTree(pointer const & value, BinaryTree * parent) {
 				this->_value = new value_type(value);
+				this->_parent = parent;
+				this->_lh = nullptr;
+				this->_rh = nullptr;
+			};
+
+			BinaryTree(value_type const & value, BinaryTree * parent) {
+				this->_value = new value_type;
+				this->_value->first = value.first;
+				this->_value->second = value.second;
 				this->_parent = parent;
 				this->_lh = nullptr;
 				this->_rh = nullptr;

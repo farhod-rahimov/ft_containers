@@ -20,8 +20,15 @@ namespace ft {
 			
             virtual ~BidirectionalIteratorMap() {};
             
-            // BidirectionalIteratorMap(pointer ptr) : _ptr(ptr) {};
-            BidirectionalIteratorMap(pointer value, BinaryTree<value_type> * parent) {
+            BidirectionalIteratorMap(pointer value) {
+				this->_binary_tree = new BinaryTree<value_type>;
+				this->_binary_tree->_value = value;
+				this->_binary_tree->_parent = nullptr;
+				this->_binary_tree->_lh = nullptr;
+				this->_binary_tree->_rh = nullptr;
+			};
+            
+			BidirectionalIteratorMap(pointer value, BinaryTree<value_type> * parent) {
 				this->_binary_tree = new BinaryTree<value_type>;
 				this->_binary_tree->_value = value;
 				this->_binary_tree->_parent = parent;
