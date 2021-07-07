@@ -64,6 +64,10 @@ namespace ft {
 					*this = src;
 				};
 			
+				virtual ~map() {
+					// change change change change change change change change change change change change change 
+				};
+
 				map & operator = (const map & src) {
 				if (this != &src) {
 					if (this->_root != nullptr)
