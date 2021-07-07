@@ -124,8 +124,19 @@ namespace ft {
 			};
 			virtual ~BinaryTree() {};	// DONT  FORGET TO CHECK LEAKS DONT  FORGET TO CHECK LEAKS DONT  FORGET TO CHECK LEAKS DONT  FORGET TO CHECK LEAKS
 			
+			BinaryTree(pointer const & value) {
+				this->_value = new value_type;
+				this->_value->first = value->first;
+				this->_value->second = value->second;
+				this->_parent = nullptr;
+				this->_lh = nullptr;
+				this->_rh = nullptr;
+			};
+
 			BinaryTree(pointer const & value, BinaryTree * parent) {
-				this->_value = new value_type(value);
+				this->_value = new value_type;
+				this->_value->first = value->first;
+				this->_value->second = value->second;
 				this->_parent = parent;
 				this->_lh = nullptr;
 				this->_rh = nullptr;
@@ -146,7 +157,9 @@ namespace ft {
 
 			BinaryTree &operator=(BinaryTree const &src) {
 				if (this != &src) {
-					this->_value = new value_type(*src._value);
+					this->_value = new value_type;
+					this->_value->first = src._value->first;
+					this->_value->second = src._value->second;
 					this->_parent = src._parent;
 					this->_lh = src._lh;
 					this->_rh = src._rh;

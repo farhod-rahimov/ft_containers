@@ -21,24 +21,28 @@ namespace ft {
             virtual ~BidirectionalIteratorMap() {};
             
             BidirectionalIteratorMap(pointer value) {
-				this->_binary_tree = new BinaryTree<value_type>;
-				this->_binary_tree->_value = value;
-				this->_binary_tree->_parent = nullptr;
-				this->_binary_tree->_lh = nullptr;
-				this->_binary_tree->_rh = nullptr;
+				this->_binary_tree = new BinaryTree<value_type>(value);
+				// this->_binary_tree->_value = value;
+				// this->_binary_tree->_parent = nullptr;
+				// this->_binary_tree->_lh = nullptr;
+				// this->_binary_tree->_rh = nullptr;
 			};
             
 			BidirectionalIteratorMap(pointer value, BinaryTree<value_type> * parent) {
-				this->_binary_tree = new BinaryTree<value_type>;
-				this->_binary_tree->_value = value;
-				this->_binary_tree->_parent = parent;
-				this->_binary_tree->_lh = nullptr;
-				this->_binary_tree->_rh = nullptr;
+				this->_binary_tree = new BinaryTree<value_type>(value, parent);
+				// this->_binary_tree->_value = value;
+				// this->_binary_tree->_parent = parent;
+				// this->_binary_tree->_lh = nullptr;
+				// this->_binary_tree->_rh = nullptr;
 			};
             
             BidirectionalIteratorMap(BinaryTree<value_type> btree) {
 				this->_binary_tree = new BinaryTree<value_type>;
 				this->_binary_tree = btree;
+				// this->_binary_tree->_value = btree->_value;
+				// this->_binary_tree->_parent = btree->_parent;
+				// this->_binary_tree->_lh = nullptr;
+				// this->_binary_tree->_rh = nullptr;
 			};
 			
 			BidirectionalIteratorMap(BidirectionalIteratorMap const & src) {
@@ -51,6 +55,7 @@ namespace ft {
 						delete this->_binary_tree;
 					}
 					this->_binary_tree = new BinaryTree<value_type>(*src._binary_tree);
+					// this->_binary_tree = src._binary_tree;
                 }
 				return (*this);
 			};
@@ -96,9 +101,11 @@ namespace ft {
 					while (tmp->_binary_tree->_value <= this->_binary_tree->_value && tmp->_binary_tree->_parent) {
 						tmp->_binary_tree = tmp->_binary_tree->_parent;
 					}
-					if (tmp->_binary_tree->_value <= this->_binary_tree->_value)
-						return (nullptr);
-				}		
+					// if (tmp->_binary_tree->_value <= this->_binary_tree->_value)
+					// 	return (tmp->_binary_tree->_end_iterator);
+						// return (++(this->_binary_tree->_value));
+						// return (nullptr);
+				}	
 				return (tmp);
 			};
 	
@@ -111,7 +118,6 @@ namespace ft {
 
 			BidirectionalIteratorMap * operator -- (int)
 			{
-
 				BidirectionalIteratorMap *tmp(this);
 
 				if (tmp->_binary_tree->_lh) {
@@ -124,16 +130,20 @@ namespace ft {
 					while (tmp->_binary_tree->_value >= this->_binary_tree->_value && tmp->_binary_tree->_parent) {
 						tmp->_binary_tree = tmp->_binary_tree->_parent;
 					}
-					if (tmp->_binary_tree->_value >= this->_binary_tree->_value)
-						return (nullptr);
+					// if (tmp->_binary_tree->_value >= this->_binary_tree->_value)
+					// 	return (tmp->_binary_tree->_begin_iterator);
 				}		
 				return (tmp);
 			};
 
 	// ----------------------------------------------------------------------------------------------------------- //
+			
+			bool operator != (BidirectionalIteratorMap & it) {
+				return (this <= it);
+			}
 
 	private:
-			BinaryTree<value_type> *_binary_tree;
+			BinaryTree<value_type>		*_binary_tree;
 	};
 };
 #endif

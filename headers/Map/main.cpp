@@ -29,13 +29,36 @@ int main()
   // std::cout << sit->first;
   // std::cout << sit->second;
 
-  pr = mymap.insert(ft::make_pair<int, int>(50, 60));
-  std::cout << pr.first->first << " "  << pr.first->second << " "  << pr.second << "\n";
+  pr = mymap.insert(ft::make_pair<int, int>(50, -50));
+  // std::cout << pr.first->first << " "  << pr.first->second << " "  << pr.second << "\n";
 
-  pr = mymap.insert(ft::make_pair<int, int>(40, 60));
-  std::cout << pr.first->first << " "  << pr.first->second << " "  << pr.second << "\n";
-  pr = mymap.insert(ft::make_pair<int, int>(40, 60));
-  std::cout << pr.first->first << " "  << pr.first->second << " "  << pr.second << "\n";
+  pr = mymap.insert(ft::make_pair<int, int>(40, -60));
+  // std::cout << pr.first->first << " "  << pr.first->second << " "  << pr.second << "\n";
+  pr = mymap.insert(ft::make_pair<int, int>(40, -60));
+  // std::cout << pr.first->first << " "  << pr.first->second << " "  << pr.second << "\n";
+
+  // ft::map<int, int>::iterator it = mymap.begin();
+  // std::cout << it->first << std::endl;;
+  // std::cout << it->second << std::endl;;
+
+  // it++;
+  // std::cout << it->first << std::endl;;
+  // std::cout << it->second << std::endl;;
+
+  // it++;
+  // std::cout << it->first << std::endl;;
+  // std::cout << it->second << std::endl;;
+  //   it++;
+  // std::cout << it->first << std::endl;;
+  // std::cout << it->second << std::endl;;
+
+  // it++;
+  // std::cout << it->first << std::endl;;
+  // std::cout << it->second << std::endl;;
+
+
+  std::cout << mymap[50];
+  std::cout << mymap[40];
 
   // std::cout << mit->second;
 }

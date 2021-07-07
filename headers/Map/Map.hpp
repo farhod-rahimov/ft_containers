@@ -47,67 +47,89 @@ namespace ft {
 
 		// ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS //
 
-			iterator begin() {
-				BinaryTree<value_type> *tmp = this->_root;
+				iterator begin() {
+					BinaryTree<value_type> *tmp = this->_root;
 
-				while (tmp && tmp->_lh) {
-					tmp = tmp->_lh;
-				}
-				return (iterator(tmp->_value, tmp->_parent));
-			};
+					while (tmp && tmp->_lh && this->_comp(tmp->_lh->_value->first, tmp->_value->first)) {
+						tmp = tmp->_lh;
+					}
+					return (iterator(tmp->_value, tmp->_parent));
+				};
 
-			iterator end() {
-				return (nullptr);
-			};
+				iterator end() {
+					BinaryTree<value_type> *tmp = this->_root;
+
+					while (tmp && tmp->_rh && this->_comp(tmp->_rh->_value->first, tmp->_value->first)) {
+						tmp = tmp->_rh;
+					}
+					return (iterator(tmp->_value, tmp->_parent));
+				};
 
 		// MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS //
 
-			pair<iterator,bool> insert (const value_type& val) {
-				if (this->_size == 0) {
-					this->_root = new BinaryTree<value_type>(val, nullptr);
+				pair<iterator,bool> insert (const value_type& val) {
+					if (this->_size == 0) {
+						this->_root = new BinaryTree<value_type>(val, nullptr);
+						this->_size += 1;
+						return (ft::make_pair(this->_root->_value, true));
+					}
+
+					// std::cout << this->_root->_value->first << std::endl;
+					// std::cout << this->_root->_value->second << std::endl;
+					
+					BinaryTree<value_type> *tmp = this->_root;
+
+					while (tmp) {
+						if (this->_comp(val.first, tmp->_value->first) && tmp->_lh)
+							tmp = tmp->_lh;
+						else if (this->_comp(val.first, tmp->_value->first) && !tmp->_lh) {
+							tmp->_lh = new BinaryTree<value_type>(val, tmp);
+							tmp = tmp->_lh;
+							break;
+						}
+						else if (this->_comp(tmp->_value->first, val.first) && tmp->_rh)
+							tmp = tmp->_rh;
+						else if (this->_comp(tmp->_value->first, val.first) && !tmp->_rh) {
+							tmp->_rh = new BinaryTree<value_type>(val, tmp);
+							tmp = tmp->_rh;
+							break;
+						}
+						else
+							return (ft::make_pair(tmp->_value, false));
+					}
 					this->_size += 1;
-					return (ft::make_pair(this->_root->_value, true));
-				}
+					return (ft::make_pair(tmp->_value, true));
+				};
 
-				BinaryTree<value_type> *tmp = this->_root;
+				// iterator insert (iterator position, const value_type& val) {
 
-				while (tmp) {
-					if (this->_comp(val.first, tmp->_value->first) && tmp->_lh)
-						tmp = tmp->_lh;
-					else if (this->_comp(val.first, tmp->_value->first) && !tmp->_lh) {
-						tmp->_lh = new BinaryTree<value_type>(val, tmp);
-						tmp = tmp->_lh;
-						break;
+				// };
+
+				// void insert (iterator first, iterator last) {
+
+				// };
+
+		// ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS //
+
+				mapped_type& operator[] (const key_type& k) {
+					iterator start = this->begin();
+					// std::cout << this->_root->_value->second << std::endl;
+					// std::cout << this->_root->_value->first << std::endl;
+
+					for ( ; start != this->end(); start++) {
+						if (start->first == k) {
+							break ;
+						}
 					}
-					else if (this->_comp(tmp->_value->first, val.first) && tmp->_rh)
-						tmp = tmp->_rh;
-					else if (this->_comp(tmp->_value->first, val.first) && !tmp->_rh) {
-						tmp->_rh = new BinaryTree<value_type>(val, tmp);
-						tmp = tmp->_rh;
-						break;
-					}
-					else
-						return (ft::make_pair(tmp->_value, false));
-				}
-				this->_size += 1;
-				return (ft::make_pair(tmp->_value, true));
-			};
-
-			// iterator insert (iterator position, const value_type& val) {
-
-			// };
-
-			// void insert (iterator first, iterator last) {
-
-			// };
-
+					return (start->second);
+				};
 
 
 	private:
-				allocator_type	        _allocator;
-				key_compare		        _comp;
-				size_type		        _size;
-				BinaryTree<value_type>	*_root;
+				allocator_type	        				_allocator;
+				key_compare		        				_comp;
+				size_type		        				_size;
+				BinaryTree<value_type>					*_root;
 	};
 
 };
