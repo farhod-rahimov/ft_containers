@@ -32,7 +32,7 @@ namespace ft {
 			BidirectionalIteratorMap & operator = (BidirectionalIteratorMap const & src) {
 				if (this != &src) {
 					if (this->_binary_tree != nullptr) {
-						delete this->_binary_tree;
+						// delete this->_binary_tree; // sega
 					}
 					this->_binary_tree = new BinaryTree<Key, T>(*src._binary_tree);
                 }

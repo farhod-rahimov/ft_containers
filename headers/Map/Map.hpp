@@ -67,8 +67,7 @@ namespace ft {
 
 		// MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS //
 				
-				// ft::pair<iterator,bool> insert (const value_type& val) {
-				bool insert (const value_type& val) {
+				ft::pair<iterator,bool> insert (const value_type& val) {
 					if (this->_size == 0) {
 						this->_root->_value->first = val.first;
 						this->_root->_value->second = val.second;
@@ -76,9 +75,7 @@ namespace ft {
 						this->_root->_rh = this->_root->createLastElemet(this->_root);
 						this->_root->_lh = this->_root->createFirstElemet(this->_root);
 						this->_size++;
-						
-						return (true);
-						// return (ft::make_pair(this->_root->_value, true));
+						return (ft::make_pair<iterator, bool>((*this->_root), true));
 					}
 
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
@@ -113,12 +110,11 @@ namespace ft {
 							break ;
 						}
 						else {
-							return (false);
-							// return (ft::make_pair(tmp->_value, false));
+							return (ft::make_pair<iterator, bool>(*tmp, false));
 						}
 					}
 					this->_size++;
-					return (true);
+					return (ft::make_pair<iterator, bool>(*tmp, true));
 				};
 
 	private:
