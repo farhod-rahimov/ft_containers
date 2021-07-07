@@ -106,31 +106,75 @@ namespace ft {
 
 // BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE   //
 
-    template <typename T>
+    // template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair <const Key,T> > >
+	template < class Key, class T >
 	struct BinaryTree {
 	public:
-			typedef std::ptrdiff_t							difference_type;
-			typedef T										value_type;
-			typedef T *                                     pointer;
+			typedef 			Key													key_type;
+			typedef 			T													mapped_type;
+			typedef 			ft::pair<key_type, mapped_type>						value_type;
+			typedef 			value_type *										pointer;
 
-		BinaryTree() {
-			this->_value = new value_type;
-			this->_parent = nullptr;
-			this->_lh = nullptr;
-			this->_rh = nullptr;
-			this->_last_element = 0;
-		};
+			BinaryTree() {
+				this->_value = new value_type;
+				this->_value->first = key_type();
+				this->_value->second = mapped_type();
+				this->_parent = nullptr;
+				this->_lh = nullptr;
+				this->_rh = nullptr;
+				this->_last_element = 0;
+				this->_first_element = 0;
+			};
+			
+			BinaryTree(const value_type & val, BinaryTree * parent) {
+				this->_value = new value_type;
+				this->_value->first = val.first;
+				this->_value->second = val.second;
+				this->_parent = parent;
+				this->_lh = nullptr;
+				this->_rh = nullptr;
+				this->_last_element = 0;
+				this->_first_element = 0;
+			}
 
-			void setLastElementFlag() { this->_last_element = 1; }
-			void removeLastElementFlag() { this->_last_element = 0; }
-			bool isLastElement() { return (this->_last_element); }
+			BinaryTree &operator=(BinaryTree const &src) {
+				if (this != &src) {
+					this->_value = src._value;
+					this->_parent = src._parent;
+					this->_lh = src._lh;
+					this->_rh = src._rh;
+					this->_last_element = src._last_element;
+					this->_first_element = src._first_element;
+				}
+				return (*this);
+			};
+
+
+			void 		setLastElementFlag() { this->_last_element = 1; };
+			void 		setFirstElementFlag() { this->_first_element = 1; };
+			void 		removeLastElementFlag() { this->_last_element = 0; };
+			void 		removeFirstElementFlag() { this->_first_element = 0; };
+			bool 		isLastElement() const { return (this->_last_element); };
+			bool 		isFirstElement() const { return (this->_first_element); };
+			
+			BinaryTree	*createFirstElemet() const {
+				BinaryTree *ret = new BinaryTree();
+				ret->setFirstElementFlag();
+				return (ret);
+			};
+
+			BinaryTree	*createLastElemet() const {
+				BinaryTree *ret = new BinaryTree();
+				ret->setLastElementFlag();
+				return (ret);
+			};
 	
-	private:
 			pointer		_value;
 			BinaryTree	*_parent;
 			BinaryTree	*_lh;
 			BinaryTree	*_rh;
 			bool		_last_element;
+			bool		_first_element;
 	};
 
 
