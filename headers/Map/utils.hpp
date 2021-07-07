@@ -135,7 +135,11 @@ namespace ft {
 				this->_rh = nullptr;
 				this->_last_element = 0;
 				this->_first_element = 0;
-			}
+			};
+			
+			BinaryTree(const BinaryTree & src) {
+				*this = src;
+			};
 
 			BinaryTree &operator=(BinaryTree const &src) {
 				if (this != &src) {

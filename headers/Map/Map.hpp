@@ -25,8 +25,8 @@ namespace ft {
 				typedef typename	allocator_type::pointer 							pointer;
 				typedef typename	allocator_type::const_pointer 						const_pointer;
 				
-				// typedef 			ft::BidirectionalIteratorMap<value_type>			iterator;
-				// typedef 			ft::BidirectionalIteratorMap<value_type const>		const_iterator;
+				typedef 			ft::BidirectionalIteratorMap<Key, T>				iterator;
+				typedef 			ft::BidirectionalIteratorMap<Key, T const>			const_iterator;
 				// typedef 			ft::BidirectionalIteratorMap<value_type>			reverse_iterator;
 				// typedef 			ft::BidirectionalIteratorMap<value_type const>		const_reverse_iterator;
 
@@ -44,6 +44,32 @@ namespace ft {
 					this->_root->setLastElementFlag();
 					this->_root->_lh = this->_root->createFirstElemet();
 				};
+
+		// ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS //
+				
+				iterator begin() {
+					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+
+					// while (tmp && tmp->_lh && this->_comp(tmp->_lh->_value->first, tmp->_value->first)) {
+					// 	tmp = tmp->_lh;
+					// }
+					// return (iterator(tmp->_value, tmp->_parent));
+
+					while (tmp && tmp->_lh && !tmp->_lh->isFirstElement()) {
+						tmp = tmp->_lh;
+					}
+					iterator it(*tmp);
+					return (it);
+				};
+
+				// iterator end() {
+				// 	BinaryTree<key_type, mapped_type> *tmp = this->_root;
+
+				// 	while (tmp && tmp->_rh && this->_comp(tmp->_value->first, tmp->_rh->_value->first)) {
+				// 		tmp = tmp->_rh;
+				// 	}
+				// 	return (iterator(tmp->_value, tmp->_parent));
+				// };
 
 		// MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS //
 				

@@ -18,4 +18,10 @@ int main()
   std::cout << m.insert(ft::make_pair<int, int>(20, -100)) << std::endl;
   std::cout << m.insert(ft::make_pair<int, int>(30, -100)) << std::endl;
   // std::cout << m.insert(ft::make_pair<int, int>(40, -100)) << std::endl;
+
+  ft::map<int, int>::iterator it;
+
+  it = m.begin();
+  std::cout << it->first;
+  std::cout << it->second;
 }
