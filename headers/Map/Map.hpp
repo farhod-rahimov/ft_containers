@@ -45,9 +45,46 @@ namespace ft {
 					this->_root->_lh = this->_root->createFirstElemet(this->_root);
 				};
 
+				map (iterator first, iterator last, const key_compare& comp = key_compare(), 
+						const allocator_type& alloc = allocator_type()) {
+					this->_allocator = alloc;
+					this->_comp = comp;
+					this->_size = 0;
+					this->_root = new BinaryTree<key_type, mapped_type>;
+					this->_root->setLastElementFlag();
+					this->_root->_lh = this->_root->createFirstElemet(this->_root);
+					
+					for (; first != last; first++) {
+						this->insert(*first);
+					}
+				};
+				
+				map (const map & src) {
+					this->_root = nullptr;
+					*this = src;
+				};
+			
+				map & operator = (const map & src) {
+				if (this != &src) {
+					if (this->_root != nullptr)
+						delete this->_root;
+					this->_allocator = src._allocator;
+					this->_comp = src._comp;
+					this->_size = 0;
+					this->_root = new BinaryTree<key_type, mapped_type>;
+					this->_root->setLastElementFlag();
+					this->_root->_lh = this->_root->createFirstElemet(this->_root);
+					
+					for (iterator it = src.begin(); it != src.end(); it++) {
+						this->insert(*it);
+					}
+				}
+				return (*this);
+			};
+
 		// ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS //
 				
-				iterator begin() {
+				iterator begin() const {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
 					while (tmp && tmp->_lh && !tmp->_lh->isFirstElement()) {
@@ -56,7 +93,7 @@ namespace ft {
 					return (iterator(*tmp));
 				};
 
-				iterator end() {
+				iterator end() const {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
 					while (!tmp->isLastElement()) {
