@@ -59,7 +59,7 @@ namespace ft {
 				iterator end() {
 					BinaryTree<value_type> *tmp = this->_root;
 
-					while (tmp && tmp->_rh && this->_comp(tmp->_rh->_value->first, tmp->_value->first)) {
+					while (tmp && tmp->_rh && this->_comp(tmp->_value->first, tmp->_rh->_value->first)) {
 						tmp = tmp->_rh;
 					}
 					return (iterator(tmp->_value, tmp->_parent));

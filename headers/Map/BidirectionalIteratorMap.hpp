@@ -63,11 +63,11 @@ namespace ft {
 	// ----------------------------------------------------------------------------------------------------------- //
 
 			bool operator == (BidirectionalIteratorMap const & src) const {
-				return (this->_binary_tree_ptr == src._binary_tree_ptr);
+				return (this->_binary_tree->_value->first == src._binary_tree->_value->first);
 			};
 
 			bool operator != (BidirectionalIteratorMap const & src) const {
-				return (this->_binary_tree->_value != src._binary_tree->_value);
+				return (this->_binary_tree->_value->first != src._binary_tree->_value->first);
 			};
 
 	// ----------------------------------------------------------------------------------------------------------- //
