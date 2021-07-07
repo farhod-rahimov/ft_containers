@@ -21,30 +21,15 @@ int main()
 
   ft::map<int, int>::iterator it;
 
+  std::cout << "------------\n";
   it = m.begin();
-  std::cout << "first " << it->first <<  "\n";
-  it++; std::cout << "first " << it->first <<  "\n";
-  it++; std::cout << "first " << it->first <<  "\n";
-  it++; std::cout << "first " << it->first <<  "\n";
-  it++; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
-  it++; std::cout << "first " << it->first <<  "\n";
-  it++; std::cout << "first " << it->first <<  "\n";
-  it++; std::cout << "first " << it->first <<  "\n";
-  it++; std::cout << "first " << it->first <<  "\n";
-  it++; std::cout << "first " << it->first <<  "\n";
-  it++; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
-  it--; std::cout << "first " << it->first <<  "\n";
+  for (; it != m.end(); it++) {
+    std::cout << it->first << " " << it->second << std::endl;
+  }
+  std::cout << "------------\n";
+  it = m.end();
+  for (; it != m.begin(); it--) {
+    std::cout << it->first << " " << it->second << std::endl;
+  }
+  std::cout << it->first << " " << it->second << std::endl;
 }

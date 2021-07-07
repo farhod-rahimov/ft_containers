@@ -50,26 +50,20 @@ namespace ft {
 				iterator begin() {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
-					// while (tmp && tmp->_lh && this->_comp(tmp->_lh->_value->first, tmp->_value->first)) {
-					// 	tmp = tmp->_lh;
-					// }
-					// return (iterator(tmp->_value, tmp->_parent));
-
 					while (tmp && tmp->_lh && !tmp->_lh->isFirstElement()) {
 						tmp = tmp->_lh;
 					}
-					iterator it(*tmp);
-					return (it);
+					return (iterator(*tmp));
 				};
 
-				// iterator end() {
-				// 	BinaryTree<key_type, mapped_type> *tmp = this->_root;
+				iterator end() {
+					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
-				// 	while (tmp && tmp->_rh && this->_comp(tmp->_value->first, tmp->_rh->_value->first)) {
-				// 		tmp = tmp->_rh;
-				// 	}
-				// 	return (iterator(tmp->_value, tmp->_parent));
-				// };
+					while (!tmp->isLastElement()) {
+						tmp = tmp->_rh;
+					}
+					return (iterator(*tmp));
+				};
 
 		// MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS MODIFIERS //
 				
