@@ -106,6 +106,9 @@ namespace ft {
 
 // BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE   //
 
+    // template <typename T>
+	// class BinaryTree 
+	
     template <typename T>
 	struct BinaryTree {
 	public:
@@ -113,27 +116,64 @@ namespace ft {
 			typedef T										value_type;
 			typedef T *                                     pointer;
 
-		BinaryTree() {
-			this->_value = new value_type;
-			this->_parent = nullptr;
-			this->_lh = nullptr;
-			this->_rh = nullptr;
-			this->_last_element = 0;
-		};
+			BinaryTree() {
+				this->_value = new value_type;
+				this->_parent = nullptr;
+				this->_lh = nullptr;
+				this->_rh = nullptr;
+			};
+			virtual ~BinaryTree() {};	// DONT  FORGET TO CHECK LEAKS DONT  FORGET TO CHECK LEAKS DONT  FORGET TO CHECK LEAKS DONT  FORGET TO CHECK LEAKS
+			
+			BinaryTree(pointer const & value) {
+				this->_value = new value_type;
+				this->_value->first = value->first;
+				this->_value->second = value->second;
+				this->_parent = nullptr;
+				this->_lh = nullptr;
+				this->_rh = nullptr;
+			};
 
-			void setLastElementFlag() { this->_last_element = 1; }
-			void removeLastElementFlag() { this->_last_element = 0; }
-			bool isLastElement() { return (this->_last_element); }
-	
-	private:
+			BinaryTree(pointer const & value, BinaryTree * parent) {
+				this->_value = new value_type;
+				this->_value->first = value->first;
+				this->_value->second = value->second;
+				this->_parent = parent;
+				this->_lh = nullptr;
+				this->_rh = nullptr;
+			};
+
+			BinaryTree(value_type const & value, BinaryTree * parent) {
+				this->_value = new value_type;
+				this->_value->first = value.first;
+				this->_value->second = value.second;
+				this->_parent = parent;
+				this->_lh = nullptr;
+				this->_rh = nullptr;
+			};
+			
+			BinaryTree(BinaryTree const & src) {
+				*this = src;
+			};
+
+			BinaryTree &operator=(BinaryTree const &src) {
+				if (this != &src) {
+					this->_value = new value_type;
+					this->_value->first = src._value->first;
+					this->_value->second = src._value->second;
+					this->_parent = src._parent;
+					this->_lh = src._lh;
+					this->_rh = src._rh;
+				}
+				return (*this);
+			};
+			
+	// private:
 			pointer		_value;
 			BinaryTree	*_parent;
 			BinaryTree	*_lh;
 			BinaryTree	*_rh;
-			bool		_last_element;
 	};
 
-
-};
+}; 
 
 #endif
