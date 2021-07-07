@@ -22,6 +22,9 @@ int main()
   ft::map<int, int>::iterator it;
 
   it = m.begin();
-  std::cout << it->first;
-  std::cout << it->second;
+  std::cout << "first " << it->first <<  "\n";
+  it++;
+  std::cout << "first " << it->first <<  "\n";
+  it++;
+  std::cout << "first " << it->first <<  "\n";
 }

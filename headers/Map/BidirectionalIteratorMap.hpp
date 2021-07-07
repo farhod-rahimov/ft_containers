@@ -63,32 +63,39 @@ namespace ft {
 
 	// ----------------------------------------------------------------------------------------------------------- //
 
-			// friend BidirectionalIteratorMap operator ++ (BidirectionalIteratorMap & it) {
-			// 	it++;
-			// 	return (it);
-			// };
+			friend BidirectionalIteratorMap operator ++ (BidirectionalIteratorMap & it) {
+				it++;
+				return (it);
+			};
 
-			// BidirectionalIteratorMap & operator ++ (int)
-			// {
-			// 	BidirectionalIteratorMap *tmp(this);
+			BidirectionalIteratorMap & operator ++ (int)
+			{
+				BidirectionalIteratorMap *tmp(this);
 
-			// 	if (tmp->_binary_tree->_rh) {
-			// 		tmp->_binary_tree = tmp->_binary_tree->_rh;
-			// 		while (tmp->_binary_tree->_lh) {
-			// 			tmp->_binary_tree = tmp->_binary_tree->_lh;
-			// 		}
-			// 	}
-			// 	else {
-			// 		while (tmp->_binary_tree->_value <= this->_binary_tree->_value && tmp->_binary_tree->_parent) {
-			// 			tmp->_binary_tree = tmp->_binary_tree->_parent;
-			// 		}
-			// 		// if (tmp->_binary_tree->_value <= this->_binary_tree->_value)
-			// 		// 	return (tmp->_binary_tree->_end_iterator);
-			// 			// return (++(this->_binary_tree->_value));
-			// 			// return (nullptr);
-			// 	}	
-			// 	return (*tmp);
-			// };
+				if (tmp->_binary_tree->_rh && !tmp->_binary_tree->_rh->isLastElement()) {
+					tmp->_binary_tree = tmp->_binary_tree->_rh;
+					while (tmp->_binary_tree->_lh && !tmp->_binary_tree->_lh->isFirstElement()) {
+						tmp->_binary_tree = tmp->_binary_tree->_lh;
+					}
+				}
+				else {
+					while (	tmp->_binary_tree->_value->first <= this->_binary_tree->_value->first && 
+							tmp->_binary_tree->_parent && !tmp->_binary_tree->_parent->isFirstElement() && 
+							!tmp->_binary_tree->_parent->isLastElement()) {
+						tmp->_binary_tree = tmp->_binary_tree->_parent;
+
+					}
+					if (tmp->_binary_tree->_value->first <= this->_binary_tree->_value->first) {
+						while (tmp->_binary_tree->_parent != nullptr) {
+							tmp->_binary_tree = tmp->_binary_tree->_parent;
+						}
+						while (!tmp->_binary_tree->_last_element) {
+							tmp->_binary_tree = tmp->_binary_tree->_rh;
+						}
+					}
+				}
+				return (*tmp);
+			};
 
 
 	private:
