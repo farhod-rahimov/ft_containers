@@ -116,11 +116,16 @@ namespace ft {
 			typedef T										value_type;
 			typedef T *                                     pointer;
 
-			BinaryTree() {};
+			BinaryTree() {
+				this->_value = new value_type;
+				this->_parent = nullptr;
+				this->_lh = nullptr;
+				this->_rh = nullptr;
+			};
 			virtual ~BinaryTree() {};	// DONT  FORGET TO CHECK LEAKS DONT  FORGET TO CHECK LEAKS DONT  FORGET TO CHECK LEAKS DONT  FORGET TO CHECK LEAKS
 			
 			BinaryTree(pointer const & value, BinaryTree * parent) {
-				this->_value = value;
+				this->_value = new value_type(value);
 				this->_parent = parent;
 				this->_lh = nullptr;
 				this->_rh = nullptr;
@@ -132,7 +137,7 @@ namespace ft {
 
 			BinaryTree &operator=(BinaryTree const &src) {
 				if (this != &src) {
-					this->_value = src._value;
+					this->_value = new value_type(*src._value);
 					this->_parent = src._parent;
 					this->_lh = src._lh;
 					this->_rh = src._rh;

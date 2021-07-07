@@ -3,6 +3,8 @@
 #include "utils.hpp"
 #include "BidirectionalIteratorMap.hpp"
 
+#include <map>
+
 // int main()
 // {
 //   ft::map<int, int> mymap;
@@ -20,10 +22,18 @@
 
 int main()
 {
-  ft::BidirectionalIteratorMap<int> it;
+  ft::map<int, int> mymap;
+  std::map<int, int> smap;
 
-  it++;
-  ++it;
-  it--;
-  --it;
+  // std::map<int, int>::iterator sit = smap.begin();
+  // std::cout << sit->first;
+  // std::cout << sit->second;
+
+  ft::map<int, int>::iterator mit = mymap.begin();
+  ft::map<int, int>::iterator mit2;
+  std::cout << mit->first;
+  std::cout << mit->second;
+  mit2 = mit;
+
+  // std::cout << mit->second;
 }

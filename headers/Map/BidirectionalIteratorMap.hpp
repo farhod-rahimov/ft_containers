@@ -14,14 +14,23 @@ namespace ft {
 
 	// ----------------------------------------------------------------------------------------------------------- //
 
-			BidirectionalIteratorMap() {};
+			BidirectionalIteratorMap() {
+				this->_binary_tree = nullptr;
+			};
 			
             virtual ~BidirectionalIteratorMap() {};
             
             // BidirectionalIteratorMap(pointer ptr) : _ptr(ptr) {};
-            // BidirectionalIteratorMap(pointer ptr, BinaryTree & btree) : _ptr(ptr), _binary_tree(btree) {};
+            BidirectionalIteratorMap(pointer value, BinaryTree<value_type> * parent) {
+				this->_binary_tree = new BinaryTree<value_type>;
+				this->_binary_tree->_value = value;
+				this->_binary_tree->_parent = parent;
+				this->_binary_tree->_lh = nullptr;
+				this->_binary_tree->_rh = nullptr;
+			};
             
-            BidirectionalIteratorMap(BinaryTree<T> btree) {
+            BidirectionalIteratorMap(BinaryTree<value_type> btree) {
+				this->_binary_tree = new BinaryTree<value_type>;
 				this->_binary_tree = btree;
 			};
 			
@@ -31,7 +40,10 @@ namespace ft {
 			
 			BidirectionalIteratorMap & operator = (BidirectionalIteratorMap const & src) {
 				if (this != &src) {
-                    this->_binary_tree = src._binary_tree;
+					if (this->_binary_tree != nullptr) {
+						delete this->_binary_tree;
+					}
+					this->_binary_tree = new BinaryTree<value_type>(*src._binary_tree);
                 }
 				return (*this);
 			};
@@ -114,7 +126,7 @@ namespace ft {
 	// ----------------------------------------------------------------------------------------------------------- //
 
 	private:
-			BinaryTree<T> *_binary_tree;
+			BinaryTree<value_type> *_binary_tree;
 	};
 };
 #endif
