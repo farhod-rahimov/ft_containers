@@ -161,14 +161,16 @@ namespace ft {
 			bool 		isLastElement() const { return (this->_last_element); };
 			bool 		isFirstElement() const { return (this->_first_element); };
 			
-			BinaryTree	*createFirstElemet() const {
+			BinaryTree	*createFirstElemet(BinaryTree * parent) const {
 				BinaryTree *ret = new BinaryTree();
+				ret->_parent = parent;
 				ret->setFirstElementFlag();
 				return (ret);
 			};
 
-			BinaryTree	*createLastElemet() const {
+			BinaryTree	*createLastElemet(BinaryTree * parent) const {
 				BinaryTree *ret = new BinaryTree();
+				ret->_parent = parent;
 				ret->setLastElementFlag();
 				return (ret);
 			};

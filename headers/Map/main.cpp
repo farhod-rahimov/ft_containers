@@ -23,8 +23,28 @@ int main()
 
   it = m.begin();
   std::cout << "first " << it->first <<  "\n";
-  it++;
-  std::cout << "first " << it->first <<  "\n";
-  it++;
-  std::cout << "first " << it->first <<  "\n";
+  it++; std::cout << "first " << it->first <<  "\n";
+  it++; std::cout << "first " << it->first <<  "\n";
+  it++; std::cout << "first " << it->first <<  "\n";
+  it++; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
+  it++; std::cout << "first " << it->first <<  "\n";
+  it++; std::cout << "first " << it->first <<  "\n";
+  it++; std::cout << "first " << it->first <<  "\n";
+  it++; std::cout << "first " << it->first <<  "\n";
+  it++; std::cout << "first " << it->first <<  "\n";
+  it++; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
+  it--; std::cout << "first " << it->first <<  "\n";
 }

@@ -70,33 +70,81 @@ namespace ft {
 
 			BidirectionalIteratorMap & operator ++ (int)
 			{
-				BidirectionalIteratorMap *tmp(this);
+				BinaryTree<Key, T> *tmp(this->_binary_tree);
 
-				if (tmp->_binary_tree->_rh && !tmp->_binary_tree->_rh->isLastElement()) {
-					tmp->_binary_tree = tmp->_binary_tree->_rh;
-					while (tmp->_binary_tree->_lh && !tmp->_binary_tree->_lh->isFirstElement()) {
-						tmp->_binary_tree = tmp->_binary_tree->_lh;
+				if (tmp->isLastElement()) {
+					return (*this);
+				}
+				else if (tmp->_rh && !tmp->_rh->isLastElement()) {
+					tmp = tmp->_rh;
+					while (tmp->_lh && !tmp->_lh->isFirstElement()) {
+						tmp = tmp->_lh;
 					}
+				}
+				else if (tmp->isFirstElement()) {
+					tmp = tmp->_parent;
 				}
 				else {
-					while (	tmp->_binary_tree->_value->first <= this->_binary_tree->_value->first && 
-							tmp->_binary_tree->_parent && !tmp->_binary_tree->_parent->isFirstElement() && 
-							!tmp->_binary_tree->_parent->isLastElement()) {
-						tmp->_binary_tree = tmp->_binary_tree->_parent;
+					while (	tmp->_value->first <= this->_binary_tree->_value->first && 
+							tmp->_parent && !tmp->_parent->isFirstElement() && 
+							!tmp->_parent->isLastElement()) {
+						tmp = tmp->_parent;
 
 					}
-					if (tmp->_binary_tree->_value->first <= this->_binary_tree->_value->first) {
-						while (tmp->_binary_tree->_parent != nullptr) {
-							tmp->_binary_tree = tmp->_binary_tree->_parent;
+					if (tmp->_value->first <= this->_binary_tree->_value->first) {
+						while (tmp->_parent != nullptr) {
+							tmp = tmp->_parent;
 						}
-						while (!tmp->_binary_tree->_last_element) {
-							tmp->_binary_tree = tmp->_binary_tree->_rh;
+						while (!tmp->isLastElement()) {
+							tmp = tmp->_rh;
 						}
 					}
 				}
-				return (*tmp);
+				*this = BidirectionalIteratorMap(*tmp);
+				return (*this);
 			};
 
+	// ----------------------------------------------------------------------------------------------------------- //
+
+			friend BidirectionalIteratorMap operator -- (BidirectionalIteratorMap & it) {
+				it--;
+				return (it);
+			};
+			
+			BidirectionalIteratorMap & operator -- (int) {
+				BinaryTree<Key, T> *tmp(this->_binary_tree);
+
+
+				if (tmp->isFirstElement()) {
+					return (*this);
+				}
+				else if (tmp->_lh && !tmp->_lh->isFirstElement()) {
+					tmp = tmp->_lh;
+					while (tmp->_rh && !tmp->_rh->isLastElement()) {
+						tmp = tmp->_rh;
+					}
+				}
+				else if (tmp->isLastElement()) {
+					tmp = tmp->_parent;
+				}
+				else {
+					while (	tmp->_value->first >= this->_binary_tree->_value->first && 
+							tmp->_parent && !tmp->_parent->isLastElement() && 
+							!tmp->_parent->isFirstElement()) {
+						tmp = tmp->_parent;
+					}
+					if (tmp->_value->first >= this->_binary_tree->_value->first) {
+						while (tmp->_parent != nullptr) {
+							tmp = tmp->_parent;
+						}
+						while (!tmp->isFirstElement()) {
+							tmp = tmp->_lh;
+						}
+					}
+				}
+				*this = BidirectionalIteratorMap(*tmp);
+				return (*this);
+			};
 
 	private:
 		BinaryTree<Key, T>		*_binary_tree;

@@ -42,7 +42,7 @@ namespace ft {
 					this->_size = 0;
 					this->_root = new BinaryTree<key_type, mapped_type>;
 					this->_root->setLastElementFlag();
-					this->_root->_lh = this->_root->createFirstElemet();
+					this->_root->_lh = this->_root->createFirstElemet(this->_root);
 				};
 
 		// ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS //
@@ -79,8 +79,8 @@ namespace ft {
 						this->_root->_value->first = val.first;
 						this->_root->_value->second = val.second;
 						this->_root->removeLastElementFlag();
-						this->_root->_rh = this->_root->createLastElemet();
-						this->_root->_lh = this->_root->createFirstElemet();
+						this->_root->_rh = this->_root->createLastElemet(this->_root);
+						this->_root->_lh = this->_root->createFirstElemet(this->_root);
 						this->_size++;
 						
 						return (true);
@@ -97,7 +97,7 @@ namespace ft {
 							tmp->_lh->removeFirstElementFlag();
 							tmp->_lh->_value->first = val.first;
 							tmp->_lh->_value->second = val.second;
-							tmp->_lh->_lh = tmp->createFirstElemet();
+							tmp->_lh->_lh = tmp->createFirstElemet(tmp->_lh);
 							break ;
 						}
 						else if (this->_comp(val.first, tmp->_value->first) && !tmp->_lh) {
@@ -111,7 +111,7 @@ namespace ft {
 							tmp->_rh->removeLastElementFlag();
 							tmp->_rh->_value->first = val.first;
 							tmp->_rh->_value->second = val.second;
-							tmp->_rh->_rh = tmp->createLastElemet();
+							tmp->_rh->_rh = tmp->createLastElemet(tmp->_rh);
 							break ;
 						}
 						else if (this->_comp(tmp->_value->first, val.first) && !tmp->_rh ) {
