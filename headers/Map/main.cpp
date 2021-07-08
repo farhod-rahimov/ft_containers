@@ -66,24 +66,19 @@ int main_m ()
 
 int main ()
 {
-  // main_m();
+  int psize;
   ft::map<char,int> mymap;
-  std::map<char,int> mymap2;
-  // char c;
+  ft::pair<char,int> * p;
 
-  mymap ['a']=101;
-  mymap2 ['a']=101;
-  mymap ['b']=200;
-  mymap2 ['b']=200;
-  mymap ['c']=202;
-  mymap2 ['c']=202;
-  mymap ['f']=303;
-  mymap2 ['f']=303;
+  // allocate an array of 5 elements using mymap's allocator:
+  p = mymap.get_allocator().allocate(5);
 
-  ft::map<char, int>::iterator it = mymap.lower_bound ('b');
-  std::map<char, int>::iterator it2 = mymap2.lower_bound ('b');
-  std::cout << it->first;
-  std::cout << it2->first;
+  // assign some values to array
+  psize = sizeof(ft::map<char,int>::value_type)*5;
+
+  std::cout << "The allocated array has a size of " << psize << " bytes.\n";
+
+  mymap.get_allocator().deallocate(p,5);
 
   return 0;
 }

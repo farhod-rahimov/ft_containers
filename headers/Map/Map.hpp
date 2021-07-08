@@ -365,6 +365,35 @@ namespace ft {
 
 				// };
 
+				iterator upper_bound (const key_type& k) {
+					iterator it = this->begin();
+					for (; it != this->end(); it++) {
+						if (this->_comp(k, it->first))
+							break ;
+					}
+					return (it);
+				};
+
+				// const_iterator upper_bound (const key_type& k) const {
+
+				// };
+
+				// pair<const_iterator,const_iterator> equal_range (const key_type& k) const {
+
+				// };
+
+				pair<iterator,iterator>	equal_range (const key_type& k) {
+					iterator lb = this->lower_bound(k);
+					iterator ub = this->upper_bound(k);
+
+					return (make_pair<iterator, iterator>(lb, ub));
+				};
+
+				allocator_type get_allocator() const {
+					return (this->_allocator);
+				};
+
+
 
 	private:
 				allocator_type	        				_allocator;
