@@ -17,7 +17,7 @@ namespace ft {
 				// typedef 			ft::pair<const key_type, mapped_type>				value_type;
 
 				typedef 			Compare												key_compare;
-				// typedef 			ft::map::value_comp									value_compare;
+				// typedef 			class value_compare									value_compare;
 				
 				typedef 			Alloc 												allocator_type;
 				typedef typename	allocator_type::reference 							reference;
@@ -33,7 +33,25 @@ namespace ft {
 				typedef 			std::ptrdiff_t										difference_type;
 				typedef 			size_t												size_type;
 
+	private:
+				class value_compare : std::binary_function<value_type, value_type, bool> {
+				   // in C++98, it is required to inherit binary_function<value_type,value_type,bool>
+				friend class map<key_type, mapped_type, key_compare, allocator_type>;
+				protected:
+					Compare _comp;
+					value_compare (Compare c) : _comp(c) {}  // constructed with map's comparison object
+				public:
+					typedef bool result_type;
+					typedef value_type first_argument_type;
+					typedef value_type second_argument_type;
+					bool operator() (const value_type& x, const value_type& y) const
+					{
+						return _comp(x.first, y.first);
+					}
+				};
+
 		// INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION INITIALIZATION  //
+	public:
 				
 				explicit map (const key_compare& comp = key_compare(), 
 							const allocator_type& alloc = allocator_type()) {
@@ -128,7 +146,12 @@ namespace ft {
 				mapped_type& operator[] (const key_type& k) {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 					iterator ret;
-
+					
+					if (this->_size == 0)
+					{
+						ret = (this->insert(ft::make_pair<key_type, mapped_type>(k, mapped_type()))).first;
+						return (ret->second);
+					}
 					while (tmp) {
 						if (this->_comp(k, tmp->_value->first) && tmp->_lh && !tmp->_lh->isFirstElement()) {
 							tmp = tmp->_lh;
@@ -256,7 +279,19 @@ namespace ft {
 					x._root = tmp_btree;
 				};
 
+				// void clear() {
+					
+				// };
 
+		// OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS  //
+
+				key_compare key_comp() const {
+					return (this->_comp);
+				};
+
+				value_compare value_comp() const {
+					return (value_compare(key_compare()));
+				};
 
 
 	private:
@@ -265,6 +300,7 @@ namespace ft {
 				size_type		        				_size;
 				BinaryTree<key_type, mapped_type>		*_root;
 	};
+
 };
 
 #endif
