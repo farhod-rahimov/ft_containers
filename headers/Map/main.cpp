@@ -66,19 +66,48 @@ int main_m ()
 
 int main ()
 {
-  int psize;
-  ft::map<char,int> mymap;
-  ft::pair<char,int> * p;
+  ft::map<int,int> mymap;
 
-  // allocate an array of 5 elements using mymap's allocator:
-  p = mymap.get_allocator().allocate(5);
+  mymap[1]=1;
+  mymap[2]=2;
+  mymap[3]=3;
+  mymap[4]=4;
+  mymap[5]=5;
+  mymap[6]=6;
+  mymap[7]=7;
+  mymap[8]=8;
+  mymap[9]=9;
+  mymap[10]=10;
+  mymap[11]=11;
+  mymap[12]=12;
+  mymap[13]=13;
+  mymap[14]=14;
+  mymap[15]=15;
+  mymap[16]=16;
+  mymap[17]=17;
+  mymap[18]=18;
+  mymap[19]=19;
+  mymap[20]=20;
+  mymap[21]=21;
+  mymap[22]=22;
+  mymap[23]=23;
+  mymap[24]=24;
+  mymap[25]=25;
+  mymap[26]=26;
+  mymap[27]=27;
+  mymap[28]=28;
+  mymap[29]=29;
+  mymap[30]=30;
 
-  // assign some values to array
-  psize = sizeof(ft::map<char,int>::value_type)*5;
+  ft::map<int, int>::iterator it = mymap.begin();
+  for (int i = 0; i < 0; i++)
+    it++;
 
-  std::cout << "The allocated array has a size of " << psize << " bytes.\n";
-
-  mymap.get_allocator().deallocate(p,5);
+  std::cout << "searching for " << it->first << " before erasing" << std::endl;
+  std::cout << mymap.find(it->first)->first << std::endl;
+  mymap.erase(it);
+  std::cout << "searching for " << it->first << " after erasing" << std::endl;
+  std::cout << mymap.find(it->first)->first << std::endl;
 
   return 0;
 }
