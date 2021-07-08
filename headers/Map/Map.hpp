@@ -145,7 +145,6 @@ namespace ft {
 							return (ret->second);
 						}
 						else {
-							std::cout << "sjknvksdjv\n";
 							break;
 						}
 					}
@@ -176,10 +175,12 @@ namespace ft {
 							tmp->_lh->_value->first = val.first;
 							tmp->_lh->_value->second = val.second;
 							tmp->_lh->_lh = tmp->createFirstElemet(tmp->_lh);
+							tmp = tmp->_lh;
 							break ;
 						}
 						else if (this->_comp(val.first, tmp->_value->first) && !tmp->_lh) {
 							tmp->_lh = new BinaryTree<key_type, mapped_type>(val, tmp);
+							tmp = tmp->_lh;
 							break ;
 						}
 						else if (this->_comp(tmp->_value->first, val.first) && tmp->_rh && !tmp->_rh->isLastElement()) {
@@ -190,10 +191,12 @@ namespace ft {
 							tmp->_rh->_value->first = val.first;
 							tmp->_rh->_value->second = val.second;
 							tmp->_rh->_rh = tmp->createLastElemet(tmp->_rh);
+							tmp = tmp->_rh;
 							break ;
 						}
 						else if (this->_comp(tmp->_value->first, val.first) && !tmp->_rh ) {
 							tmp->_rh = new BinaryTree<key_type, mapped_type>(val, tmp);
+							tmp = tmp->_rh;
 							break ;
 						}
 						else {

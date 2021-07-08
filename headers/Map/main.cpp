@@ -11,15 +11,15 @@ int main()
   std::map<int, int> s;
 
   m.insert(ft::make_pair<int, int>(100, 100));
-  m.insert(ft::make_pair<int, int>(200, 100));
-  m.insert(ft::make_pair<int, int>(300, 100));
-  m.insert(ft::make_pair<int, int>(400, 100));
-  m.insert(ft::make_pair<int, int>(500, 100));
-  m.insert(ft::make_pair<int, int>(600, 100));
-  m.insert(ft::make_pair<int, int>(700, 100));
-  m.insert(ft::make_pair<int, int>(800, 100));
+  m.insert(ft::make_pair<int, int>(200, 200));
+  m.insert(ft::make_pair<int, int>(300, 300));
+  m.insert(ft::make_pair<int, int>(400, 400));
+  m.insert(ft::make_pair<int, int>(500, 500));
+  m.insert(ft::make_pair<int, int>(600, 600));
+  m.insert(ft::make_pair<int, int>(700, 700));
+  m.insert(ft::make_pair<int, int>(800, 800));
 
-  std::cout << m[800] << std::endl;
+  std::cout << m[900] << std::endl;
 
 
 }
