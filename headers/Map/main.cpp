@@ -46,40 +46,44 @@
 int main_m ()
 {
   std::map<char,int> mymap;
+  char c;
 
-  mymap['x']=1001;
-  mymap['y']=2002;
-  mymap['z']=3003;
+  mymap ['a']=101;
+  mymap ['c']=202;
+  mymap ['f']=303;
 
-  std::cout << "mymap contains:\n";
-
-  std::pair<char,int> highest = *mymap.end();          // last element
-
-  std::map<char,int>::iterator it = mymap.begin();
-  do {
-    std::cout << it->first << " => " << it->second << '\n';
-  } while ( mymap.value_comp()(*it++, highest) );
+  for (c='a'; c<'h'; c++)
+  {
+    std::cout << c;
+    if (mymap.count(c)>0)
+      std::cout << " is an element of mymap.\n";
+    else 
+      std::cout << " is not an element of mymap.\n";
+  }
 
   return 0;
 }
 
 int main ()
 {
-  main_m();
+  // main_m();
   ft::map<char,int> mymap;
+  std::map<char,int> mymap2;
+  // char c;
 
-  mymap['x']=1001;
-  mymap['y']=2002;
-  mymap['z']=3003;
+  mymap ['a']=101;
+  mymap2 ['a']=101;
+  mymap ['b']=200;
+  mymap2 ['b']=200;
+  mymap ['c']=202;
+  mymap2 ['c']=202;
+  mymap ['f']=303;
+  mymap2 ['f']=303;
 
-  std::cout << "mymap contains:\n";
-
-  ft::pair<char,int> highest = *mymap.end();          // last element
-
-  ft::map<char,int>::iterator it = mymap.begin();
-  do {
-    std::cout << it->first << " => " << it->second << '\n';
-  } while ( mymap.value_comp()(*it++, highest) );
+  ft::map<char, int>::iterator it = mymap.lower_bound ('b');
+  std::map<char, int>::iterator it2 = mymap2.lower_bound ('b');
+  std::cout << it->first;
+  std::cout << it2->first;
 
   return 0;
 }

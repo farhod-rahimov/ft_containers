@@ -35,7 +35,6 @@ namespace ft {
 
 	private:
 				class value_compare : std::binary_function<value_type, value_type, bool> {
-				   // in C++98, it is required to inherit binary_function<value_type,value_type,bool>
 				friend class map<key_type, mapped_type, key_compare, allocator_type>;
 				protected:
 					Compare _comp;
@@ -106,7 +105,7 @@ namespace ft {
 
 		// ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS //
 				
-				iterator begin() const {
+				iterator begin() {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
 					while (tmp && tmp->_lh && !tmp->_lh->isFirstElement()) {
@@ -114,8 +113,17 @@ namespace ft {
 					}
 					return (iterator(*tmp));
 				};
+				
+				// const_iterator begin() const {
+				// 	BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
-				iterator end() const {
+				// 	while (tmp && tmp->_lh && !tmp->_lh->isFirstElement()) {
+				// 		tmp = tmp->_lh;
+				// 	}
+				// 	return (const_iterator(*tmp));
+				// };
+
+				iterator end() {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
 					while (!tmp->isLastElement()) {
@@ -123,6 +131,15 @@ namespace ft {
 					}
 					return (iterator(*tmp));
 				};
+
+				// const_iterator end() const {
+				// 	BinaryTree<key_type, mapped_type> *tmp = this->_root;
+
+				// 	while (!tmp->isLastElement()) {
+				// 		tmp = tmp->_rh;
+				// 	}
+				// 	return (const_iterator(*tmp));
+				// };
 
 				// iterator rbegin() const {};    // uncomment  uncomment  uncomment  uncomment  uncomment  uncomment 
 				// iterator rend() const {}; //  uncomment  uncomment  uncomment  uncomment  uncomment  uncomment 	
@@ -156,19 +173,15 @@ namespace ft {
 						if (this->_comp(k, tmp->_value->first) && tmp->_lh && !tmp->_lh->isFirstElement()) {
 							tmp = tmp->_lh;
 						}
-						else if (this->_comp(k, tmp->_value->first) && tmp->_lh && tmp->_lh->isFirstElement()) {
-							ret = (this->insert(ft::make_pair<key_type, mapped_type>(k, mapped_type()))).first;
-							return (ret->second);
-						}
 						else if (this->_comp(tmp->_value->first, k) && tmp->_rh && !tmp->_rh->isLastElement()) {
 							tmp = tmp->_rh;
 						}
-						else if (this->_comp(tmp->_value->first, k) && tmp->_rh && tmp->_rh->isLastElement()) {
-							ret = (this->insert(ft::make_pair<key_type, mapped_type>(k, mapped_type()))).first;
-							return (ret->second);
+						else if (!this->_comp(tmp->_value->first, k) && !this->_comp(k, tmp->_value->first)) {
+							break;
 						}
 						else {
-							break;
+							ret = (this->insert(ft::make_pair<key_type, mapped_type>(k, mapped_type()))).first;
+							return (ret->second);
 						}
 					}
 					return (tmp->_value->second);
@@ -292,6 +305,65 @@ namespace ft {
 				value_compare value_comp() const {
 					return (value_compare(key_compare()));
 				};
+
+		// OPERATIONS OPERATIONS OPERATIONS OPERATIONS OPERATIONS OPERATIONS OPERATIONS OPERATIONS OPERATIONS OPERATIONS //
+
+				iterator find (const key_type& k) {
+					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+					iterator ret = this->end();
+
+					while (tmp) {
+						if (this->_comp(k, tmp->_value->first) && tmp->_lh && !tmp->_lh->isFirstElement()) {
+							tmp = tmp->_lh;
+						}
+						else if (this->_comp(tmp->_value->first, k) && tmp->_rh && !tmp->_rh->isLastElement()) {
+							tmp = tmp->_rh;
+						}
+						else if (!this->_comp(tmp->_value->first, k) && !this->_comp(k, tmp->_value->first)) {
+							ret = iterator(*tmp);
+							break;
+						}
+						else
+							return (ret);
+					}
+					return (ret);
+				};
+
+				const_iterator find (const key_type& k) const {
+					return (const_iterator(this->find(k)));
+				};
+
+				size_type count (const key_type& k) const {
+					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+
+					while (tmp) {
+						if (this->_comp(k, tmp->_value->first) && tmp->_lh && !tmp->_lh->isFirstElement()) {
+							tmp = tmp->_lh;
+						}
+						else if (this->_comp(tmp->_value->first, k) && tmp->_rh && !tmp->_rh->isLastElement()) {
+							tmp = tmp->_rh;
+						}
+						else if (!this->_comp(tmp->_value->first, k) && !this->_comp(k, tmp->_value->first)) {
+							return (1);
+						}
+						else
+							return (0);
+					}
+					return (0);
+				};
+
+				iterator lower_bound (const key_type& k) {
+					iterator it = this->begin();
+					for (; it != this->end(); it++) {
+						if (!this->_comp(it->first, k))
+							break ;
+					}
+					return (it);
+				};
+
+				// const_iterator lower_bound (const key_type& k) const {
+
+				// };
 
 
 	private:
