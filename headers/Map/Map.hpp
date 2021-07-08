@@ -207,6 +207,19 @@ namespace ft {
 					return (ft::make_pair<iterator, bool>(*tmp, true));
 				};
 
+				iterator insert (iterator position, const value_type& val) {
+					static_cast<void>(position);
+					return (this->insert(val).first);
+				};
+
+				void insert (iterator first, iterator last) {
+					for (; first != last; first++) {
+						this->insert(*first);
+					}
+				};
+
+
+
 	private:
 				allocator_type	        				_allocator;
 				key_compare		        				_comp;
