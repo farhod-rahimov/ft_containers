@@ -7,33 +7,37 @@
 
 int main()
 {
-  ft::map<int, int> m;
-  std::map<int, int> s;
+  ft::map<int, int> m1;
+  m1.insert(ft::make_pair<int, int>(100, 100));
+  m1.insert(ft::make_pair<int, int>(200, 200));
+  m1.insert(ft::make_pair<int, int>(300, 300));
+  m1.insert(ft::make_pair<int, int>(400, 400));
 
-  m.insert(ft::make_pair<int, int>(100, 100));
-  m.insert(ft::make_pair<int, int>(200, 200));
-  m.insert(ft::make_pair<int, int>(300, 300));
-  m.insert(ft::make_pair<int, int>(400, 400));
-  m.insert(ft::make_pair<int, int>(500, 500));
-  m.insert(ft::make_pair<int, int>(600, 600));
-  m.insert(ft::make_pair<int, int>(700, 700));
-  m.insert(ft::make_pair<int, int>(800, 800));
-
-  std::cout << m[800] << std::endl;
-
-  s.insert(std::make_pair<int, int>(100, 100));
-  s.insert(std::make_pair<int, int>(200, 200));
-  s.insert(std::make_pair<int, int>(300, 300));
-  s.insert(std::make_pair<int, int>(400, 400));
-  s.insert(std::make_pair<int, int>(500, 500));
-  s.insert(std::make_pair<int, int>(600, 600));
-  s.insert(std::make_pair<int, int>(700, 700));
-  s.insert(std::make_pair<int, int>(800, 800));
-
-  std::cout << m[800] << std::endl;
 
   ft::map<int, int> m2;
-  m2.insert(m.begin(), ft::make_pair<int, int>(100, 100));
-  std::cout << m2[200] << std::endl;
+  m2.insert(ft::make_pair<int, int>(500, 500));
+  m2.insert(ft::make_pair<int, int>(600, 600));
 
+  std::cout << "m1 contains:\n";
+  for (ft::map<int,int>::iterator it = m1.begin(); it!=m1.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n'; 
+  std::cout << "size " << m1.size() << std::endl;
+
+    std::cout << "\nm2 contains:\n";
+  for (ft::map<int,int>::iterator it = m2.begin(); it!=m2.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+  std::cout << "size " << m2.size() << std::endl;
+
+  m1.swap(m2);
+
+  std::cout << "\nm1 contains:\n";
+  for (ft::map<int,int>::iterator it = m1.begin(); it!=m1.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n'; 
+  std::cout << "size " << m1.size() << std::endl;
+
+    std::cout << "\nm2 contains:\n";
+  for (ft::map<int,int>::iterator it = m2.begin(); it!=m2.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+
+  std::cout << "size " << m2.size() << std::endl;
 }

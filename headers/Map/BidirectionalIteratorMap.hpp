@@ -2,8 +2,13 @@
 #define BIDIRECTIONAL_ITERATOR_MAP_HPP
 
 #include "utils.hpp"
+#include "Map.hpp"
+
+// #include "../Stack.hpp"
+// #include "../Vector.hpp"
 
 namespace ft {
+
 	template < class Key, class T >
 	class BidirectionalIteratorMap {
 	public:
@@ -147,6 +152,7 @@ namespace ft {
 			};
 
 	private:
+		// friend void ft::map<Key, T>::erase(typename ft::map<Key, T>::iterator position);
 		BinaryTree<Key, T>		*_binary_tree;
 	};
 };

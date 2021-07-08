@@ -218,6 +218,45 @@ namespace ft {
 					}
 				};
 
+				// void erase (iterator position) {
+				// 	static_cast<void>(position);
+
+				// 	// std::cout << position._binary_tree->_value->first;
+				// 	// return ;
+				// 	// if (this->_comp(position->_binary_tree->_value->first, this->_root)) {
+				// 	// 	if (position->_binary_tree->_value->parent && position->_binary_tree->_rh 
+				// 	// 		&& !position->_binary_tree->_rh->isLastElement) {
+
+				// 	// 	}
+				// 	// }
+				// };
+
+				// size_type erase (const key_type& k) {
+
+				// };
+
+				// void erase (iterator first, iterator last) {
+
+				// };
+
+				void swap (map& x) {
+					allocator_type tmp_allocator = this->_allocator;
+					key_compare tmp_comp = this->_comp;
+					size_type tmp_size = this->_size;
+					BinaryTree<key_type, mapped_type> *tmp_btree = this->_root;
+					
+					this->_allocator = x._allocator;
+					this->_comp = x._comp;
+					this->_size = x._size;
+					this->_root = x._root;
+
+					x._allocator = tmp_allocator;
+					x._comp = tmp_comp;
+					x._size = tmp_size;
+					x._root = tmp_btree;
+				};
+
+
 
 
 	private:
