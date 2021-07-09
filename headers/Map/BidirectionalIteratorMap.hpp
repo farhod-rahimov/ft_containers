@@ -97,7 +97,6 @@ namespace ft {
 							tmp->_parent && !tmp->_parent->isFirstElement() && 
 							!tmp->_parent->isLastElement()) {
 						tmp = tmp->_parent;
-
 					}
 					if (tmp->_value->first <= this->_binary_tree->_value->first) {
 						while (tmp->_parent != nullptr) {

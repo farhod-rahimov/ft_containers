@@ -69,20 +69,22 @@ int main ()
   ft::map<int,int> mymap;
 
 
-  mymap[50]=50;
-  for (int i = -100; i <= 100; i++)
+  mymap[10000]=10000;
+  for (int i = -10000; i <= 10000; i++)
     mymap[i]=i;
 
-  ft::map<int, int>::iterator it = mymap.begin();
-
-  int a; std::cin >> a;
+  std::cout << "size = " << mymap.size() << std::endl;
   std::cout << "------------------------------\n";
-  for (int i = -100; i < a; i++)
-    it++;
-  mymap.erase(it);
-  for (ft::map<int, int>::iterator iter = mymap.begin(); iter != mymap.end(); iter++)
-    std::cout << mymap.find(iter->first)->first << std::endl;
-  // for (int i = -101; i <= 100; i++) {
+
+  std::cout << mymap.erase(10001);
+
+  // for (ft::map<int, int>::iterator iter = mymap.begin(); iter != mymap.end(); iter++)
+    mymap.erase(mymap.begin(), mymap.end());
+
+  // for (ft::map<int, int>::iterator iter = mymap.begin(); iter != mymap.end(); iter++)
+  //   std::cout << iter->first << std::endl;
+  std::cout << "\nsize = " << mymap.size() << std::endl;
+  // for (int i = -101; i <= 102; i++) {
   //   std::cout << mymap.find(i)->first << std::endl;
   // }
   return 0;

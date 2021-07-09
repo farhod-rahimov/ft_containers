@@ -264,11 +264,9 @@ namespace ft {
 					char side;
 					BinaryTree<key_type, mapped_type> *erase_el = this->_private_find(position->first, &side);
 					BinaryTree<key_type, mapped_type> *tmp;
-					// BinaryTree<key_type, mapped_type> *tmp2;
 					if (erase_el == nullptr || this->_size == 0)
 						return ;
 
-					
 					this->_size -= 1;
 					if (this->_size == 0) {
 						tmp = this->_root;
@@ -278,77 +276,94 @@ namespace ft {
 						delete tmp;
 						return ;
 					}
-					// else if (!this->_comp(position->first, this->_root->_value->first) 
-					// 	&& !this->_comp(this->_root->_value->first, position->first)) { // deleting root
-					// 	// if (this->_root->_lh && !this->_root->_lh->isFirstElement()) {
-					// 	// 	tmp = this->_root->_lh;
-					// 	// 	while (tmp->_rh && !tmp->_rh->isLastElement()) {
-					// 	// 		tmp = tmp->_rh;
-					// 	// 	}
-					// 	// 	tmp->_parent->_rh = tmp->_rh;
-					// 	// 	erase_el = this->_root;
-					// 	// 	this->_root = tmp;
-					// 	// 	this->_root->_lh = erase_el->_lh;
-					// 	// 	this->_root->_rh = erase_el->_rh;
-					// 	// 	delete erase_el;
-					// 	// }
-					// 	// else if (this->_root->_rh && !this->_root->_rh->isLastElement()) {
-					// 	if (this->_root->_rh && !this->_root->_rh->isLastElement()) {
-					// 		tmp = this->_root->_rh;
-					// 		while (tmp->_lh && !tmp->_lh->isFirstElement()) {
-					// 			tmp = tmp->_lh;
-					// 		}
-					// 		tmp->_parent->_lh = tmp->_lh;
-					// 		erase_el = this->_root;
-					// 		this->_root = tmp;
-					// 		this->_root->_lh = erase_el->_lh;
-					// 		this->_root->_rh = erase_el->_rh;
-					// 		delete erase_el;
-					// 	}
-					// 	return ;
-					// }
-					if (this->_comp(position->first, this->_root->_value->first)) {
-					// else if (this->_comp(position->first, this->_root->_value->first)) {
+					else if (!this->_comp(position->first, this->_root->_value->first) 
+						&& !this->_comp(this->_root->_value->first, position->first)) { // deleting root
+						if (this->_root->_rh && !this->_root->_rh->isLastElement()) {
+							erase_el = this->_root;
+							this->_root = this->_root->_rh;
+							this->_root->_parent = nullptr;
+							tmp = this->_root;
+							while (tmp->_lh)
+								tmp = tmp->_lh;
+							tmp->_lh = erase_el->_lh;
+							if (tmp->_lh)
+								tmp->_lh->_parent = tmp;
+							delete erase_el;
+						}
+						else if (!this->_root->_rh || this->_root->_rh->isLastElement()) {
+							erase_el = this->_root;
+							this->_root = this->_root->_lh;
+							tmp = this->_root;
+							while (tmp->_rh)
+								tmp = tmp->_rh;
+							tmp->_rh = erase_el->_rh;
+							if (tmp->_rh)
+								tmp->_rh->_parent = tmp;
+							delete erase_el;
+						}
+						return ;
+					}
+					else if (this->_comp(position->first, this->_root->_value->first)) {
 						if (side == 'l') {
 							if (!erase_el->_rh) { // situation 1, 2
 								erase_el->_parent->_lh = erase_el->_lh;
+								if (erase_el->_lh)
+									erase_el->_lh->_parent = erase_el->_parent;
 								delete erase_el;
 							}
 							else if (!erase_el->_lh || erase_el->_lh->isFirstElement()) { // situation 3, 4
 								erase_el->_parent->_lh = erase_el->_rh;
+								if (erase_el->_rh)
+									erase_el->_rh->_parent = erase_el->_parent;
 								tmp = erase_el->_rh;
 								while (tmp->_lh)
 									tmp = tmp->_lh;
 								tmp->_lh = erase_el->_lh;
+								if (tmp->_lh)
+									tmp->_lh->_parent = tmp;
 							}
 							else if (erase_el->_lh && erase_el->_rh) { // situation 5
 								erase_el->_parent->_lh = erase_el->_rh;
+								if (erase_el->_rh)
+									erase_el->_rh->_parent = erase_el->_parent;
 								tmp = erase_el->_rh;
 								while (tmp->_lh)
 									tmp = tmp->_lh;
 								tmp->_lh = erase_el->_lh;
+								if (tmp->_lh)
+									tmp->_lh->_parent = tmp;
 								delete erase_el;
 							}
 						}
 						else if (side == 'r') {
 							if (!erase_el->_rh) { // situation 6
 								erase_el->_parent->_rh = erase_el->_lh;
+								if (erase_el->_lh)
+									erase_el->_lh->_parent = erase_el->_parent;
 								delete erase_el;
 							}
 							else if (!erase_el->_lh || erase_el->_lh->isFirstElement()) { // situation 7
 								erase_el->_parent->_rh = erase_el->_rh;
+								if (erase_el->_rh)
+									erase_el->_rh->_parent = erase_el->_parent;
 								tmp = erase_el->_rh;
 								while (tmp->_lh)
 									tmp = tmp->_lh;
 								tmp->_lh = erase_el->_lh;
+								if (tmp->_lh)
+									tmp->_lh->_parent = tmp;
 								delete erase_el;
 							}
 							else if (erase_el->_lh && erase_el->_rh) { // situation 8
 								erase_el->_parent->_rh = erase_el->_rh;
+								if (erase_el->_rh)
+									erase_el->_rh->_parent = erase_el->_parent;
 								tmp = erase_el->_rh;
 								while (tmp->_lh)
 									tmp = tmp->_lh;
 								tmp->_lh = erase_el->_lh;
+								if (tmp->_lh)
+									tmp->_lh->_parent = tmp;
 								delete erase_el;
 							}
 						}
@@ -358,44 +373,64 @@ namespace ft {
 						if (side == 'l') {
 							if (!erase_el->_rh) { // situation 1
 								erase_el->_parent->_lh = erase_el->_lh;
+								if (erase_el->_lh)
+									erase_el->_lh->_parent = erase_el->_parent;
 								delete erase_el;
 							}
 							else if (!erase_el->_lh) { // situation 2
 								erase_el->_parent->_lh = erase_el->_rh;
+								if (erase_el->_rh)
+									erase_el->_rh->_parent = erase_el->_parent;
 								delete erase_el;
 							}
 							else if (erase_el->_lh && erase_el->_rh) { // situation 3
 								erase_el->_parent->_lh = erase_el->_rh;
+								if (erase_el->_rh)
+									erase_el->_rh->_parent = erase_el->_parent;
 								tmp = erase_el->_rh;
 								while (tmp->_lh)
 									tmp = tmp->_lh;
 								tmp->_lh = erase_el->_lh;
+								if (tmp->_lh)
+									tmp->_lh->_parent = tmp;
 								delete erase_el;
 							}
 						}
 						else if (side == 'r') {
 							if ((!erase_el->_rh || erase_el->_rh->isLastElement()) && erase_el->_lh) { // situation 4
 								erase_el->_parent->_rh = erase_el->_lh;
+								if (erase_el->_lh)
+									erase_el->_lh->_parent = erase_el->_parent;
 								tmp = erase_el->_lh;
 								while (tmp->_rh)
 									tmp = tmp->_rh;
 								tmp->_rh = erase_el->_rh;
+								if (tmp->_rh)
+									tmp->_rh->_parent = tmp;
 								delete erase_el;
 							}
 							else if ((!erase_el->_rh || erase_el->_rh->isLastElement()) && !erase_el->_lh) { // situation 4
 								erase_el->_parent->_rh = erase_el->_rh;
+								if (erase_el->_rh)
+									erase_el->_rh->_parent = erase_el->_parent;
 								delete erase_el;
 							}
 							else if (!erase_el->_lh) { // situatin 5
 								erase_el->_parent->_rh = erase_el->_rh;
+								if (erase_el->_rh)
+									erase_el->_rh->_parent = erase_el->_parent;
 								delete erase_el;
 							}
 							else if (erase_el->_lh && erase_el->_rh) {
 								erase_el->_parent->_rh = erase_el->_rh;
 								tmp = erase_el->_rh;
+								if (erase_el->_rh)
+									erase_el->_rh->_parent = erase_el->_parent;
 								while (tmp->_lh)
 									tmp = tmp->_lh;
 								tmp->_lh = erase_el->_lh;
+								if (tmp->_lh)
+									tmp->_lh->_parent = tmp;
 								delete erase_el;
 							}
 						}
@@ -403,13 +438,19 @@ namespace ft {
 					}
 				};
 
-				// size_type erase (const key_type& k) {
+				size_type erase (const key_type& k) {
+					iterator it = this->find(k);
+					if (it == this->end())
+						return (0);
+					this->erase(it);
+					return (1);
+				};
 
-				// };
-
-				// void erase (iterator first, iterator last) {
-
-				// };
+				void erase (iterator first, iterator last) {
+					for (; first != last; first++) {
+						this->erase(first);
+					}
+				};
 
 				void swap (map& x) {
 					allocator_type tmp_allocator = this->_allocator;
@@ -550,8 +591,9 @@ namespace ft {
 						else if (!this->_comp(tmp->_value->first, k) && !this->_comp(k, tmp->_value->first)) {
 							return (tmp);
 						}
-						else
+						else {
 							return (nullptr);
+						}
 					}
 					return (nullptr);
 				};
