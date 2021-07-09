@@ -108,6 +108,8 @@ namespace ft {
 				iterator begin() {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
+					if (this->_size == 0)
+						return (this->end());
 					while (tmp && tmp->_lh && !tmp->_lh->isFirstElement()) {
 						tmp = tmp->_lh;
 					}
@@ -262,7 +264,7 @@ namespace ft {
 					char side;
 					BinaryTree<key_type, mapped_type> *erase_el = this->_private_find(position->first, &side);
 					BinaryTree<key_type, mapped_type> *tmp;
-					BinaryTree<key_type, mapped_type> *tmp2;
+					// BinaryTree<key_type, mapped_type> *tmp2;
 					if (erase_el == nullptr || this->_size == 0)
 						return ;
 
@@ -272,6 +274,7 @@ namespace ft {
 						tmp = this->_root;
 						this->_root = this->_root->_lh;
 						this->_root->_rh = tmp->_rh;
+						this->_root->_parent = nullptr;
 						delete tmp;
 						return ;
 					}
@@ -304,127 +307,99 @@ namespace ft {
 					// 	}
 					// 	return ;
 					// }
-					else if (this->_comp(position->first, this->_root->_value->first)) {
+					if (this->_comp(position->first, this->_root->_value->first)) {
+					// else if (this->_comp(position->first, this->_root->_value->first)) {
 						if (side == 'l') {
-							if ((!erase_el->_lh || erase_el->_lh->isFirstElement()) && !erase_el->_rh) { // situation 1
-								erase_el->_parent->_lh = erase_el->_lh; // = nullptr
-								delete erase_el;
-							}
-							else if (erase_el->_lh && !erase_el->_rh) { // situation 2
+							if (!erase_el->_rh) { // situation 1, 2
 								erase_el->_parent->_lh = erase_el->_lh;
 								delete erase_el;
 							}
-							else if ((!erase_el->_lh || erase_el->_lh->isFirstElement()) && erase_el->_rh) { // situation 3
+							else if (!erase_el->_lh || erase_el->_lh->isFirstElement()) { // situation 3, 4
 								erase_el->_parent->_lh = erase_el->_rh;
-								delete erase_el;
-							}
-							else if (erase_el->_lh && erase_el->_rh && !erase_el->_rh->_lh) {
 								tmp = erase_el->_rh;
-								erase_el->_parent->_lh = tmp;
-								tmp->_lh = erase_el->_lh;
-							}
-							else if (erase_el->_lh && erase_el->_rh) {
-								tmp = erase_el->_rh;
-								while (tmp->_lh && !tmp->_lh->isFirstElement()) { // situation 4 == 8
-									if (!tmp->_lh || tmp->_lh->isFirstElement()) {
-										tmp->_parent->_lh = tmp->_lh;
-									}
+								while (tmp->_lh)
 									tmp = tmp->_lh;
-								}
-								erase_el->_parent->_lh = tmp;
 								tmp->_lh = erase_el->_lh;
-								tmp->_rh = erase_el->_rh;
+							}
+							else if (erase_el->_lh && erase_el->_rh) { // situation 5
+								erase_el->_parent->_lh = erase_el->_rh;
+								tmp = erase_el->_rh;
+								while (tmp->_lh)
+									tmp = tmp->_lh;
+								tmp->_lh = erase_el->_lh;
 								delete erase_el;
 							}
-							return ;
 						}
 						else if (side == 'r') {
-							if ((!erase_el->_lh || erase_el->_lh->isFirstElement()) && !erase_el->_rh) { // situation 5
-								erase_el->_parent->_rh = erase_el->_rh; // = nullptr
-								delete erase_el;
-							}
-							else if (erase_el->_lh && !erase_el->_rh) { // situation 6
+							if (!erase_el->_rh) { // situation 6
 								erase_el->_parent->_rh = erase_el->_lh;
 								delete erase_el;
 							}
-							else if ((!erase_el->_lh || erase_el->_lh->isFirstElement()) && erase_el->_rh) { // situation 7
+							else if (!erase_el->_lh || erase_el->_lh->isFirstElement()) { // situation 7
 								erase_el->_parent->_rh = erase_el->_rh;
-							}
-							else if (erase_el->_lh && erase_el->_rh && !erase_el->_rh->_lh) {
 								tmp = erase_el->_rh;
-								erase_el->_parent->_rh = tmp;
-								tmp->_lh = erase_el->_lh;
-							}
-							else if (erase_el->_lh && erase_el->_rh) {
-								tmp = erase_el->_rh;
-								while (tmp->_lh && !tmp->_lh->isFirstElement()) { // situation 8 == 4
-									if (!tmp->_lh || tmp->_lh->isFirstElement()) {
-										tmp->_parent->_lh = tmp->_lh;
-									}
+								while (tmp->_lh)
 									tmp = tmp->_lh;
-								}
-								erase_el->_parent->_lh = tmp;
 								tmp->_lh = erase_el->_lh;
-								tmp->_rh = erase_el->_rh;
 								delete erase_el;
 							}
-							return ;
+							else if (erase_el->_lh && erase_el->_rh) { // situation 8
+								erase_el->_parent->_rh = erase_el->_rh;
+								tmp = erase_el->_rh;
+								while (tmp->_lh)
+									tmp = tmp->_lh;
+								tmp->_lh = erase_el->_lh;
+								delete erase_el;
+							}
 						}
+						return ;
 					}
 					else {
 						if (side == 'l') {
-							if (!erase_el->_lh && !erase_el->_rh) { // situation 1 == l 1
-								delete erase_el;
-							}
-							else if (erase_el->_lh && !erase_el->_rh) { // situation 2
+							if (!erase_el->_rh) { // situation 1
 								erase_el->_parent->_lh = erase_el->_lh;
 								delete erase_el;
 							}
-							else if (!erase_el->_lh && erase_el->_rh) { // situation 3
+							else if (!erase_el->_lh) { // situation 2
 								erase_el->_parent->_lh = erase_el->_rh;
 								delete erase_el;
 							}
-							else if (erase_el->_lh && erase_el->_rh) {
+							else if (erase_el->_lh && erase_el->_rh) { // situation 3
+								erase_el->_parent->_lh = erase_el->_rh;
 								tmp = erase_el->_rh;
-								while (tmp->_lh && !tmp->_lh->isFirstElement()) { // situation 4 == 8
-									if (!tmp->_lh || tmp->_lh->isFirstElement()) {
-										tmp->_parent->_lh = tmp->_lh;
-									}
+								while (tmp->_lh)
 									tmp = tmp->_lh;
-								}
-								erase_el->_parent->_lh = tmp;
 								tmp->_lh = erase_el->_lh;
-								tmp->_rh = erase_el->_rh;
 								delete erase_el;
 							}
-							return ;
 						}
 						else if (side == 'r') {
-							if (!erase_el->_lh && !erase_el->_rh) { // situation 5
-								delete erase_el;
-							}
-							else if (erase_el->_lh && !erase_el->_rh) { // situation 6
+							if ((!erase_el->_rh || erase_el->_rh->isLastElement()) && erase_el->_lh) { // situation 4
 								erase_el->_parent->_rh = erase_el->_lh;
-								delete erase_el;
-							}
-							else if (!erase_el->_lh && erase_el->_rh) { // situation 7
-								erase_el->_parent->_rh = erase_el->_rh;
-							}
-							else if (erase_el->_lh && erase_el->_rh) {
-								tmp = erase_el->_rh;
-								while (tmp->_lh && !tmp->_lh->isFirstElement()) { // situation 8 == 4
-									if (!tmp->_lh || tmp->_lh->isFirstElement()) {
-										tmp->_parent->_lh = tmp->_lh;
-									}
-									tmp = tmp->_lh;
-								}
-								erase_el->_parent->_lh = tmp;
-								tmp->_lh = erase_el->_lh;
+								tmp = erase_el->_lh;
+								while (tmp->_rh)
+									tmp = tmp->_rh;
 								tmp->_rh = erase_el->_rh;
 								delete erase_el;
 							}
-							return ;
+							else if ((!erase_el->_rh || erase_el->_rh->isLastElement()) && !erase_el->_lh) { // situation 4
+								erase_el->_parent->_rh = erase_el->_rh;
+								delete erase_el;
+							}
+							else if (!erase_el->_lh) { // situatin 5
+								erase_el->_parent->_rh = erase_el->_rh;
+								delete erase_el;
+							}
+							else if (erase_el->_lh && erase_el->_rh) {
+								erase_el->_parent->_rh = erase_el->_rh;
+								tmp = erase_el->_rh;
+								while (tmp->_lh)
+									tmp = tmp->_lh;
+								tmp->_lh = erase_el->_lh;
+								delete erase_el;
+							}
 						}
+						return ;
 					}
 				};
 

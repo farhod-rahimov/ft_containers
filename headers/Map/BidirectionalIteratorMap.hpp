@@ -87,7 +87,10 @@ namespace ft {
 					}
 				}
 				else if (tmp->isFirstElement()) {
-					tmp = tmp->_parent;
+					if (tmp->_rh->isLastElement())
+						tmp = tmp->_rh;
+					else
+						tmp = tmp->_parent;
 				}
 				else {
 					while (	tmp->_value->first <= this->_binary_tree->_value->first && 
