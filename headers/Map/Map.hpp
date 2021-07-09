@@ -60,6 +60,7 @@ namespace ft {
 					this->_root = new BinaryTree<key_type, mapped_type>;
 					this->_root->setLastElementFlag();
 					this->_root->_lh = this->_root->createFirstElemet(this->_root);
+					this->_root->_rh = nullptr;
 				};
 
 				map (iterator first, iterator last, const key_compare& comp = key_compare(), 
@@ -70,6 +71,7 @@ namespace ft {
 					this->_root = new BinaryTree<key_type, mapped_type>;
 					this->_root->setLastElementFlag();
 					this->_root->_lh = this->_root->createFirstElemet(this->_root);
+					this->_root->_rh = nullptr;
 					
 					for (; first != last; first++) {
 						this->insert(*first);
@@ -470,8 +472,17 @@ namespace ft {
 				};
 
 				// void clear() {
-					
+				// 	this->_private_clear(this->_root);
+				// 	this->_size = 0;
 				// };
+
+				// void _private_clear(BinaryTree<key_type, mapped_type> *tmp) { 			// move to private
+				// 	if (tmp == nullptr)
+				// 		return ;
+				// 	_private_clear(tmp->_lh);
+				// 	delete tmp;
+				// 	_private_clear(tmp->_rh);
+				// }
 
 		// OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS  //
 
