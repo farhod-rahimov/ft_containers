@@ -196,7 +196,7 @@ namespace ft {
 				};
 
 				size_type max_size() const {
-					return (this->_allocator.max_size() / sizeof(BinaryTree<key_type, mapped_type>)); // not sure
+					return (this->_allocator.max_size() / sizeof(BinaryTree<key_type, mapped_type>));
 				};
 
 		// ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS //
@@ -486,7 +486,11 @@ namespace ft {
 				};
 
 				void erase (iterator first, iterator last) {
-					for (; first != last; first++) {
+					size_type n = 0;
+					for (iterator tmp = first; tmp != last; tmp++) {
+						n++;
+					}
+					for (; n-- > 0; first++) {
 						this->erase(first);
 					}
 				};
