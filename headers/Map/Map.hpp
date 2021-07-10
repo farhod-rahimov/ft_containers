@@ -84,7 +84,9 @@ namespace ft {
 				};
 			
 				virtual ~map() {
-					// change change change change change change change change change change change change change 
+					this->clear();
+					delete (this->_root->_rh);
+					delete (this->_root);
 				};
 
 				map & operator = (const map & src) {
@@ -198,7 +200,7 @@ namespace ft {
 						this->_root->_value->first = val.first;
 						this->_root->_value->second = val.second;
 						this->_root->removeLastElementFlag();
-						if (this->_root->_rh)
+						if (this->_root->_rh) {}
 							delete this->_root->_rh;
 						if (this->_root->_lh)
 							delete this->_root->_lh;
@@ -471,10 +473,10 @@ namespace ft {
 					x._root = tmp_btree;
 				};
 
-				// void clear() {
-				// 	this->_private_clear(this->_root);
-				// 	this->_size = 0;
-				// };
+				void clear() {
+					while (this->_size)
+						this->erase(this->_root->_value->first);
+				};
 
 				// void _private_clear(BinaryTree<key_type, mapped_type> *tmp) { 			// move to private
 				// 	if (tmp == nullptr)

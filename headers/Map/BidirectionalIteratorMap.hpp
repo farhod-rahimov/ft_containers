@@ -27,7 +27,8 @@ namespace ft {
 			virtual ~BidirectionalIteratorMap() {};
 			
 			BidirectionalIteratorMap(BinaryTree<Key, T> & src) {
-				this->_binary_tree = new BinaryTree<Key, T>(src);
+				// this->_binary_tree = new BinaryTree<Key, T>(src);
+				this->_binary_tree = &src;
 			};
 			
 			BidirectionalIteratorMap(BidirectionalIteratorMap const & src) {
@@ -36,10 +37,11 @@ namespace ft {
 			
 			BidirectionalIteratorMap & operator = (BidirectionalIteratorMap const & src) {
 				if (this != &src) {
-					if (this->_binary_tree != nullptr) {
-						// delete this->_binary_tree; // sega
-					}
-					this->_binary_tree = new BinaryTree<Key, T>(*src._binary_tree);
+					// if (this->_binary_tree != nullptr) {
+					// 	// delete this->_binary_tree; // sega
+					// }
+					// this->_binary_tree = new BinaryTree<Key, T>(*src._binary_tree);
+					this->_binary_tree = src._binary_tree;
                 }
 				return (*this);
 			};

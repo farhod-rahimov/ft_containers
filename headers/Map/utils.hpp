@@ -126,6 +126,10 @@ namespace ft {
 				this->_first_element = 0;
 			};
 			
+			~BinaryTree() {
+				delete this->_value;
+			}
+
 			BinaryTree(const value_type & val, BinaryTree * parent) {
 				this->_value = new value_type;
 				this->_value->first = val.first;
