@@ -383,7 +383,7 @@ void get_allocator() {
 int main ()
 {
   // constructor();
-  operator_eq();
+  // operator_eq();
   // begin();
   // rbegin();
   // empty();
@@ -402,7 +402,6 @@ int main ()
   // upper_bound();
   // equal_range();
   // get_allocator();
-  
   
   // while (1)
   //   ;

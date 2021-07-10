@@ -9,16 +9,13 @@
 
 namespace ft {
 	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair <const Key,T> > >
-	// template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair <Key,T> > >
 	class map {
 	public:
 				typedef 			Key																key_type;
 				typedef 			T																mapped_type;
 				typedef 			ft::pair<key_type, mapped_type>									value_type;
-				// typedef 			ft::pair<const key_type, mapped_type>							value_type;
 
 				typedef 			Compare															key_compare;
-				// typedef 			class value_compare												value_compare;
 				
 				typedef 			Alloc 															allocator_type;
 				typedef typename	allocator_type::reference 										reference;
@@ -39,7 +36,7 @@ namespace ft {
 				friend class map<key_type, mapped_type, key_compare, allocator_type>;
 				protected:
 					Compare _comp;
-					value_compare (Compare c) : _comp(c) {}  // constructed with map's comparison object
+					value_compare (Compare c) : _comp(c) {}
 				public:
 					typedef bool result_type;
 					typedef value_type first_argument_type;
@@ -81,7 +78,8 @@ namespace ft {
 				};
 				
 				map (const map & src) {
-					this->_root = nullptr;
+					// this->_root = nullptr;
+					this->_root = new BinaryTree<key_type, mapped_type>;
 					*this = src;
 				};
 			
@@ -96,10 +94,16 @@ namespace ft {
 				if (this != &src) {
 					if (this->_size) {
 						this->clear();
+						// delete (this->_root->_lh);
+						// delete (this->_root);
+						// delete (this->_root->_rh);
 					}
 					this->_allocator = src._allocator;
 					this->_comp = src._comp;
 					this->_size = 0;
+					// this->_root = new BinaryTree<key_type, mapped_type>;
+					// this->_root->setLastElementFlag();
+					// this->_root->_lh = this->_root->createFirstElemet(this->_root);
 					for (const_iterator it = src.begin(); it != src.end(); it++) {
 						this->insert(*it);
 					}
@@ -517,7 +521,6 @@ namespace ft {
 
 		// OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS  //
 
-								// MAIN TEST FROM CPP DOESNT PASS 
 				key_compare key_comp() const {
 					return (this->_comp);
 				};
@@ -654,7 +657,6 @@ namespace ft {
 					return (nullptr);
 				};
 	};
-
 };
 
 #endif

@@ -252,6 +252,23 @@ void key_comp() {
   } while ( mymap.value_comp()(*it++, highest) );
 }
 
+void value_comp() {
+  std::map<char,int> mymap;
+
+  mymap['x']=1001;
+  mymap['y']=2002;
+  mymap['z']=3003;
+
+  std::cout << "mymap contains:\n";
+
+  std::pair<char,int> highest = *mymap.rbegin();          // last element
+
+  std::map<char,int>::iterator it = mymap.begin();
+  do {
+    std::cout << it->first << " => " << it->second << '\n';
+  } while ( mymap.value_comp()(*it++, highest) );
+}
+
 void find() {
   std::map<char,int> mymap;
   std::map<char,int>::iterator it;
@@ -366,7 +383,7 @@ void get_allocator() {
 int main ()
 {
   // constructor();
-  operator_eq();
+  // operator_eq();
   // begin();
   // rbegin();
   // empty();
@@ -377,7 +394,8 @@ int main ()
   // erase();
   // swap();
   // clear();
-  // key_comp();
+  key_comp();
+  // value_comp();
   // find();
   // count();
   // lower_bound();

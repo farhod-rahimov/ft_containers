@@ -1,2 +1,3 @@
-Size of first: 0
-Size of second: 3
+mymap contains:
+x => 1001
+y => 2002
