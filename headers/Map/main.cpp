@@ -7,47 +7,38 @@
 
 void m() {
   ft::map<int,int> mymap;
-  mymap.insert(ft::make_pair(100, 100));
-  mymap.insert(ft::make_pair(200, 200));
-  mymap.insert(ft::make_pair(300, 300));
-  mymap.insert(ft::make_pair(400, 400));
-  mymap.insert(ft::make_pair(500, 500));
-  mymap.insert(ft::make_pair(600, 600));
-  mymap.insert(ft::make_pair(700, 700));
-  mymap.insert(ft::make_pair(800, 800));
-  mymap.insert(ft::make_pair(900, 900));
-  mymap.insert(ft::make_pair(1000, 1000));
-  mymap.insert(ft::make_pair(1100, 1100));
-  mymap.insert(ft::make_pair(1200, 1200));
-  mymap.insert(ft::make_pair(1300, 1300));
-  mymap.insert(ft::make_pair(1400, 1400));
-  mymap.insert(ft::make_pair(1500, 1500));
-  mymap.insert(ft::make_pair(1600, 1600));
-  mymap.insert(ft::make_pair(1700, 1700));
-  mymap.insert(ft::make_pair(1800, 1800));
-  mymap.insert(ft::make_pair(1900, 1900));
-  mymap.insert(ft::make_pair(2000, 2000));
-  mymap.insert(ft::make_pair(2100, 2100));
-  mymap.insert(ft::make_pair(2200, 2200));
-  mymap.insert(ft::make_pair(2300, 2300));
-  mymap.insert(ft::make_pair(2400, 2400));
-  mymap.insert(ft::make_pair(2500, 2500));
-  mymap.insert(ft::make_pair(2600, 2600));
-  mymap.insert(ft::make_pair(2700, 2700));
-  mymap.insert(ft::make_pair(2800, 2800));
-  mymap.insert(ft::make_pair(2900, 2900));
-  mymap.insert(ft::make_pair(3000, 3000));
+  for (int i = 100; i <= 4000; i+=100) {
+    mymap.insert(ft::make_pair(i, i));
+  }
+  std::cout << "mymap size " << mymap.size() << std::endl;
+  mymap.clear();
+  std::cout << mymap.insert(ft::make_pair(3000, 3000)).first->first << std::endl;
   std::cout << "mymap size " << mymap.size() << std::endl;
 
-  mymap.clear();
-  mymap.insert(ft::make_pair(3000, 3000));
-  std::cout << "mymap size " << mymap.size() << std::endl;
+  ft::map<int, int>::iterator c;
+  ft::map<int, int>::iterator d;
+  c = mymap.begin();
+  d = mymap.begin();
+
+  // std::map<int, int> m;
+  // for (int i = 100; i <= 4000; i+=100) {
+  //   m.insert(std::make_pair(i, i));
+  // }
+  // std::map<int, int>::const_iterator p;
+  // std::map<int, int>::iterator q;
+  // p = m.begin();
+  // q = m.begin();
+  // std::cout << "6546546    " << p->first << " " << p->second << std::endl;
+  // p->second = 123;
+  // q->second = 123;
+  // std::cout << "6546546    " << p->first << " " << p->second;
+
 }
 
 int main ()
 {
   m();
-  while (1)
-    ;
+  // while (1)
+  //   ;
   return 0;
 }

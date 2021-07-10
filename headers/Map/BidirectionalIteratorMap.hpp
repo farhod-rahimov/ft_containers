@@ -27,7 +27,6 @@ namespace ft {
 			virtual ~BidirectionalIteratorMap() {};
 			
 			BidirectionalIteratorMap(BinaryTree<Key, T> & src) {
-				// this->_binary_tree = new BinaryTree<Key, T>(src);
 				this->_binary_tree = &src;
 			};
 			
@@ -37,10 +36,6 @@ namespace ft {
 			
 			BidirectionalIteratorMap & operator = (BidirectionalIteratorMap const & src) {
 				if (this != &src) {
-					// if (this->_binary_tree != nullptr) {
-					// 	// delete this->_binary_tree; // sega
-					// }
-					// this->_binary_tree = new BinaryTree<Key, T>(*src._binary_tree);
 					this->_binary_tree = src._binary_tree;
                 }
 				return (*this);
@@ -49,12 +44,10 @@ namespace ft {
 	// ----------------------------------------------------------------------------------------------------------- //
 
 			bool operator == (BidirectionalIteratorMap const & src) const {
-				// return (this->_binary_tree->_value->first == src._binary_tree->_value->first);
 				return (this->_binary_tree->_value == src._binary_tree->_value);
 			};
 
 			bool operator != (BidirectionalIteratorMap const & src) const {
-				// return (this->_binary_tree->_value->first != src._binary_tree->_value->first);
 				return (this->_binary_tree->_value != src._binary_tree->_value);
 			};
 
@@ -156,7 +149,6 @@ namespace ft {
 			};
 
 	private:
-		// friend void ft::map<Key, T>::erase(typename ft::map<Key, T>::iterator position);
 		BinaryTree<Key, T>		*_binary_tree;
 	};
 };

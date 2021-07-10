@@ -26,7 +26,8 @@ namespace ft {
 				typedef typename	allocator_type::const_pointer 						const_pointer;
 				
 				typedef 			ft::BidirectionalIteratorMap<Key, T>				iterator;
-				typedef 			ft::BidirectionalIteratorMap<Key, T const>			const_iterator;
+				// typedef 			ft::BidirectionalIteratorMap<Key, T>				iterator;
+				// typedef 			ft::BidirectionalIteratorMap<Key const, T const>			const_iterator;
 				// typedef 			ft::BidirectionalIteratorMap<value_type>			reverse_iterator;
 				// typedef 			ft::BidirectionalIteratorMap<value_type const>		const_reverse_iterator;
 
@@ -519,9 +520,9 @@ namespace ft {
 					return (ret);
 				};
 
-				const_iterator find (const key_type& k) const {
-					return (const_iterator(this->find(k)));
-				};
+				// const_iterator find (const key_type& k) const {
+				// 	return (const_iterator(this->find(k)));
+				// };
 
 				size_type count (const key_type& k) const {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
