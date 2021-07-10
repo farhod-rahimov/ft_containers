@@ -112,9 +112,8 @@ namespace ft {
 			typedef 			Key													key_type;
 			typedef 			T													mapped_type;
 			typedef 			ft::pair<key_type const, mapped_type>				value_type;
-			
-			typedef 			Alloc											allocator_type;
-			typedef typename	allocator_type::pointer							pointer;
+			typedef 			Alloc												allocator_type;
+			typedef typename	allocator_type::pointer								pointer;
 
 			BinaryTree(const allocator_type& alloc = allocator_type()) {
 				this->_allocator = alloc;
@@ -192,8 +191,6 @@ namespace ft {
 			bool			_last_element;
 			bool			_first_element;
 	};
-
-
 };
 
 #endif

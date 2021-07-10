@@ -234,22 +234,18 @@ void clear () {
 void key_comp() {
   ft::map<char,int> mymap;
 
-  ft::map<char,int>::key_compare mycomp = mymap.key_comp();
-
-  mymap['a']=100;
-  mymap['b']=200;
-  mymap['c']=300;
+  mymap['x']=100;
+  mymap['y']=200;
+  mymap['z']=300;
 
   std::cout << "mymap contains:\n";
 
-  char highest = mymap.rbegin()->first;     // key value of last element
+  ft::pair<char,int> highest = *mymap.rbegin();          // last element
 
   ft::map<char,int>::iterator it = mymap.begin();
   do {
     std::cout << it->first << " => " << it->second << '\n';
-  } while ( mycomp((*it++).first, highest) );
-
-  std::cout << '\n';
+  } while ( mymap.value_comp()(*it++, highest) );
 }
 
 void value_comp() {
@@ -400,10 +396,10 @@ int main ()
   count();
   lower_bound();
   upper_bound();
-  // equal_range();
+  equal_range();
   get_allocator();
   
-  while (1)
-    ;
+  // while (1)
+  //   ;
   return 0;
 }

@@ -8,7 +8,7 @@
 #include "utils.hpp"
 
 namespace ft {
-	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair <const Key,T> > >
+	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair <Key const,T> > >
 	class map {
 	public:
 				typedef 			Key																key_type;
@@ -227,8 +227,6 @@ namespace ft {
 				
 				ft::pair<iterator,bool> insert (const value_type& val) {
 					if (this->_size == 0) {
-						// this->_root->_value->first = val.first;
-						// this->_root->_value->second = val.second;
 						this->_allocator.construct(this->_root->_value, val);
 						this->_root->removeLastElementFlag();
 						if (this->_root->_rh) {}
@@ -249,10 +247,7 @@ namespace ft {
 						}
 						else if (this->_comp(val.first, tmp->_value->first) && tmp->_lh && tmp->_lh->isFirstElement()) {
 							tmp->_lh->removeFirstElementFlag();
-
 							tmp->_allocator.construct(tmp->_lh->_value, val);
-							// tmp->_lh->_value->first = val.first;
-							// tmp->_lh->_value->second = val.second;
 							tmp->_lh->_lh = tmp->createFirstElemet(tmp->_lh);
 							tmp = tmp->_lh;
 							break ;
@@ -267,10 +262,7 @@ namespace ft {
 						}
 						else if (this->_comp(tmp->_value->first, val.first) && tmp->_rh && tmp->_rh->isLastElement()) {
 							tmp->_rh->removeLastElementFlag();
-
 							tmp->_allocator.construct(tmp->_rh->_value, val);
-							// tmp->_rh->_value->first = val.first;
-							// tmp->_rh->_value->second = val.second;
 							tmp->_rh->_rh = tmp->createLastElemet(tmp->_rh);
 							tmp = tmp->_rh;
 							break ;
@@ -628,9 +620,9 @@ namespace ft {
 				};
 
 	private:
-				allocator_type	        				_allocator;
-				key_compare		        				_comp;
-				size_type		        				_size;
+				allocator_type	        					_allocator;
+				key_compare		        					_comp;
+				size_type		        					_size;
 				BinaryTree<key_type const, mapped_type>		*_root;
 
 				BinaryTree<key_type const, mapped_type>		*_private_find(key_type const & k, char *side) {

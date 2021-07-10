@@ -238,9 +238,9 @@ void clear () {
 void key_comp() {
   std::map<char,int> mymap;
 
-  mymap['x']=1001;
-  mymap['y']=2002;
-  mymap['z']=3003;
+  mymap['x']=100;
+  mymap['y']=200;
+  mymap['z']=300;
 
   std::cout << "mymap contains:\n";
 
@@ -382,26 +382,26 @@ void get_allocator() {
 
 int main ()
 {
-  // constructor();
-  // operator_eq();
-  // begin();
-  // rbegin();
-  // empty();
-  // size();
-  // max_size();
-  // operator_2();
-  // insert();
-  // erase();
-  // swap();
-  // clear();
+  constructor();
+  operator_eq();
+  begin();
+  rbegin();
+  empty();
+  size();
+  max_size();
+  operator_2();
+  insert();
+  erase();
+  swap();
+  clear();
   key_comp();
-  // value_comp();
-  // find();
-  // count();
-  // lower_bound();
-  // upper_bound();
-  // equal_range();
-  // get_allocator();
+  value_comp();
+  find();
+  count();
+  lower_bound();
+  upper_bound();
+  equal_range();
+  get_allocator();
 
 
   // while (1)

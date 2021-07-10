@@ -1,31 +1,20 @@
 #ifndef BIDIRECTIONAL_ITERATOR_MAP_HPP
 #define BIDIRECTIONAL_ITERATOR_MAP_HPP
 
-#include "utils.hpp"
 #include "Map.hpp"
-
-// #include "../Stack.hpp"
-// #include "../Vector.hpp"
+#include "utils.hpp"
 
 namespace ft {
 
-	// template < class Key, class T >
-    template < class Key, class T, class Alloc = std::allocator<ft::pair <Key const,T> > >
+    template < class Key, class T, class Alloc = std::allocator<ft::pair <Key const, T> > >
 	class BidirectionalIteratorMap {
 	public:
-			// typedef 	Key										key_type;
-			// typedef 	T										mapped_type;
-			// typedef 	ft::pair<key_type, mapped_type>			value_type;
-			// typedef 	value_type *							pointer;
-			// typedef 	std::bidirectional_iterator_tag         iterator_category;
-
 			typedef 			Key													key_type;
 			typedef 			T													mapped_type;
 			typedef 			ft::pair<key_type const, mapped_type>				value_type;
-			
-			typedef 			Alloc											allocator_type;
-			typedef typename	allocator_type::pointer							pointer;
-			typedef 	std::bidirectional_iterator_tag         iterator_category;
+			typedef 			Alloc												allocator_type;
+			typedef typename	allocator_type::pointer								pointer;
+			typedef 			std::bidirectional_iterator_tag         			iterator_category;
 
 	// ----------------------------------------------------------------------------------------------------------- //
 
@@ -161,23 +150,16 @@ namespace ft {
 		BinaryTree<Key const, T>		*_binary_tree;
 	};
 
-	// template <  class Key,  class T >
     template < class Key, class T, class Alloc = std::allocator<ft::pair <Key const,T> > >
 	class BidirectionalIteratorMapConst {
 	public:
-			// typedef 	Key 									key_type;
-			// typedef 	T										mapped_type;
-			// typedef 	ft::pair<key_type, mapped_type>			value_type;
-			// typedef 	value_type *							pointer;
-			// typedef 	std::bidirectional_iterator_tag         iterator_category;
 
-						typedef 			Key													key_type;
+			typedef 			Key													key_type;
 			typedef 			T													mapped_type;
 			typedef 			ft::pair<key_type const, mapped_type>				value_type;
-			
-			typedef 			Alloc											allocator_type;
-			typedef typename	allocator_type::pointer							pointer;
-			typedef 	std::bidirectional_iterator_tag         iterator_category;
+			typedef 			Alloc												allocator_type;
+			typedef typename	allocator_type::pointer								pointer;
+			typedef				std::bidirectional_iterator_tag        				iterator_category;
 
 	// ----------------------------------------------------------------------------------------------------------- //
 
