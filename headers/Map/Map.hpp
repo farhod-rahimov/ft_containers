@@ -87,21 +87,19 @@ namespace ft {
 			
 				virtual ~map() {
 					this->clear();
+					delete (this->_root->_lh);
 					delete (this->_root->_rh);
 					delete (this->_root);
 				};
 
 				map & operator = (const map & src) {
 				if (this != &src) {
-					if (this->_root != nullptr)
-						delete this->_root;
+					if (this->_size) {
+						this->clear();
+					}
 					this->_allocator = src._allocator;
 					this->_comp = src._comp;
 					this->_size = 0;
-					this->_root = new BinaryTree<key_type, mapped_type>;
-					this->_root->setLastElementFlag();
-					this->_root->_lh = this->_root->createFirstElemet(this->_root);
-					
 					for (const_iterator it = src.begin(); it != src.end(); it++) {
 						this->insert(*it);
 					}
@@ -519,6 +517,7 @@ namespace ft {
 
 		// OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS  //
 
+								// MAIN TEST FROM CPP DOESNT PASS 
 				key_compare key_comp() const {
 					return (this->_comp);
 				};

@@ -1,2 +1,2 @@
-a => 10
-d => 40
+Size of first: 0
+Size of second: 3

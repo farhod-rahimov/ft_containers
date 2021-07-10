@@ -188,16 +188,185 @@ void erase() {
 
   it=mymap.find ('e');
   mymap.erase ( it, mymap.end() );    // erasing by range
-
+  
   // show content:
   for (it=mymap.begin(); it!=mymap.end(); ++it)
     std::cout << it->first << " => " << it->second << '\n';
 }
 
+void swap() {
+  std::map<char,int> foo,bar;
+
+  foo['x']=100;
+  foo['y']=200;
+
+  bar['a']=11;
+  bar['b']=22;
+  bar['c']=33;
+
+  foo.swap(bar);
+
+  std::cout << "foo contains:\n";
+  for (std::map<char,int>::iterator it=foo.begin(); it!=foo.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+
+  std::cout << "bar contains:\n";
+  for (std::map<char,int>::iterator it=bar.begin(); it!=bar.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+}
+
+void clear () {
+  std::map<char,int> mymap;
+
+  mymap['x']=100;
+  mymap['y']=200;
+  mymap['z']=300;
+
+  std::cout << "mymap contains:\n";
+  for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+
+  mymap.clear();
+  mymap['a']=1101;
+  mymap['b']=2202;
+
+  std::cout << "mymap contains:\n";
+  for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+}
+
+void key_comp() {
+  std::map<char,int> mymap;
+
+  mymap['x']=1001;
+  mymap['y']=2002;
+  mymap['z']=3003;
+
+  std::cout << "mymap contains:\n";
+
+  std::pair<char,int> highest = *mymap.rbegin();          // last element
+
+  std::map<char,int>::iterator it = mymap.begin();
+  do {
+    std::cout << it->first << " => " << it->second << '\n';
+  } while ( mymap.value_comp()(*it++, highest) );
+}
+
+void find() {
+  std::map<char,int> mymap;
+  std::map<char,int>::iterator it;
+
+  mymap['a']=50;
+  mymap['b']=100;
+  mymap['c']=150;
+  mymap['d']=200;
+
+  it = mymap.find('b');
+  if (it != mymap.end())
+    mymap.erase (it);
+
+  // print content:
+  std::cout << "elements in mymap:" << '\n';
+  std::cout << "a => " << mymap.find('a')->second << '\n';
+  std::cout << "c => " << mymap.find('c')->second << '\n';
+  std::cout << "d => " << mymap.find('d')->second << '\n';
+}
+
+void count() {
+  std::map<char,int> mymap;
+  char c;
+
+  mymap ['a']=101;
+  mymap ['c']=202;
+  mymap ['f']=303;
+
+  for (c='a'; c<'h'; c++)
+  {
+    std::cout << c;
+    if (mymap.count(c)>0)
+      std::cout << " is an element of mymap.\n";
+    else 
+      std::cout << " is not an element of mymap.\n";
+  }
+}
+
+void lower_bound() {
+  std::map<char,int> mymap;
+  std::map<char,int>::iterator itlow,itup;
+
+  mymap['a']=20;
+  mymap['b']=40;
+  mymap['c']=60;
+  mymap['d']=80;
+  mymap['e']=100;
+
+  itlow=mymap.lower_bound ('b');  // itlow points to b
+  itup=mymap.upper_bound ('d');   // itup points to e (not d!)
+
+  mymap.erase(itlow,itup);        // erases [itlow,itup)
+
+  // print content:
+  for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+}
+
+void upper_bound() {
+  std::map<char,int> mymap;
+  std::map<char,int>::iterator itlow,itup;
+
+  mymap['a']=20;
+  mymap['b']=40;
+  mymap['c']=60;
+  mymap['d']=80;
+  mymap['e']=100;
+
+  itlow=mymap.lower_bound ('b');  // itlow points to b
+  itup=mymap.upper_bound ('d');   // itup points to e (not d!)
+
+  mymap.erase(itlow,itup);        // erases [itlow,itup)
+
+  // print content:
+  for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+    std::cout << it->first << " => " << it->second << '\n';
+}
+
+void equal_range() {
+  std::map<char,int> mymap;
+
+  mymap['a']=10;
+  mymap['b']=20;
+  mymap['c']=30;
+
+  std::pair<std::map<char,int>::iterator,std::map<char,int>::iterator> ret;
+  ret = mymap.equal_range('b');
+
+  std::cout << "lower bound points to: ";
+  std::cout << ret.first->first << " => " << ret.first->second << '\n';
+
+  std::cout << "upper bound points to: ";
+  std::cout << ret.second->first << " => " << ret.second->second << '\n';
+}
+
+void get_allocator() {
+  int psize;
+  std::map<char,int> mymap;
+  std::pair<const char,int>* p;
+
+  // allocate an array of 5 elements using mymap's allocator:
+  p=mymap.get_allocator().allocate(5);
+
+  // assign some values to array
+  psize = sizeof(std::map<char,int>::value_type)*5;
+
+  std::cout << "The allocated array has a size of " << psize << " bytes.\n";
+
+  mymap.get_allocator().deallocate(p,5);
+}
+
 int main ()
 {
   // constructor();
-  // operator_eq();
+  operator_eq();
   // begin();
   // rbegin();
   // empty();
@@ -205,7 +374,18 @@ int main ()
   // max_size();
   // operator_2();
   // insert();
-  erase();
+  // erase();
+  // swap();
+  // clear();
+  // key_comp();
+  // find();
+  // count();
+  // lower_bound();
+  // upper_bound();
+  // equal_range();
+  // get_allocator();
+
+
   // while (1)
   //   ;
   return 0;
