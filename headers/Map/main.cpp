@@ -17,11 +17,17 @@ void m() {
   c = mymap.begin();
   d = mymap.begin();
 
-  ft::map<int, int>::iterator con;
-
-  con = mymap.begin();
+  ft::map<int,int> const mymapc;
+  ft::map<int, int>::const_iterator con;
+  con = mymapc.begin();
+  
   con++;
   std::cout << con->first;
+
+  std::map<int, int>::const_iterator stlc;
+  std::map<int, int> stl;
+
+  // stlc = stl.begin();
 }
 
 int main ()

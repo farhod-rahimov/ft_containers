@@ -156,8 +156,8 @@ namespace ft {
 	template <  class Key,  class T >
 	class BidirectionalIteratorMapConst {
 	public:
-			typedef 	Key const								key_type;
-			typedef 	T	const								mapped_type;
+			typedef 	Key 									key_type;
+			typedef 	T										mapped_type;
 			typedef 	ft::pair<key_type, mapped_type>			value_type;
 			typedef 	value_type *							pointer;
 			typedef 	std::bidirectional_iterator_tag         iterator_category;

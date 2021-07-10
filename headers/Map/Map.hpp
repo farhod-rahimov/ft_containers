@@ -27,9 +27,9 @@ namespace ft {
 				typedef typename	allocator_type::const_pointer 									const_pointer;
 				
 				typedef 			ft::BidirectionalIteratorMap<Key, T>							iterator;
-				typedef 			ft::BidirectionalIteratorMapConst<Key const, T const>			const_iterator;
+				typedef 			ft::BidirectionalIteratorMapConst<Key, T>						const_iterator;
 				typedef 			ft::BidirectionalReverseIteratorMap<Key, T>						reverse_iterator;
-				typedef 			ft::BidirectionalReverseIteratorMapConst<Key const, T const>	const_reverse_iterator;
+				typedef 			ft::BidirectionalReverseIteratorMapConst<Key, T>				const_reverse_iterator;
 
 				typedef 			std::ptrdiff_t													difference_type;
 				typedef 			size_t															size_type;
