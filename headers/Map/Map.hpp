@@ -134,7 +134,7 @@ namespace ft {
 				iterator end() {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
-					while (!tmp->isLastElement()) {
+					while (tmp && !tmp->isLastElement()) {
 						tmp = tmp->_rh;
 					}
 					return (iterator(*tmp));
@@ -143,7 +143,7 @@ namespace ft {
 				const_iterator end() const {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
-					while (!tmp->isLastElement()) {
+					while (tmp && !tmp->isLastElement()) {
 						tmp = tmp->_rh;
 					}
 					return (const_iterator(*tmp));
@@ -152,7 +152,7 @@ namespace ft {
 				reverse_iterator rbegin()  {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
-					while (!tmp->isLastElement()) {
+					while (tmp && tmp->_rh && !tmp->_rh->isLastElement()) {
 						tmp = tmp->_rh;
 					}
 					return (reverse_iterator(*tmp));
@@ -161,7 +161,7 @@ namespace ft {
 				const_reverse_iterator rbegin() const {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
-					while (!tmp->isLastElement()) {
+					while (tmp && tmp->_rh && !tmp->_rh->isLastElement()) {
 						tmp = tmp->_rh;
 					}
 					return (const_reverse_iterator(*tmp));
@@ -170,7 +170,7 @@ namespace ft {
 				reverse_iterator rend() {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
-					while (tmp && tmp->_lh && !tmp->_lh->isFirstElement()) {
+					while (tmp && !tmp->isFirstElement()) {
 						tmp = tmp->_lh;
 					}
 					return (reverse_iterator(*tmp));
@@ -179,7 +179,7 @@ namespace ft {
 				const_reverse_iterator rend() const {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
-					while (tmp && tmp->_lh && !tmp->_lh->isFirstElement()) {
+					while (tmp && !tmp->isFirstElement()) {
 						tmp = tmp->_lh;
 					}
 					return (const_reverse_iterator(*tmp));
