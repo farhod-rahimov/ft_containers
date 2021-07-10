@@ -9,13 +9,22 @@
 
 namespace ft {
 
-	template < class Key, class T >
+	// template < class Key, class T >
+    template < class Key, class T, class Alloc = std::allocator<ft::pair <Key const,T> > >
 	class BidirectionalIteratorMap {
 	public:
-			typedef 	Key										key_type;
-			typedef 	T										mapped_type;
-			typedef 	ft::pair<key_type, mapped_type>			value_type;
-			typedef 	value_type *							pointer;
+			// typedef 	Key										key_type;
+			// typedef 	T										mapped_type;
+			// typedef 	ft::pair<key_type, mapped_type>			value_type;
+			// typedef 	value_type *							pointer;
+			// typedef 	std::bidirectional_iterator_tag         iterator_category;
+
+			typedef 			Key													key_type;
+			typedef 			T													mapped_type;
+			typedef 			ft::pair<key_type const, mapped_type>				value_type;
+			
+			typedef 			Alloc											allocator_type;
+			typedef typename	allocator_type::pointer							pointer;
 			typedef 	std::bidirectional_iterator_tag         iterator_category;
 
 	// ----------------------------------------------------------------------------------------------------------- //
@@ -26,7 +35,7 @@ namespace ft {
 			
 			virtual ~BidirectionalIteratorMap() {};
 			
-			BidirectionalIteratorMap(BinaryTree<Key, T> & src) {
+			BidirectionalIteratorMap(BinaryTree<Key const, T> & src) {
 				this->_binary_tree = &src;
 			};
 			
@@ -70,7 +79,7 @@ namespace ft {
 
 			BidirectionalIteratorMap & operator ++ (int)
 			{
-				BinaryTree<Key, T> *tmp(this->_binary_tree);
+				BinaryTree<Key const, T> *tmp(this->_binary_tree);
 
 				if (tmp->isLastElement()) {
 					return (*this);
@@ -114,7 +123,7 @@ namespace ft {
 			};
 			
 			BidirectionalIteratorMap & operator -- (int) {
-				BinaryTree<Key, T> *tmp(this->_binary_tree);
+				BinaryTree<Key const, T> *tmp(this->_binary_tree);
 
 
 				if (tmp->isFirstElement()) {
@@ -149,17 +158,25 @@ namespace ft {
 			};
 
 	private:
-		BinaryTree<Key, T>		*_binary_tree;
+		BinaryTree<Key const, T>		*_binary_tree;
 	};
 
-
-	template <  class Key,  class T >
+	// template <  class Key,  class T >
+    template < class Key, class T, class Alloc = std::allocator<ft::pair <Key const,T> > >
 	class BidirectionalIteratorMapConst {
 	public:
-			typedef 	Key 									key_type;
-			typedef 	T										mapped_type;
-			typedef 	ft::pair<key_type, mapped_type>			value_type;
-			typedef 	value_type *							pointer;
+			// typedef 	Key 									key_type;
+			// typedef 	T										mapped_type;
+			// typedef 	ft::pair<key_type, mapped_type>			value_type;
+			// typedef 	value_type *							pointer;
+			// typedef 	std::bidirectional_iterator_tag         iterator_category;
+
+						typedef 			Key													key_type;
+			typedef 			T													mapped_type;
+			typedef 			ft::pair<key_type const, mapped_type>				value_type;
+			
+			typedef 			Alloc											allocator_type;
+			typedef typename	allocator_type::pointer							pointer;
 			typedef 	std::bidirectional_iterator_tag         iterator_category;
 
 	// ----------------------------------------------------------------------------------------------------------- //
@@ -170,7 +187,7 @@ namespace ft {
 			
 			virtual ~BidirectionalIteratorMapConst() {};
 			
-			BidirectionalIteratorMapConst(BinaryTree<Key, T> & src) {
+			BidirectionalIteratorMapConst(BinaryTree<Key const, T> & src) {
 				this->_binary_tree = &src;
 			};
 			
@@ -214,7 +231,7 @@ namespace ft {
 
 			BidirectionalIteratorMapConst & operator ++ (int)
 			{
-				BinaryTree<Key, T> *tmp(this->_binary_tree);
+				BinaryTree<Key const, T> *tmp(this->_binary_tree);
 
 				if (tmp->isLastElement()) {
 					return (*this);
@@ -258,7 +275,7 @@ namespace ft {
 			};
 			
 			BidirectionalIteratorMapConst & operator -- (int) {
-				BinaryTree<Key, T> *tmp(this->_binary_tree);
+				BinaryTree<Key const, T> *tmp(this->_binary_tree);
 
 
 				if (tmp->isFirstElement()) {
@@ -293,7 +310,7 @@ namespace ft {
 			};
 
 	private:
-		BinaryTree<Key, T>		*_binary_tree;
+		BinaryTree<Key const, T>		*_binary_tree;
 	};
 };
 

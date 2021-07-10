@@ -400,7 +400,7 @@ int main ()
   count();
   lower_bound();
   upper_bound();
-  equal_range();
+  // equal_range();
   get_allocator();
   
   while (1)

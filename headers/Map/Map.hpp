@@ -13,7 +13,7 @@ namespace ft {
 	public:
 				typedef 			Key																key_type;
 				typedef 			T																mapped_type;
-				typedef 			ft::pair<key_type, mapped_type>									value_type;
+				typedef 			ft::pair<key_type const, mapped_type>							value_type;
 
 				typedef 			Compare															key_compare;
 				
@@ -56,7 +56,7 @@ namespace ft {
 					this->_allocator = alloc;
 					this->_comp = comp;
 					this->_size = 0;
-					this->_root = new BinaryTree<key_type, mapped_type>;
+					this->_root = new BinaryTree<key_type const, mapped_type>;
 					this->_root->setLastElementFlag();
 					this->_root->_lh = this->_root->createFirstElemet(this->_root);
 					this->_root->_rh = nullptr;
@@ -67,7 +67,7 @@ namespace ft {
 					this->_allocator = alloc;
 					this->_comp = comp;
 					this->_size = 0;
-					this->_root = new BinaryTree<key_type, mapped_type>;
+					this->_root = new BinaryTree<key_type const, mapped_type>;
 					this->_root->setLastElementFlag();
 					this->_root->_lh = this->_root->createFirstElemet(this->_root);
 					this->_root->_rh = nullptr;
@@ -78,7 +78,7 @@ namespace ft {
 				};
 				
 				map (const map & src) {
-					this->_root = new BinaryTree<key_type, mapped_type>;
+					this->_root = new BinaryTree<key_type const, mapped_type>;
 					*this = src;
 				};
 			
@@ -107,7 +107,7 @@ namespace ft {
 		// ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS ITERATORS //
 				
 				iterator begin() {
-					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 
 					if (this->_size == 0)
 						return (this->end());
@@ -118,7 +118,7 @@ namespace ft {
 				};
 				
 				const_iterator begin() const {
-					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 
 					while (tmp && tmp->_lh && !tmp->_lh->isFirstElement()) {
 						tmp = tmp->_lh;
@@ -127,7 +127,7 @@ namespace ft {
 				};
 
 				iterator end() {
-					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 
 					while (tmp && !tmp->isLastElement()) {
 						tmp = tmp->_rh;
@@ -136,7 +136,7 @@ namespace ft {
 				};
 
 				const_iterator end() const {
-					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 
 					while (tmp && !tmp->isLastElement()) {
 						tmp = tmp->_rh;
@@ -145,7 +145,7 @@ namespace ft {
 				};
 
 				reverse_iterator rbegin()  {
-					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 
 					while (tmp && tmp->_rh && !tmp->_rh->isLastElement()) {
 						tmp = tmp->_rh;
@@ -154,7 +154,7 @@ namespace ft {
 				};
 				
 				const_reverse_iterator rbegin() const {
-					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 
 					while (tmp && tmp->_rh && !tmp->_rh->isLastElement()) {
 						tmp = tmp->_rh;
@@ -163,7 +163,7 @@ namespace ft {
 				};
 
 				reverse_iterator rend() {
-					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 
 					while (tmp && !tmp->isFirstElement()) {
 						tmp = tmp->_lh;
@@ -172,7 +172,7 @@ namespace ft {
 				};
 
 				const_reverse_iterator rend() const {
-					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 
 					while (tmp && !tmp->isFirstElement()) {
 						tmp = tmp->_lh;
@@ -191,13 +191,13 @@ namespace ft {
 				};
 
 				size_type max_size() const {
-					return (this->_allocator.max_size() / sizeof(BinaryTree<key_type, mapped_type>));
+					return (this->_allocator.max_size() / sizeof(BinaryTree<key_type const, mapped_type>));
 				};
 
 		// ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS ELEMENT_ACCESS //
 				
 				mapped_type& operator[] (const key_type& k) {
-					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 					iterator ret;
 					
 					if (this->_size == 0)
@@ -227,8 +227,9 @@ namespace ft {
 				
 				ft::pair<iterator,bool> insert (const value_type& val) {
 					if (this->_size == 0) {
-						this->_root->_value->first = val.first;
-						this->_root->_value->second = val.second;
+						// this->_root->_value->first = val.first;
+						// this->_root->_value->second = val.second;
+						this->_allocator.construct(this->_root->_value, val);
 						this->_root->removeLastElementFlag();
 						if (this->_root->_rh) {}
 							delete this->_root->_rh;
@@ -240,7 +241,7 @@ namespace ft {
 						return (ft::make_pair<iterator, bool>((*this->_root), true));
 					}
 
-					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 
 					while (tmp) {
 						if (this->_comp(val.first, tmp->_value->first) && tmp->_lh && !tmp->_lh->isFirstElement()) {
@@ -248,14 +249,16 @@ namespace ft {
 						}
 						else if (this->_comp(val.first, tmp->_value->first) && tmp->_lh && tmp->_lh->isFirstElement()) {
 							tmp->_lh->removeFirstElementFlag();
-							tmp->_lh->_value->first = val.first;
-							tmp->_lh->_value->second = val.second;
+
+							tmp->_allocator.construct(tmp->_lh->_value, val);
+							// tmp->_lh->_value->first = val.first;
+							// tmp->_lh->_value->second = val.second;
 							tmp->_lh->_lh = tmp->createFirstElemet(tmp->_lh);
 							tmp = tmp->_lh;
 							break ;
 						}
 						else if (this->_comp(val.first, tmp->_value->first) && !tmp->_lh) {
-							tmp->_lh = new BinaryTree<key_type, mapped_type>(val, tmp);
+							tmp->_lh = new BinaryTree<key_type const, mapped_type>(val, tmp);
 							tmp = tmp->_lh;
 							break ;
 						}
@@ -264,14 +267,16 @@ namespace ft {
 						}
 						else if (this->_comp(tmp->_value->first, val.first) && tmp->_rh && tmp->_rh->isLastElement()) {
 							tmp->_rh->removeLastElementFlag();
-							tmp->_rh->_value->first = val.first;
-							tmp->_rh->_value->second = val.second;
+
+							tmp->_allocator.construct(tmp->_rh->_value, val);
+							// tmp->_rh->_value->first = val.first;
+							// tmp->_rh->_value->second = val.second;
 							tmp->_rh->_rh = tmp->createLastElemet(tmp->_rh);
 							tmp = tmp->_rh;
 							break ;
 						}
 						else if (this->_comp(tmp->_value->first, val.first) && !tmp->_rh ) {
-							tmp->_rh = new BinaryTree<key_type, mapped_type>(val, tmp);
+							tmp->_rh = new BinaryTree<key_type const, mapped_type>(val, tmp);
 							tmp = tmp->_rh;
 							break ;
 						}
@@ -296,8 +301,8 @@ namespace ft {
 
 				void erase (iterator position) {
 					char side;
-					BinaryTree<key_type, mapped_type> *erase_el = this->_private_find(position->first, &side);
-					BinaryTree<key_type, mapped_type> *tmp;
+					BinaryTree<key_type const, mapped_type> *erase_el = this->_private_find(position->first, &side);
+					BinaryTree<key_type const, mapped_type> *tmp;
 					if (erase_el == nullptr || this->_size == 0)
 						return ;
 
@@ -494,7 +499,7 @@ namespace ft {
 					allocator_type tmp_allocator = this->_allocator;
 					key_compare tmp_comp = this->_comp;
 					size_type tmp_size = this->_size;
-					BinaryTree<key_type, mapped_type> *tmp_btree = this->_root;
+					BinaryTree<key_type const, mapped_type> *tmp_btree = this->_root;
 					
 					this->_allocator = x._allocator;
 					this->_comp = x._comp;
@@ -525,7 +530,7 @@ namespace ft {
 		// OPERATIONS OPERATIONS OPERATIONS OPERATIONS OPERATIONS OPERATIONS OPERATIONS OPERATIONS OPERATIONS OPERATIONS //
 
 				iterator find (const key_type& k) {
-					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 					iterator ret = this->end();
 
 					while (tmp) {
@@ -550,7 +555,7 @@ namespace ft {
 				};
 
 				size_type count (const key_type& k) const {
-					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 
 					while (tmp) {
 						if (this->_comp(k, tmp->_value->first) && tmp->_lh && !tmp->_lh->isFirstElement()) {
@@ -615,7 +620,7 @@ namespace ft {
 					iterator lb = this->lower_bound(k);
 					iterator ub = this->upper_bound(k);
 
-					return (make_pair<iterator, iterator>(lb, ub));
+					return (ft::make_pair<iterator, iterator>(lb, ub));
 				};
 
 				allocator_type get_allocator() const {
@@ -626,10 +631,10 @@ namespace ft {
 				allocator_type	        				_allocator;
 				key_compare		        				_comp;
 				size_type		        				_size;
-				BinaryTree<key_type, mapped_type>		*_root;
+				BinaryTree<key_type const, mapped_type>		*_root;
 
-				BinaryTree<key_type, mapped_type>		*_private_find(key_type & k, char *side) {
-					BinaryTree<key_type, mapped_type> *tmp = this->_root;
+				BinaryTree<key_type const, mapped_type>		*_private_find(key_type const & k, char *side) {
+					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 					
 					while (tmp) {
 						if (this->_comp(k, tmp->_value->first) && tmp->_lh && !tmp->_lh->isFirstElement()) {

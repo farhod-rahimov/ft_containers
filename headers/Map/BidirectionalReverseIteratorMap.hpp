@@ -9,13 +9,23 @@
 
 namespace ft {
 
-	template < class Key, class T >
+	// template < class Key, class T >
+    template < class Key, class T, class Alloc = std::allocator<ft::pair <Key const,T> > >
 	class BidirectionalReverseIteratorMap {
 	public:
-			typedef 	Key										key_type;
-			typedef 	T										mapped_type;
-			typedef 	ft::pair<key_type, mapped_type>			value_type;
-			typedef 	value_type *							pointer;
+			// typedef 	Key										key_type;
+			// typedef 	T										mapped_type;
+			// typedef 	ft::pair<key_type, mapped_type>			value_type;
+			// typedef 	value_type *							pointer;
+			// typedef 	std::bidirectional_iterator_tag         iterator_category;
+
+
+						typedef 			Key													key_type;
+			typedef 			T													mapped_type;
+			typedef 			ft::pair<key_type const, mapped_type>				value_type;
+			
+			typedef 			Alloc											allocator_type;
+			typedef typename	allocator_type::pointer							pointer;
 			typedef 	std::bidirectional_iterator_tag         iterator_category;
 
 	// ----------------------------------------------------------------------------------------------------------- //
@@ -26,7 +36,7 @@ namespace ft {
 			
 			virtual ~BidirectionalReverseIteratorMap() {};
 			
-			BidirectionalReverseIteratorMap(BinaryTree<Key, T> & src) {
+			BidirectionalReverseIteratorMap(BinaryTree<Key const, T> & src) {
 				this->_binary_tree = &src;
 			};
 			
@@ -70,7 +80,7 @@ namespace ft {
 
 			BidirectionalReverseIteratorMap & operator ++ (int)
 			{
-				BinaryTree<Key, T> *tmp(this->_binary_tree);
+				BinaryTree<Key const, T> *tmp(this->_binary_tree);
 
 				if (tmp->isFirstElement()) {
 					return (*this);
@@ -111,7 +121,7 @@ namespace ft {
 			};
 			
 			BidirectionalReverseIteratorMap & operator -- (int) {
-				BinaryTree<Key, T> *tmp(this->_binary_tree);
+				BinaryTree<Key const, T> *tmp(this->_binary_tree);
 
 				if (tmp->isLastElement()) {
 					return (*this);
@@ -148,16 +158,26 @@ namespace ft {
 			};
 
 	private:
-		BinaryTree<Key, T>		*_binary_tree;
+		BinaryTree<Key const, T>		*_binary_tree;
 	};
 
-	template < class Key, class T >
+
+    template < class Key, class T, class Alloc = std::allocator<ft::pair <Key const,T> > >
+	// template < class Key, class T >
 	class BidirectionalReverseIteratorMapConst {
 	public:
-			typedef 	Key										key_type;
-			typedef 	T										mapped_type;
-			typedef 	ft::pair<key_type, mapped_type>			value_type;
-			typedef 	value_type *							pointer;
+			// typedef 	Key										key_type;
+			// typedef 	T										mapped_type;
+			// typedef 	ft::pair<key_type, mapped_type>			value_type;
+			// typedef 	value_type *							pointer;
+			// typedef 	std::bidirectional_iterator_tag         iterator_category;
+
+									typedef 			Key													key_type;
+			typedef 			T													mapped_type;
+			typedef 			ft::pair<key_type const, mapped_type>				value_type;
+			
+			typedef 			Alloc											allocator_type;
+			typedef typename	allocator_type::pointer							pointer;
 			typedef 	std::bidirectional_iterator_tag         iterator_category;
 
 	// ----------------------------------------------------------------------------------------------------------- //
@@ -168,7 +188,7 @@ namespace ft {
 			
 			virtual ~BidirectionalReverseIteratorMapConst() {};
 			
-			BidirectionalReverseIteratorMapConst(BinaryTree<Key, T> & src) {
+			BidirectionalReverseIteratorMapConst(BinaryTree<Key const, T> & src) {
 				this->_binary_tree = &src;
 			};
 			
@@ -212,7 +232,7 @@ namespace ft {
 
 			BidirectionalReverseIteratorMapConst & operator ++ (int)
 			{
-				BinaryTree<Key, T> *tmp(this->_binary_tree);
+				BinaryTree<Key const, T> *tmp(this->_binary_tree);
 
 				if (tmp->isFirstElement()) {
 					return (*this);
@@ -253,7 +273,7 @@ namespace ft {
 			};
 			
 			BidirectionalReverseIteratorMapConst & operator -- (int) {
-				BinaryTree<Key, T> *tmp(this->_binary_tree);
+				BinaryTree<Key const, T> *tmp(this->_binary_tree);
 
 				if (tmp->isLastElement()) {
 					return (*this);
@@ -290,7 +310,7 @@ namespace ft {
 			};
 
 	private:
-		BinaryTree<Key, T>		*_binary_tree;
+		BinaryTree<Key const, T>		*_binary_tree;
 	};
 };
 

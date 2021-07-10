@@ -106,12 +106,12 @@ namespace ft {
 
 // BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE   //
 
-    template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair <Key,T> > >
+    template < class Key, class T, class Alloc = std::allocator<ft::pair <Key const,T> > >
 	struct BinaryTree {
 	public:
 			typedef 			Key													key_type;
 			typedef 			T													mapped_type;
-			typedef 			ft::pair<key_type, mapped_type>						value_type;
+			typedef 			ft::pair<key_type const, mapped_type>				value_type;
 			
 			typedef 			Alloc											allocator_type;
 			typedef typename	allocator_type::pointer							pointer;
