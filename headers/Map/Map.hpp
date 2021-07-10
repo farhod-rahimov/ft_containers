@@ -139,14 +139,14 @@ namespace ft {
 					return (iterator(*tmp));
 				};
 
-		// 		// const_iterator end() const {
-		// 		// 	BinaryTree<key_type, mapped_type> *tmp = this->_root;
+				const_iterator end() const {
+					BinaryTree<key_type, mapped_type> *tmp = this->_root;
 
-		// 		// 	while (!tmp->isLastElement()) {
-		// 		// 		tmp = tmp->_rh;
-		// 		// 	}
-		// 		// 	return (const_iterator(*tmp));
-		// 		// };
+					while (!tmp->isLastElement()) {
+						tmp = tmp->_rh;
+					}
+					return (const_iterator(*tmp));
+				};
 
 		// 		// iterator rbegin() const {};    // uncomment  uncomment  uncomment  uncomment  uncomment  uncomment 
 		// 		// iterator rend() const {}; //  uncomment  uncomment  uncomment  uncomment  uncomment  uncomment 	
@@ -479,14 +479,6 @@ namespace ft {
 						this->erase(this->_root->_value->first);
 				};
 
-				// void _private_clear(BinaryTree<key_type, mapped_type> *tmp) { 			// move to private
-				// 	if (tmp == nullptr)
-				// 		return ;
-				// 	_private_clear(tmp->_lh);
-				// 	delete tmp;
-				// 	_private_clear(tmp->_rh);
-				// }
-
 		// OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS OBSERVERS  //
 
 				key_compare key_comp() const {
@@ -520,9 +512,9 @@ namespace ft {
 					return (ret);
 				};
 
-				// const_iterator find (const key_type& k) const {
-				// 	return (const_iterator(this->find(k)));
-				// };
+				const_iterator find (const key_type& k) const {
+					return (const_iterator(this->find(k)));
+				};
 
 				size_type count (const key_type& k) const {
 					BinaryTree<key_type, mapped_type> *tmp = this->_root;
@@ -552,9 +544,14 @@ namespace ft {
 					return (it);
 				};
 
-				// const_iterator lower_bound (const key_type& k) const {
-
-				// };
+				const_iterator lower_bound (const key_type& k) const {
+					const_iterator it = this->begin();
+					for (; it != this->end(); it++) {
+						if (!this->_comp(it->first, k))
+							break ;
+					}
+					return (it);
+				};
 
 				iterator upper_bound (const key_type& k) {
 					iterator it = this->begin();
@@ -565,13 +562,21 @@ namespace ft {
 					return (it);
 				};
 
-				// const_iterator upper_bound (const key_type& k) const {
+				const_iterator upper_bound (const key_type& k) const {
+					const_iterator it = this->begin();
+					for (; it != this->end(); it++) {
+						if (this->_comp(k, it->first))
+							break ;
+					}
+					return (it);
+				};
 
-				// };
+				pair<const_iterator,const_iterator> equal_range (const key_type& k) const {
+					const_iterator lb = this->lower_bound(k);
+					const_iterator ub = this->upper_bound(k);
 
-				// pair<const_iterator,const_iterator> equal_range (const key_type& k) const {
-
-				// };
+					return (make_pair<const_iterator, const_iterator>(lb, ub));
+				};
 
 				pair<iterator,iterator>	equal_range (const key_type& k) {
 					iterator lb = this->lower_bound(k);
