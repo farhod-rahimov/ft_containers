@@ -102,7 +102,7 @@ namespace ft {
 					this->_root->setLastElementFlag();
 					this->_root->_lh = this->_root->createFirstElemet(this->_root);
 					
-					for (iterator it = src.begin(); it != src.end(); it++) {
+					for (const_iterator it = src.begin(); it != src.end(); it++) {
 						this->insert(*it);
 					}
 				}

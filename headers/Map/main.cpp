@@ -5,34 +5,34 @@
 
 #include <map>
 
-void m() {
-  ft::map<int,int> mymap;
-  for (int i = 100; i <= 4000; i+=100) {
-    mymap.insert(ft::make_pair(i, i));
-  }
-  std::cout << "mymap size " << mymap.size() << std::endl;
+bool fncomp (char lhs, char rhs) {return lhs<rhs;}
 
-  ft::map<int, int>::iterator c;
-  ft::map<int, int>::iterator d;
-  c = mymap.begin();
-  d = mymap.begin();
+struct classcomp {
+  bool operator() (const char& lhs, const char& rhs) const
+  {return lhs<rhs;}
+};
 
-  ft::map<int,int> const mymapc;
-  ft::map<int, int>::const_iterator con;
-  con = mymapc.begin();
-  
-  con++;
-  std::cout << con->first;
+void constructor() {
+  ft::map<char,int> first;
 
-  std::map<int, int>::const_iterator stlc;
-  std::map<int, int> stl;
+  first['a']=10;
+  first['b']=30;
+  first['c']=50;
+  first['d']=70;
 
-  // stlc = stl.begin();
+  ft::map<char,int> second (first.begin(),first.end());
+
+  ft::map<char,int> third (second);
+
+  ft::map<char,int,classcomp> fourth;                 // class as Compare
+
+  bool(*fn_pt)(char,char) = fncomp;
+  ft::map<char,int,bool(*)(char,char)> fifth (fn_pt); // function pointer as Compare
 }
 
 int main ()
 {
-  m();
+  constructor();
   // while (1)
   //   ;
   return 0;
