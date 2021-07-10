@@ -382,28 +382,28 @@ void get_allocator() {
 
 int main ()
 {
-  // constructor();
-  // operator_eq();
-  // begin();
-  // rbegin();
-  // empty();
-  // size();
-  // max_size();
-  // operator_2();
-  // insert();
-  // erase();
-  // swap();
-  // clear();
-  // key_comp();                // NO,  OUTPUT IS NOT THE SAME SA STL SHOWS
-  // value_comp();                // NO,  OUTPUT IS NOT THE SAME SA STL SHOWS
-  // find();
-  // count();
-  // lower_bound();
-  // upper_bound();
-  // equal_range();
-  // get_allocator();
+  constructor();
+  operator_eq();
+  begin();
+  rbegin();
+  empty();
+  size();
+  max_size();
+  operator_2();
+  insert();
+  erase();
+  swap();
+  clear();
+  key_comp();                // NO,  OUTPUT IS NOT THE SAME SA STL SHOWS
+  value_comp();                // NO,  OUTPUT IS NOT THE SAME SA STL SHOWS
+  find();
+  count();
+  lower_bound();
+  upper_bound();
+  equal_range();
+  get_allocator();
   
-  // while (1)
-  //   ;
+  while (1)
+    ;
   return 0;
 }

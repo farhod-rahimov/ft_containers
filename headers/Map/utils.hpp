@@ -106,19 +106,21 @@ namespace ft {
 
 // BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE BINARY_TREE   //
 
-    // template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair <const Key,T> > >
-	template < class Key, class T >
+    template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair <Key,T> > >
 	struct BinaryTree {
 	public:
 			typedef 			Key													key_type;
 			typedef 			T													mapped_type;
 			typedef 			ft::pair<key_type, mapped_type>						value_type;
-			typedef 			value_type *										pointer;
+			
+			typedef 			Alloc											allocator_type;
+			typedef typename	allocator_type::pointer							pointer;
 
-			BinaryTree() {
-				this->_value = new value_type;
-				this->_value->first = key_type();
-				this->_value->second = mapped_type();
+			BinaryTree(const allocator_type& alloc = allocator_type()) {
+				this->_allocator = alloc;
+				this->_value = this->_allocator.allocate(1);
+				this->_allocator.construct(this->_value, value_type());
+
 				this->_parent = nullptr;
 				this->_lh = nullptr;
 				this->_rh = nullptr;
@@ -127,13 +129,15 @@ namespace ft {
 			};
 			
 			~BinaryTree() {
-				delete this->_value;
+				this->_allocator.destroy(this->_value);
+				this->_allocator.deallocate(this->_value, 1);
 			}
 
-			BinaryTree(const value_type & val, BinaryTree * parent) {
-				this->_value = new value_type;
-				this->_value->first = val.first;
-				this->_value->second = val.second;
+			BinaryTree(const value_type & val, BinaryTree * parent, const allocator_type& alloc = allocator_type()) {
+				this->_allocator = alloc;
+				this->_value = this->_allocator.allocate(1);
+				this->_allocator.construct(this->_value, val);
+
 				this->_parent = parent;
 				this->_lh = nullptr;
 				this->_rh = nullptr;
@@ -147,6 +151,7 @@ namespace ft {
 
 			BinaryTree &operator=(BinaryTree const &src) {
 				if (this != &src) {
+					this->_allocator = src._allocator;
 					this->_value = src._value;
 					this->_parent = src._parent;
 					this->_lh = src._lh;
@@ -179,12 +184,13 @@ namespace ft {
 				return (ret);
 			};
 	
-			pointer		_value;
-			BinaryTree	*_parent;
-			BinaryTree	*_lh;
-			BinaryTree	*_rh;
-			bool		_last_element;
-			bool		_first_element;
+			allocator_type	_allocator;
+			pointer			_value;
+			BinaryTree		*_parent;
+			BinaryTree		*_lh;
+			BinaryTree		*_rh;
+			bool			_last_element;
+			bool			_first_element;
 	};
 
 
