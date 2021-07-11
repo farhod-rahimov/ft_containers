@@ -288,7 +288,7 @@ namespace ft {
 						// 	tmp = tmp->_rh;
 						// 	break ;
 						// }
-						else if (this->_comp(tmp->_value->first, val.first) && tmp->_rh) {
+						else if (this->_comp(tmp->_value->first, val.first)) {
 							if (!tmp->_rh) {
 								tmp->_rh = new BinaryTree<key_type const, mapped_type>(val, tmp);
 								tmp = tmp->_rh;
