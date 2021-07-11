@@ -17,13 +17,6 @@ namespace ft {
 				this->_c = ctnr;
 			};
 
-			stack (const stack & src) {
-				this->_c = src._c;
-			};
-
-			virtual ~stack () {
-			}
-
 			stack & operator = (stack const & src) {
 				this->_c = src._c;
 				return (*this);
@@ -58,17 +51,21 @@ namespace ft {
 	private:
 			template <class TT, class CContainer>
 			friend bool ft::operator == (const ft::stack<TT,CContainer> & lhs, const ft::stack<TT,CContainer> & rhs);
+			
 			template <class TT, class CContainer>
 			friend bool ft::operator != (const ft::stack<TT,CContainer> & lhs, const ft::stack<TT,CContainer> & rhs);
+			
 			template <class TT, class CContainer>
 			friend bool ft::operator < (const ft::stack<TT,CContainer> & lhs, const ft::stack<TT,CContainer> & rhs);
+			
 			template <class TT, class CContainer>
 			friend bool ft::operator <= (const ft::stack<TT,CContainer> & lhs, const ft::stack<TT,CContainer> & rhs);
+			
 			template <class TT, class CContainer>
 			friend bool ft::operator > (const ft::stack<TT,CContainer> & lhs, const ft::stack<TT,CContainer> & rhs);
+			
 			template <class TT, class CContainer>
 			friend bool ft::operator >= (const ft::stack<TT,CContainer> & lhs, const ft::stack<TT,CContainer> & rhs);
-
 
 			container_type _c;
 	};
