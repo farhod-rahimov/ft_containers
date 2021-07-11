@@ -67,7 +67,7 @@ void push ()
 {
   std::stack<int> mystack;
 
-  for (int i=0; i<5; ++i) mystack.push(i);
+  for (int i=0; i<100000; ++i) mystack.push(i);
 
   std::cout << "Popping out elements...";
   while (!mystack.empty())
@@ -83,7 +83,7 @@ void pop ()
 {
   std::stack<int> mystack;
 
-  for (int i=0; i<5; ++i) mystack.push(i);
+  for (int i=0; i<100000; ++i) mystack.push(i);
 
   std::cout << "Popping out elements...";
   while (!mystack.empty())
@@ -113,17 +113,13 @@ void relational_operators_vector()
 
 void main_stack()
 {
-    int a = 10000;
-    while (a-- != 0)
-    {
-      constructor();
-      empty();
-      size();
-      top();
-      push();
-      pop();
-      relational_operators_vector();
-    }
+    constructor();
+    empty();
+    size();
+    top();
+    push();
+    pop();
+    relational_operators_vector();
 }
 
 int main()
