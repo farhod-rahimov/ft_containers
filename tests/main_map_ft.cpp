@@ -385,8 +385,8 @@ void get_allocator() {
 ft::map<int, int> advanced_insert() {
   ft::map<int, int> mymap;
 
-  mymap.insert(ft::make_pair<int, int>(0, 0));
-  for (int i = -5000; i <= 5000; i++) {
+  mymap.insert(ft::make_pair<int, int>(2500, 2500));
+  for (int i = 0; i <= 5000; i++) {                          // inserting 5 000 elements
     mymap.insert(ft::make_pair<int, int>(i, i));
   }
   std::cout << "mymap size " << mymap.size() << std::endl;
@@ -422,7 +422,7 @@ void main_map ()
   equal_range();
   get_allocator();
   advanced_insert();
-  // advanced_clear();
+  advanced_clear();
 }
 
 int main()
