@@ -3,9 +3,9 @@
 
 #include <memory>
 
-#include "RandomAccessIterator.hpp"
-#include "RandomAccessReverseIterator.hpp"
-#include "utils.hpp"
+#include "../utils/RandomAccessIterator.hpp"
+#include "../utils/RandomAccessReverseIterator.hpp"
+#include "../utils/utils.hpp"
 
 namespace ft {
 	template < class T, class Alloc = std::allocator<T> >

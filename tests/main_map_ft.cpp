@@ -1,5 +1,6 @@
 #include <iostream>
-#include "Map.hpp"
+#include <ctime>
+#include "../headers/Map.hpp"
 
 bool fncomp (char lhs, char rhs) {return lhs<rhs;}
 
@@ -376,7 +377,7 @@ void get_allocator() {
   mymap.get_allocator().deallocate(p,5);
 }
 
-int main ()
+void main_map ()
 {
   constructor();
   operator_eq();
@@ -398,8 +399,13 @@ int main ()
   upper_bound();
   equal_range();
   get_allocator();
-  
-  // while (1)
-  //   ;
-  return 0;
+}
+
+int main()
+{
+    int start = std::clock();
+    main_map();
+    int end = std::clock();
+    int t = (end - start) / 1000;
+    std::cout << "\nIt took " << t << " milliseconds to run MAIN_MAP_FT.CPP tests" << std::endl;
 }

@@ -131,5 +131,5 @@ int main()
     main_stack();
     int end = std::clock();
     int t = (end - start) / 1000;
-    std::cout << "\nIt took " << t << " milliseconds to run MAIN_STL.CPP tests" << std::endl;
+    std::cout << "\nIt took " << t << " milliseconds to run MAIN_STACK_STL.CPP tests" << std::endl;
 }
