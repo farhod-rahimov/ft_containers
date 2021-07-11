@@ -250,15 +250,8 @@ void assign ()
 void push_back ()
 {
   std::vector<int> myvector;
-    myvector.push_back(10);
-    myvector.push_back(10);
-    myvector.push_back(10);
-    myvector.push_back(10);
-    myvector.push_back(10);
-    myvector.push_back(10);
-    myvector.push_back(10);
-    myvector.push_back(10);
-    myvector.push_back(10);
+  for (int i = 0; i < 1000000; i++)
+    myvector.push_back(i);
 
   std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
 }
@@ -424,34 +417,30 @@ void swap_vector()
 
 void main_vector()
 {
-    int a = 10000;
-    while (a-- != 0)
-    {
-      constructor();
-      operator_equal();
-      begin();
-      rbegin();
-      size();
-      max_size();
-      resize();
-      capacity();
-      empty();
-      reserve();
-      operator_2();
-      at();
-      front();
-      back();
-      assign();
-      push_back();
-      pop_back();
-      insert();
-      erase();
-      swap();
-      clear();
-      get_allocator();
-      relational_operators_vector();
-      swap_vector();
-  }
+    constructor();
+    operator_equal();
+    begin();
+    rbegin();
+    size();
+    max_size();
+    resize();
+    capacity();
+    empty();
+    reserve();
+    operator_2();
+    at();
+    front();
+    back();
+    assign();
+    push_back();
+    pop_back();
+    insert();
+    erase();
+    swap();
+    clear();
+    get_allocator();
+    relational_operators_vector();
+    swap_vector();
 }
 
 int main()
