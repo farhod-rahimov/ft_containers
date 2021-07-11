@@ -422,7 +422,7 @@ void main_map()
   equal_range();
   get_allocator();
   advanced_insert();
-  advanced_clear();
+  // advanced_clear();
 }
 
 int main ()

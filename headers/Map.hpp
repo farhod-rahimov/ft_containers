@@ -242,29 +242,15 @@ namespace ft {
 					BinaryTree<key_type const, mapped_type> *tmp = this->_root;
 
 					while (tmp) {
-						// if (this->_comp(val.first, tmp->_value->first) && tmp->_lh && !tmp->_lh->isFirstElement()) {
-						// 	tmp = tmp->_lh;
-						// }
-						// else if (this->_comp(val.first, tmp->_value->first) && tmp->_lh && tmp->_lh->isFirstElement()) {
-						// 	tmp->_lh->removeFirstElementFlag();
-						// 	tmp->_allocator.construct(tmp->_lh->_value, val);
-						// 	tmp->_lh->_lh = tmp->createFirstElemet(tmp->_lh);
-						// 	tmp = tmp->_lh;
-						// 	break ;
-						// }
-						// else if (this->_comp(val.first, tmp->_value->first) && !tmp->_lh) {
-						// 	tmp->_lh = new BinaryTree<key_type const, mapped_type>(val, tmp);
-						// 	tmp = tmp->_lh;
-						// 	break ;
-						// }
 						if (this->_comp(val.first, tmp->_value->first)) {
-							if (!tmp->_lh) {
+							if (tmp->_lh && !tmp->_lh->isFirstElement()) {
+								tmp = tmp->_lh;
+							}
+							else if (!tmp->_lh) {
 								tmp->_lh = new BinaryTree<key_type const, mapped_type>(val, tmp);
 								tmp = tmp->_lh;
 								break ;
 							}
-							else if (!tmp->_lh->isFirstElement())
-								tmp = tmp->_lh;
 							else {
 								tmp->_lh->removeFirstElementFlag();
 								tmp->_allocator.construct(tmp->_lh->_value, val);
@@ -273,29 +259,15 @@ namespace ft {
 								break ;
 							}
 						}
-						// else if (this->_comp(tmp->_value->first, val.first) && tmp->_rh && !tmp->_rh->isLastElement()) {
-						// 	tmp = tmp->_rh;
-						// }
-						// else if (this->_comp(tmp->_value->first, val.first) && tmp->_rh && tmp->_rh->isLastElement()) {
-						// 	tmp->_rh->removeLastElementFlag();
-						// 	tmp->_allocator.construct(tmp->_rh->_value, val);
-						// 	tmp->_rh->_rh = tmp->createLastElemet(tmp->_rh);
-						// 	tmp = tmp->_rh;
-						// 	break ;
-						// }
-						// else if (this->_comp(tmp->_value->first, val.first) && !tmp->_rh ) {
-						// 	tmp->_rh = new BinaryTree<key_type const, mapped_type>(val, tmp);
-						// 	tmp = tmp->_rh;
-						// 	break ;
-						// }
 						else if (this->_comp(tmp->_value->first, val.first)) {
 							if (!tmp->_rh) {
 								tmp->_rh = new BinaryTree<key_type const, mapped_type>(val, tmp);
 								tmp = tmp->_rh;
 								break ;
 							}
-							else if (!tmp->_rh->isLastElement())
+							else if (!tmp->_rh->isLastElement()) {
 								tmp = tmp->_rh;
+							}
 							else {
 								tmp->_rh->removeLastElementFlag();
 								tmp->_allocator.construct(tmp->_rh->_value, val);

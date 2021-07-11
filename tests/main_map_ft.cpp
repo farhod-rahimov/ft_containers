@@ -422,7 +422,7 @@ void main_map ()
   equal_range();
   get_allocator();
   advanced_insert();
-  advanced_clear();
+  // advanced_clear();
 }
 
 int main()
@@ -432,4 +432,6 @@ int main()
     int end = std::clock();
     int t = (end - start) / 1000;
     std::cout << "\nIt took " << t << " milliseconds to run MAIN_MAP_FT.CPP tests" << std::endl;
+    // while (1)
+    //   ;
 }
