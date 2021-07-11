@@ -421,8 +421,8 @@ void main_map()
   upper_bound();
   equal_range();
   get_allocator();
-  // advanced_insert();
-  // advanced_clear();
+  advanced_insert();
+  advanced_clear();
 }
 
 int main ()
