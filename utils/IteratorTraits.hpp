@@ -1,6 +1,8 @@
 #ifndef ITERATOR_TRAITS
 # define ITERATOR_TRAITS
 
+#include <memory>
+
 namespace ft {
 
 	template <class Iterator>
@@ -16,7 +18,7 @@ namespace ft {
 	template <class T>
 	class iterator_traits<T*> {
 		public:
-				typedef	ptrdiff_t							difference_type;
+				typedef	std::ptrdiff_t						difference_type;
 				typedef	T									value_type;
 				typedef	T*									pointer;
 				typedef	T&									reference;
@@ -26,7 +28,7 @@ namespace ft {
 	template <class T>
 	class iterator_traits<const T*> {
 		public:
-				typedef	ptrdiff_t							difference_type;
+				typedef	std::ptrdiff_t						difference_type;
 				typedef	T									value_type;
 				typedef	T*									pointer;
 				typedef	T&									reference;

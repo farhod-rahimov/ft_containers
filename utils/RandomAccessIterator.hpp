@@ -41,11 +41,11 @@ namespace ft {
 
 	// ----------------------------------------------------------------------------------------------------------- //
 
-			value_type & operator * (void) {
+			value_type & operator * (void) const {
 				return (*_ptr);
 			};
 
-			value_type *operator -> (void) {
+			value_type *operator -> (void) const {
 				return (_ptr);
 			};
 
@@ -131,7 +131,7 @@ namespace ft {
 
 	// ----------------------------------------------------------------------------------------------------------- //
 
-			value_type & operator [] (int n) {
+			value_type & operator [] (int n) const {
 				return (this->_ptr[n]);
 			}
 
