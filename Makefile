@@ -59,6 +59,8 @@ test_map:		map
 				@ echo '--------------------------------------------------------------------'
 				@ diff ./tests/ft.output ./tests/stl.output ; cd ../
 
+all_test:		test_vector test_stack test_map
+
 clean:
 				@ cd ./tests ; rm *.o *.output ; cd ../
 

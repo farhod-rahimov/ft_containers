@@ -8,12 +8,14 @@ namespace ft {
     template < class Key, class T, class Alloc = std::allocator<ft::pair <Key const,T> > >
 	class BidirectionalReverseIteratorMap {
 	public:
+			typedef 			std::ptrdiff_t										difference_type;
 			typedef 			Key													key_type;
 			typedef 			T													mapped_type;
 			typedef 			ft::pair<key_type const, mapped_type>				value_type;
 			typedef 			Alloc												allocator_type;
 			typedef typename	allocator_type::pointer								pointer;
-			typedef 			std::bidirectional_iterator_tag						iterator_category;
+			typedef typename	allocator_type::reference							reference;
+			typedef 			std::bidirectional_iterator_tag         			iterator_category;
 
 	// ----------------------------------------------------------------------------------------------------------- //
 
@@ -151,12 +153,14 @@ namespace ft {
     template < class Key, class T, class Alloc = std::allocator<ft::pair <Key const,T> > >
 	class BidirectionalReverseIteratorMapConst {
 	public:
+			typedef 			std::ptrdiff_t										difference_type;
 			typedef 			Key													key_type;
 			typedef 			T													mapped_type;
 			typedef 			ft::pair<key_type const, mapped_type>				value_type;
 			typedef 			Alloc												allocator_type;
 			typedef typename	allocator_type::pointer								pointer;
-			typedef 			std::bidirectional_iterator_tag						iterator_category;
+			typedef typename	allocator_type::reference							reference;
+			typedef 			std::bidirectional_iterator_tag         			iterator_category;
 
 	// ----------------------------------------------------------------------------------------------------------- //
 
