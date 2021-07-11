@@ -229,10 +229,8 @@ namespace ft {
 					if (this->_size == 0) {
 						this->_allocator.construct(this->_root->_value, val);
 						this->_root->removeLastElementFlag();
-						if (this->_root->_rh) {}
-							delete this->_root->_rh;
-						if (this->_root->_lh)
-							delete this->_root->_lh;
+						delete this->_root->_rh;
+						delete this->_root->_lh;
 						this->_root->_rh = this->_root->createLastElemet(this->_root);
 						this->_root->_lh = this->_root->createFirstElemet(this->_root);
 						this->_size++;
