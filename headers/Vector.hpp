@@ -5,6 +5,7 @@
 
 #include "../utils/RandomAccessIterator.hpp"
 #include "../utils/RandomAccessReverseIterator.hpp"
+#include "../utils/Compare.hpp"
 #include "../utils/utils.hpp"
 
 namespace ft {

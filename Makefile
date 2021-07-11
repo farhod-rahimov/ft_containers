@@ -6,6 +6,9 @@ all:
 				@ echo '			make test_iterator_traits, make test_reverse_iterator,'
 				@ echo '			make test_enable_if, make test_is_integral'
 				@ echo '--------------------------------------------------------------------'
+
+#SRC COMPILE SRC COMPILE SRC COMPILE SRC COMPILE SRC COMPILE SRC COMPILE SRC COMPILE SRC COMPILE SRC COMPILE SRC COMPILE SRC COMPILE SRC COMPILE SRC COMPILE SRC COMPILE #
+
 vector:
 				@ echo '--------------------------------------------------------------------'
 				@ echo 'compiling ./tests/main_vector-ft.cpp into binary file vector_ft.test'
@@ -45,6 +48,12 @@ is_integral:
 				@ echo '--------------------------------------------------------------------'
 				@ echo 'compiling ./tests/main_is_integral.cpp into binary file is_integral.test'
 				@ cd ./tests && $(COMPILE) -c main_is_integral.cpp && $(COMPILE) -o is_integral.test main_is_integral.o
+compare:
+				@ echo '--------------------------------------------------------------------'
+				@ echo 'compiling ./tests/main_compare.cpp into binary file icompare.test'
+				@ cd ./tests && $(COMPILE) -c main_compare.cpp && $(COMPILE) -o compare.test main_compare.o
+
+#RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES RULES #
 
 test_vector:	vector
 				@ echo '--------------------------------------------------------------------'
@@ -116,7 +125,16 @@ test_is_integral: is_integral
 				@ echo '--------------------------------------------------------------------'
 				@ cat ./tests/ft.output ; cd ../
 
-all_test:		test_vector test_stack test_map test_iterator_traits test_reverse_iterator
+test_compare: compare
+				@ echo '--------------------------------------------------------------------'
+				@ echo 'redirecting the result of executing compare.test to ft.output'
+				@ ./tests/compare.test > ./tests/ft.output
+				@ echo '--------------------------------------------------------------------'
+				@ echo 'running cat ft.output'
+				@ echo '--------------------------------------------------------------------'
+				@ cat ./tests/ft.output ; cd ../
+
+all_test:		test_vector test_stack test_map test_iterator_traits test_reverse_iterator test_enable_if test_is_integral test_compare
 
 clean:
 				@ cd ./tests ; rm *.o *.output ; cd ../
