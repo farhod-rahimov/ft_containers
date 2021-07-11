@@ -2,7 +2,9 @@ COMPILE = clang++ -Wall -Wextra -Werror -std=c++98
 
 all:		
 				@ echo '--------------------------------------------------------------------'
-				@ echo 'Available commands: make test_vector, make test_stack, make test_map, make test_iterator_traits, make test_reverse_iterator'
+				@ echo 'Available commands:	make test_vector, make test_stack, make test_map,'
+				@ echo '			make test_iterator_traits, make test_reverse_iterator,'
+				@ echo '			make test_enable_if, make test_is_integral'
 				@ echo '--------------------------------------------------------------------'
 vector:
 				@ echo '--------------------------------------------------------------------'
@@ -33,6 +35,16 @@ reverse_iterator:
 				@ echo '--------------------------------------------------------------------'
 				@ echo 'compiling ./tests/main_reverse_iterator.cpp into binary file reverse_iterator.test'
 				@ cd ./tests && $(COMPILE) -c main_reverse_iterator.cpp && $(COMPILE) -o reverse_iterator.test main_reverse_iterator.o
+
+enable_if:
+				@ echo '--------------------------------------------------------------------'
+				@ echo 'compiling ./tests/main_enable_if.cpp into binary file enable_if.test'
+				@ cd ./tests && $(COMPILE) -c main_enable_if.cpp && $(COMPILE) -o enable_if.test main_enable_if.o
+
+is_integral:
+				@ echo '--------------------------------------------------------------------'
+				@ echo 'compiling ./tests/main_is_integral.cpp into binary file is_integral.test'
+				@ cd ./tests && $(COMPILE) -c main_is_integral.cpp && $(COMPILE) -o is_integral.test main_is_integral.o
 
 test_vector:	vector
 				@ echo '--------------------------------------------------------------------'
@@ -81,6 +93,24 @@ test_reverse_iterator: reverse_iterator
 				@ echo '--------------------------------------------------------------------'
 				@ echo 'redirecting the result of executing reverse_iterator.test to ft.output'
 				@ ./tests/reverse_iterator.test > ./tests/ft.output
+				@ echo '--------------------------------------------------------------------'
+				@ echo 'running cat ft.output'
+				@ echo '--------------------------------------------------------------------'
+				@ cat ./tests/ft.output ; cd ../
+
+test_enable_if: enable_if
+				@ echo '--------------------------------------------------------------------'
+				@ echo 'redirecting the result of executing enable_if.test to ft.output'
+				@ ./tests/enable_if.test > ./tests/ft.output
+				@ echo '--------------------------------------------------------------------'
+				@ echo 'running cat ft.output'
+				@ echo '--------------------------------------------------------------------'
+				@ cat ./tests/ft.output ; cd ../
+
+test_is_integral: is_integral
+				@ echo '--------------------------------------------------------------------'
+				@ echo 'redirecting the result of executing is_integral.test to ft.output'
+				@ ./tests/is_integral.test > ./tests/ft.output
 				@ echo '--------------------------------------------------------------------'
 				@ echo 'running cat ft.output'
 				@ echo '--------------------------------------------------------------------'
