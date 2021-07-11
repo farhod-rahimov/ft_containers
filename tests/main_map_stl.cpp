@@ -235,18 +235,22 @@ void clear () {
 void key_comp() {
   std::map<char,int> mymap;
 
-  mymap['x']=100;
-  mymap['y']=200;
-  mymap['z']=300;
+  std::map<char,int>::key_compare mycomp = mymap.key_comp();
+
+  mymap['a']=100;
+  mymap['b']=200;
+  mymap['c']=300;
 
   std::cout << "mymap contains:\n";
 
-  std::pair<char,int> highest = *mymap.rbegin();          // last element
+  char highest = mymap.rbegin()->first;     // key value of last element
 
   std::map<char,int>::iterator it = mymap.begin();
-  do {
+  while ( mycomp((*it).first, highest) ) {
     std::cout << it->first << " => " << it->second << '\n';
-  } while ( mymap.value_comp()(*it++, highest) );
+    it++;
+  }
+  std::cout << '\n';
 }
 
 void value_comp() {
@@ -261,9 +265,10 @@ void value_comp() {
   std::pair<char,int> highest = *mymap.rbegin();          // last element
 
   std::map<char,int>::iterator it = mymap.begin();
-  do {
+  while (mymap.value_comp()(*it, highest)) {
     std::cout << it->first << " => " << it->second << '\n';
-  } while ( mymap.value_comp()(*it++, highest) );
+    it++;
+  }
 }
 
 void find() {
@@ -377,6 +382,23 @@ void get_allocator() {
   mymap.get_allocator().deallocate(p,5);
 }
 
+std::map<int, int> advanced_insert() {
+  std::map<int, int> mymap;
+
+  mymap.insert(std::make_pair<int, int>(0, 0));
+  for (int i = -5000; i <= 5000; i++) {
+    mymap.insert(std::make_pair<int, int>(i, i));
+  }
+  std::cout << "mymap size " << mymap.size() << std::endl;
+  return (mymap);
+}
+
+void advanced_clear() {
+  std::map<int, int> mymap = advanced_insert();
+
+  mymap.clear();
+}
+
 void main_map()
 {
   constructor();
@@ -399,6 +421,8 @@ void main_map()
   upper_bound();
   equal_range();
   get_allocator();
+  // advanced_insert();
+  // advanced_clear();
 }
 
 int main ()
